@@ -1,8 +1,9 @@
 import { useSetAtom } from "jotai"
 import { useCallback } from "react"
-import { GraphNode, GraphEdge } from "../graph-types.ts"
-import { graphRootAtom } from "./graph-atoms.ts"
+
+import { GraphEdge,GraphNode } from "../graph-types.ts"
 import { createEmptyGraph } from "../graph-util.ts"
+import { graphRootAtom } from "./graph-atoms.ts"
 
 export function useClearGraph() {
   const setGraphRoot = useSetAtom(graphRootAtom)

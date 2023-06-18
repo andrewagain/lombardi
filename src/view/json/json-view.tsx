@@ -1,11 +1,12 @@
 "use client"
 
+import { useAtomValue } from "jotai"
+
 import { graphRootAtom } from "@/graph/state/graph-atoms.ts"
 import {
   graphNodesWithoutIncomingEdgesAtom,
   graphTreeRootNodesAtom,
 } from "@/graph/state/tree-atoms.ts"
-import { useAtomValue } from "jotai"
 
 // https://github.com/brimdata/react-arborist
 export default function JsonView() {

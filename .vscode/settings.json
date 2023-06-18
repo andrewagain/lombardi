@@ -1,6 +1,23 @@
 {
+  "explorer.decorations.colors": false,
+  "git.decorations.enabled": true,
+  "workbench.editor.decorations.colors": true,
+  "explorer.decorations.badges": true,
+  "search.exclude": {
+    "package-lock.json": true,
+    "packages/web/build": true,
+    "packages/web/public/build": true
+  },
   "eslint.codeActionsOnSave.rules": ["simple-import-sort/imports"],
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
-  }
+  },
+  "[markdown]": {
+    "editor.formatOnSave": false
+  },
+  "workbench.colorCustomizations": {
+    "editorGutter.deletedBackground": "#ffffff"
+  },
+  "javascript.preferences.importModuleSpecifier": "shortest",
+  "typescript.preferences.importModuleSpecifier": "shortest"
 }

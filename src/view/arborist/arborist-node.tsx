@@ -1,5 +1,6 @@
-import { GraphNode } from "@/graph/graph-types.ts"
 import { NodeRendererProps } from "react-arborist"
+
+import { GraphNode } from "@/graph/graph-types.ts"
 
 export function ArboristNode({
   node,

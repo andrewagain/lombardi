@@ -1,5 +1,6 @@
-import { GraphEdge, GraphRoot } from "../graph-types.ts"
 import { atom } from "jotai"
+
+import { GraphEdge, GraphRoot } from "../graph-types.ts"
 import { createEmptyGraph } from "../graph-util.ts"
 
 export const graphRootAtom = atom<GraphRoot>(createEmptyGraph())
