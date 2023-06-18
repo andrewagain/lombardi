@@ -10,7 +10,9 @@ import {
 import { graphTreeRootNodesAtom } from "@/graph/state/tree-atoms.ts"
 import { useAtomValue } from "jotai"
 import { Tree } from "react-arborist"
+
 import { ArboristNode } from "./arborist-node.tsx"
+
 import ArboristCursor from "./arborist-cursor.tsx"
 import styles from "./arborist.module.css"
 
