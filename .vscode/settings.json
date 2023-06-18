@@ -1,0 +1,6 @@
+{
+  "eslint.codeActionsOnSave.rules": ["simple-import-sort/imports"],
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  }
+}

@@ -1,5 +1,8 @@
 "use client"
 
+import { useAtomValue } from "jotai"
+import { Tree } from "react-arborist"
+
 import { GraphNode } from "@/graph/graph-types.ts"
 import {
   useAddEdge,
@@ -8,13 +11,10 @@ import {
   useRenameNode,
 } from "@/graph/state/graph-hooks.ts"
 import { graphTreeRootNodesAtom } from "@/graph/state/tree-atoms.ts"
-import { useAtomValue } from "jotai"
-import { Tree } from "react-arborist"
 
-import { ArboristNode } from "./arborist-node.tsx"
-
-import ArboristCursor from "./arborist-cursor.tsx"
 import styles from "./arborist.module.css"
+import ArboristCursor from "./arborist-cursor.tsx"
+import { ArboristNode } from "./arborist-node.tsx"
 
 // https://github.com/brimdata/react-arborist
 export default function ArboristView() {
