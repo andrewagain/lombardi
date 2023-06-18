@@ -1,0 +1,36 @@
+.arborist {
+  border: 2px solid skyblue;
+}
+
+/* row */
+.arborist [role="treeitem"] {
+  cursor: pointer;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+/* row hover */
+.arborist [role="treeitem"]:hover {
+  background-color: #eee;
+
+  @media (prefers-color-scheme: dark) {
+    background-color: #333;
+  }
+}
+
+.arborist [role="treeitem"] [data-focused="true"] {
+  background-color: #eee;
+
+  @media (prefers-color-scheme: dark) {
+    background-color: #333;
+  }
+}
+
+/* row selected */
+.arborist [aria-selected="true"] {
+  background-color: #ccc;
+
+  @media (prefers-color-scheme: dark) {
+    background-color: #555;
+  }
+}
