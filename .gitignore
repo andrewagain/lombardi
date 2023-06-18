@@ -5,6 +5,9 @@
 /.pnp
 .pnp.js
 
+# package-lock is just annoying in the early stages
+package-lock.json
+
 # testing
 /coverage
 
