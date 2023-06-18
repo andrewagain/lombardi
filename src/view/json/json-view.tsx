@@ -1,17 +1,17 @@
-"use client";
+"use client"
 
-import { graphRootAtom } from "@/graph/state/graph-atoms.js";
+import { graphRootAtom } from "@/graph/state/graph-atoms.tsx"
 import {
   graphNodesWithoutIncomingEdgesAtom,
   graphTreeRootNodesAtom,
-} from "@/graph/state/tree-atoms.js";
-import { useAtomValue } from "jotai";
+} from "@/graph/state/tree-atoms.tsx"
+import { useAtomValue } from "jotai"
 
 // https://github.com/brimdata/react-arborist
 export default function JsonView() {
-  const root = useAtomValue(graphRootAtom);
-  const rootNodes = useAtomValue(graphNodesWithoutIncomingEdgesAtom);
-  const tree = useAtomValue(graphTreeRootNodesAtom);
+  const root = useAtomValue(graphRootAtom)
+  const rootNodes = useAtomValue(graphNodesWithoutIncomingEdgesAtom)
+  const tree = useAtomValue(graphTreeRootNodesAtom)
 
   return (
     <div className="w-full h-full">
@@ -20,5 +20,5 @@ export default function JsonView() {
       <div>{JSON.stringify(rootNodes)}</div>
       <div>{JSON.stringify(tree)}</div>
     </div>
-  );
+  )
 }

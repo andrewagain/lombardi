@@ -1,5 +1,5 @@
-import { GraphNode } from "@/graph/graph-types.js";
-import { NodeRendererProps } from "react-arborist";
+import { GraphNode } from "@/graph/graph-types.ts"
+import { NodeRendererProps } from "react-arborist"
 
 export function ArboristNode({
   node,
@@ -16,5 +16,5 @@ export function ArboristNode({
       {node.isLeaf ? "🍁" : "📁"}
       {node.data.name}
     </div>
-  );
+  )
 }

@@ -1,10 +1,10 @@
-import { sortBy } from "lodash-es";
+import { sortBy } from "lodash-es"
 import {
   GraphEdge,
   GraphEdgePriorityMap,
   GraphRoot,
   GraphShorthand,
-} from "./graph-types.js";
+} from "./graph-types.ts"
 
 export function createEmptyGraph(): GraphRoot {
   return {
@@ -22,7 +22,7 @@ export function createEmptyGraph(): GraphRoot {
       ].map((e) => [e.id, e])
     ),
     edgePriorityMap: new Map([["ra", 1]]),
-  };
+  }
 }
 
 export function translateShorthandGraph(g: GraphShorthand): GraphRoot {
@@ -30,12 +30,12 @@ export function translateShorthandGraph(g: GraphShorthand): GraphRoot {
     nodeMap: new Map(g.nodes.map((n) => [n.id, n])),
     edgeMap: new Map(g.edges?.map((e) => [e.id, e])),
     edgePriorityMap: new Map(),
-  };
+  }
 }
 
 export function graphSortEdges(
   edges: GraphEdge[],
   edgePriorityMap: GraphEdgePriorityMap
 ): GraphEdge[] {
-  return sortBy(edges, (e) => edgePriorityMap.get(e.id) ?? -1);
+  return sortBy(edges, (e) => edgePriorityMap.get(e.id) ?? -1)
 }

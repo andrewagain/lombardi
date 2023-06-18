@@ -1,90 +1,90 @@
-import { useSetAtom } from "jotai";
-import { useCallback } from "react";
-import { GraphNode, GraphEdge } from "../graph-types.js";
-import { graphRootAtom } from "./graph-atoms.js";
-import { createEmptyGraph } from "../graph-util.js";
+import { useSetAtom } from "jotai"
+import { useCallback } from "react"
+import { GraphNode, GraphEdge } from "../graph-types.ts"
+import { graphRootAtom } from "./graph-atoms.ts"
+import { createEmptyGraph } from "../graph-util.ts"
 
 export function useClearGraph() {
-  const setGraphRoot = useSetAtom(graphRootAtom);
+  const setGraphRoot = useSetAtom(graphRootAtom)
   return useCallback(() => {
-    setGraphRoot(createEmptyGraph());
-  }, [setGraphRoot]);
+    setGraphRoot(createEmptyGraph())
+  }, [setGraphRoot])
 }
 
 export function useAddNode() {
-  const setGraphRoot = useSetAtom(graphRootAtom);
+  const setGraphRoot = useSetAtom(graphRootAtom)
   return useCallback(
     (node: GraphNode) => {
       setGraphRoot((graphRoot) => {
-        const { nodeMap } = graphRoot;
+        const { nodeMap } = graphRoot
         return {
           ...graphRoot,
           nodeMap: new Map(nodeMap).set(node.id, node),
-        };
-      });
+        }
+      })
     },
     [setGraphRoot]
-  );
+  )
 }
 
 export function useAddEdge() {
-  const setGraphRoot = useSetAtom(graphRootAtom);
+  const setGraphRoot = useSetAtom(graphRootAtom)
   return useCallback(
     (edge: GraphEdge) => {
       setGraphRoot((graphRoot) => {
-        const { edgeMap } = graphRoot;
+        const { edgeMap } = graphRoot
         return {
           ...graphRoot,
           edgeMap: new Map(edgeMap).set(edge.id, edge),
-        };
-      });
+        }
+      })
     },
     [setGraphRoot]
-  );
+  )
 }
 
 export function useRenameNode() {
-  const setGraphRoot = useSetAtom(graphRootAtom);
+  const setGraphRoot = useSetAtom(graphRootAtom)
   return useCallback(
     (id: string, name: string) => {
       setGraphRoot((graphRoot) => {
-        const { nodeMap } = graphRoot;
-        const node = nodeMap.get(id);
+        const { nodeMap } = graphRoot
+        const node = nodeMap.get(id)
         if (!node) {
-          return graphRoot;
+          return graphRoot
         }
         return {
           ...graphRoot,
           nodeMap: new Map(nodeMap).set(id, { ...node, name }),
-        };
-      });
+        }
+      })
     },
     [setGraphRoot]
-  );
+  )
 }
 
 export function useDeleteNodes() {
-  const setGraphRoot = useSetAtom(graphRootAtom);
+  const setGraphRoot = useSetAtom(graphRootAtom)
 
   return useCallback(
     (ids: string[]) => {
       setGraphRoot((graphRoot) => {
-        const { nodeMap, edgeMap } = graphRoot;
-        const newEdgeMap = new Map(edgeMap);
+        const { nodeMap, edgeMap } = graphRoot
+        const newEdgeMap = new Map(edgeMap)
         for (const id of ids) {
-          nodeMap.delete(id);
+          nodeMap.delete(id)
           for (const edge of edgeMap.values()) {
             if (edge.source === id || edge.target === id) {
-              newEdgeMap.delete(edge.id);
+              newEdgeMap.delete(edge.id)
             }
           }
         }
         return {
           ...graphRoot,
           edgeMap: newEdgeMap,
-        };
-      });
+        }
+      })
     },
     [setGraphRoot]
-  );
+  )
 }

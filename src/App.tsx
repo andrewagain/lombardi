@@ -1,7 +1,7 @@
-import ArboristView from "@/view/arborist/arborist-view.js"
-import JsonView from "@/view/json/json-view.js"
+import ArboristView from "@/view/arborist/arborist-view.tsx"
+import JsonView from "@/view/json/json-view.tsx"
 
-export default function App() {
+export default function Home() {
   return (
     <main className="w-full grid grid-cols-2 gap-0">
       <div className="border border-green-500">
