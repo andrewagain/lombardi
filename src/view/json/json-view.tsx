@@ -1,5 +1,3 @@
-"use client"
-
 import { useAtomValue } from "jotai"
 
 import { graphRootAtom } from "@/graph/state/graph-atoms.ts"
