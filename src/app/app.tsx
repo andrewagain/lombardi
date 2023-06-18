@@ -1,9 +1,12 @@
 import ArboristView from "@/view/arborist/arborist-view.tsx"
 import JsonView from "@/view/json/json-view.tsx"
 
-export default function Home() {
+import style from "./app.module.css"
+
+export default function NuonsApp() {
   return (
-    <main className="w-full grid grid-cols-2 gap-0">
+    <main className={style.app}>
+      <header>Header</header>
       <div className="border border-green-500">
         <ArboristView />
       </div>
