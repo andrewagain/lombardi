@@ -1,10 +1,10 @@
 "use client"
 
-import { graphRootAtom } from "@/graph/state/graph-atoms.tsx"
+import { graphRootAtom } from "@/graph/state/graph-atoms.ts"
 import {
   graphNodesWithoutIncomingEdgesAtom,
   graphTreeRootNodesAtom,
-} from "@/graph/state/tree-atoms.tsx"
+} from "@/graph/state/tree-atoms.ts"
 import { useAtomValue } from "jotai"
 
 // https://github.com/brimdata/react-arborist

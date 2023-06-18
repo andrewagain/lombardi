@@ -1,12 +1,12 @@
 import { atom } from "jotai"
-import { GraphNode } from "../graph-types.tsx"
+import { GraphNode } from "@/graph/graph-types.ts"
 import {
   graphNodeMapAtom,
   graphEdgeMapByTargetAtom,
   graphEdgeMapBySourceAtom,
   graphEdgePriorityMapAtom,
-} from "./graph-atoms.tsx"
-import { graphSortEdges } from "@/graph/graph-util.tsx"
+} from "./graph-atoms.ts"
+import { graphSortEdges } from "@/graph/graph-util.ts"
 
 export interface GraphTreeNode extends GraphNode {
   children: GraphTreeNode[]
