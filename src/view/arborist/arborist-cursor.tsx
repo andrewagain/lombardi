@@ -1,10 +1,10 @@
-import { CursorProps } from "react-arborist";
+import { CursorProps } from "react-arborist"
 
-export default function ArboristCursor({ top, left }: CursorProps) {
+export default function ArboristCursor({ top, left, indent }: CursorProps) {
   return (
     <div
-      className="w-full h-2 bg-slate-800 dark:bg-slate-200"
-      style={{ top, left }}
+      className="w-full h-0 border-t-2 border-white absolute"
+      style={{ top, left, marginLeft: indent }}
     ></div>
-  );
+  )
 }
