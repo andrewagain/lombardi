@@ -29,7 +29,6 @@ export default function ArboristView() {
   const renameNode = useRenameNode()
 
   const onCreate: CreateHandler<GraphNode> = ({ parentId, index, type }) => {
-    // TODO: focus the newly created node
     console.log("onCreate", parentId, index, type)
     const id = `node-${Date.now()}`
     const node: GraphNode = { id, name: "" }
