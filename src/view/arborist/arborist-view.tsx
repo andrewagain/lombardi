@@ -1,5 +1,11 @@
 import { useAtomValue } from "jotai"
-import { Tree } from "react-arborist"
+import {
+  CreateHandler,
+  DeleteHandler,
+  MoveHandler,
+  RenameHandler,
+  Tree,
+} from "react-arborist"
 
 import { GraphNode } from "@/graph/graph-types.ts"
 import {
@@ -22,43 +28,29 @@ export default function ArboristView() {
   const deleteNodes = useDeleteNodes()
   const renameNode = useRenameNode()
 
-  const onCreate = ({
-    parentId,
-    index,
-    type,
-  }: {
-    parentId: string | null
-    index: number
-    type: string
-  }) => {
+  const onCreate: CreateHandler<GraphNode> = ({ parentId, index, type }) => {
+    // TODO: focus the newly created node
     console.log("onCreate", parentId, index, type)
     const id = `node-${Date.now()}`
-    addNode({ id, name: "" })
+    const node: GraphNode = { id, name: "" }
+    addNode(node)
     if (parentId) {
       addEdge({ id: `edge-${Date.now()}`, source: parentId, target: id })
     }
-    return null
+    return node
   }
 
-  const onRename = ({ id, name }: { id: string; name: string }) => {
+  const onRename: RenameHandler<GraphNode> = ({ id, name }) => {
     console.log("onRename", id, name)
     renameNode(id, name)
   }
 
-  const onMove = ({
-    dragIds,
-    parentId,
-    index,
-  }: {
-    dragIds: string[]
-    parentId: string | null
-    index: number
-  }) => {
+  const onMove: MoveHandler<GraphNode> = ({ dragIds, parentId, index }) => {
     // TODO: we need to store position information before we can implement this
     console.log("onMove", dragIds, parentId, index)
   }
 
-  const onDelete = ({ ids }: { ids: string[] }) => {
+  const onDelete: DeleteHandler<GraphNode> = ({ ids }) => {
     console.log("onDelete", ids)
     deleteNodes(ids)
   }
