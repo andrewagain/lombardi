@@ -34,3 +34,12 @@
     background-color: #555;
   }
 }
+
+.node {
+  display: flex;
+  align-items: center;
+  margin: 0 12px 0 2px;
+  height: 100%;
+  line-height: 20px;
+  white-space: nowrap;
+}
