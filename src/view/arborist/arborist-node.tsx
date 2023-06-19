@@ -1,3 +1,4 @@
+import clsx from "clsx"
 import { NodeApi, NodeRendererProps } from "react-arborist"
 import { BsTree } from "react-icons/bs"
 import { MdArrowDropDown, MdArrowRight } from "react-icons/md"
@@ -15,7 +16,7 @@ export function ArboristNode({
     <div
       ref={dragHandle}
       style={style}
-      className={styles.node}
+      className={clsx(styles.node, node.state)}
       onClick={() => node.isInternal && node.toggle()}
     >
       <FolderArrow node={node} />
@@ -28,12 +29,16 @@ export function ArboristNode({
 }
 
 function Input({ node }: { node: NodeApi<GraphNode> }) {
+  console.log("Input render")
   return (
     <input
       autoFocus
       type="text"
       defaultValue={node.data.name}
-      onFocus={(e) => e.currentTarget.select()}
+      onFocus={(e) => {
+        console.log("FOCUS")
+        e.currentTarget.select()
+      }}
       onBlur={() => node.reset()}
       onKeyDown={(e) => {
         if (e.key === "Escape") node.reset()
