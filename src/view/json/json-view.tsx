@@ -13,7 +13,7 @@ export default function JsonView() {
 
   return (
     <div className="w-full h-full">
-      <div className="border-2 border-red-400">
+      <div style={{ border: "2px solid green" }}>
         {JSON.stringify([...root.edgePriorityMap.entries()])}
       </div>
       <div>{JSON.stringify([...root.nodeMap.values()])}</div>

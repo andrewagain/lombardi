@@ -6,10 +6,20 @@ export default function NuonsApp() {
   return (
     <main className={style.app}>
       <header>Header</header>
-      <div className="border border-green-500">
+      <div
+        style={{
+          gridArea: "a",
+          border: "2px solid green",
+        }}
+      >
         <ArboristView />
       </div>
-      <div className="border border-orange-700">
+      <div
+        style={{
+          gridArea: "b",
+          border: "2px solid blue",
+        }}
+      >
         <JsonView />
       </div>
     </main>
