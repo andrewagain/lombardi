@@ -3,19 +3,27 @@
 import "reactflow/dist/style.css"
 
 import { atom, useAtomValue } from "jotai"
+import { useAtomCallback } from "jotai/utils"
+import { useCallback } from "react"
 import {
+  applyNodeChanges,
   Background,
   BackgroundVariant,
   Controls,
   Edge,
   MiniMap,
   Node,
+  NodeChange,
   ReactFlow,
   XYPosition,
 } from "reactflow"
 
 import { GraphEdge, GraphNode, GraphNodeId } from "@/graph/graph-types"
-import { graphEdgesAtom, graphNodesAtom } from "@/graph/state/graph-atoms"
+import {
+  graphEdgesAtom,
+  graphNodeMapAtom,
+  graphNodesAtom,
+} from "@/graph/state/graph-atoms"
 
 type FlowNode = Node<GraphNode>
 type FlowEdge = Edge<GraphEdge>
@@ -55,8 +63,21 @@ export default function FlowView() {
   const nodes = useAtomValue(flowNodesAtom)
   const edges = useAtomValue(flowEdgesAtom)
 
+  // const onNodesChange = useAtomCallback(
+  //   useCallback((get, set, changes: NodeChange[]) => {
+  //     const newNodes = applyNodeChanges(get(graphNodesAtom), changes)
+  //     const nodesMap = new Map(get(graphNodeMapAtom))
+  //     changes.forEach((change) => {
+  //       if (change.type === "add" || change.type === "update") {
+  //         nodesMap.set(change.node.id, change.node.position)
+  //       }
+  //     }
+
+  //   }, [])
+  // )
+
   return (
-    <ReactFlow nodes={nodes} edges={edges}>
+    <ReactFlow nodes={nodes} edges={edges} onNodesChange={onNodesChange}>
       <Controls />
       <MiniMap />
       <Background variant={BackgroundVariant.Dots} gap={12} size={1} />
