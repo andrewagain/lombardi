@@ -103,9 +103,14 @@ export function useMoveNodes() {
   return useCallback(
     (
       nodeIds: string[],
-      destinationParentId: string,
+      destinationParentId: string | null,
       destinationParentIndex: number
     ) => {
+      if (!destinationParentId) {
+        console.log("Drag and drop without destination parent")
+        return
+      }
+
       setGraphRoot((graphRoot) => {
         // Put all nodes that are moving into a map for easy lookup
         const movingNodeIdMap = new Map(nodeIds.map((id) => [id, true]))

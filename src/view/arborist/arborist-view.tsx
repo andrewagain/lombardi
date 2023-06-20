@@ -12,6 +12,7 @@ import {
   useAddEdge,
   useAddNode,
   useDeleteNodes,
+  useMoveNodes,
   useRenameNode,
 } from "@/graph/state/graph-hooks.ts"
 import { graphTreeRootNodesAtom } from "@/graph/state/tree-atoms.ts"
@@ -27,6 +28,7 @@ export default function ArboristView() {
   const addEdge = useAddEdge()
   const deleteNodes = useDeleteNodes()
   const renameNode = useRenameNode()
+  const moveNodes = useMoveNodes()
 
   const onCreate: CreateHandler<GraphNode> = ({ parentId, index, type }) => {
     console.log("onCreate", parentId, index, type)
@@ -47,6 +49,7 @@ export default function ArboristView() {
   const onMove: MoveHandler<GraphNode> = ({ dragIds, parentId, index }) => {
     // TODO: we need to store position information before we can implement this
     console.log("onMove", dragIds, parentId, index)
+    moveNodes(dragIds, parentId, index)
   }
 
   const onDelete: DeleteHandler<GraphNode> = ({ ids }) => {
