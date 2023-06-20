@@ -9,9 +9,10 @@
     "packages/web/public/build": true
   },
   "eslint.codeActionsOnSave.rules": ["simple-import-sort/imports"],
-  "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true
-  },
+  "editor.codeActionsOnSave": [
+    "source.addMissingImports",
+    "source.fixAll.eslint"
+  ],
   "[markdown]": {
     "editor.formatOnSave": false
   },
