@@ -3,7 +3,6 @@
 import "reactflow/dist/style.css"
 
 import { atom, useAtom, useAtomValue } from "jotai"
-import { useAtomCallback } from "jotai/utils"
 import { useCallback } from "react"
 import {
   applyNodeChanges,
