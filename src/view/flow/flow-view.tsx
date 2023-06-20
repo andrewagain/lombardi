@@ -1,5 +1,13 @@
 import { atom, useAtomValue } from "jotai"
-import { Node, ReactFlow, XYPosition } from "reactflow"
+import {
+  Background,
+  BackgroundVariant,
+  Controls,
+  MiniMap,
+  Node,
+  ReactFlow,
+  XYPosition,
+} from "reactflow"
 
 import { GraphNode, GraphNodeId } from "@/graph/graph-types"
 import { graphNodesAtom } from "@/graph/state/graph-atoms"
@@ -23,5 +31,11 @@ const flowNodesAtom = atom((get) => {
 export default function FlowView() {
   const nodes = useAtomValue(flowNodesAtom)
 
-  return <ReactFlow nodes={nodes} />
+  return (
+    <ReactFlow nodes={nodes}>
+      <Controls />
+      <MiniMap />
+      <Background variant={BackgroundVariant.Dots} gap={12} size={1} />
+    </ReactFlow>
+  )
 }
