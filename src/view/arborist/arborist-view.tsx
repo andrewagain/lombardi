@@ -47,9 +47,8 @@ export default function ArboristView() {
   }
 
   const onMove: MoveHandler<GraphNode> = ({ dragIds, parentId, index }) => {
-    // TODO: we need to store position information before we can implement this
     console.log("onMove", dragIds, parentId, index)
-    moveNodes(dragIds, parentId, index)
+    moveNodes({ nodeIds: dragIds, parentId, insertIndex: index })
   }
 
   const onDelete: DeleteHandler<GraphNode> = ({ ids }) => {

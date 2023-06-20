@@ -1,4 +1,5 @@
 import { useSetAtom } from "jotai"
+import { useAtomCallback } from "jotai/utils"
 import { useCallback } from "react"
 
 import { GraphEdge, GraphNode } from "../graph-types.ts"
@@ -100,18 +101,26 @@ export function useDeleteNodes() {
 export function useMoveNodes() {
   const setGraphRoot = useSetAtom(graphRootAtom)
 
-  return useCallback(
-    (
-      nodeIds: string[],
-      destinationParentId: string | null,
-      destinationParentIndex: number
-    ) => {
-      if (!destinationParentId) {
-        console.log("Drag and drop without destination parent")
-        return
-      }
-
-      setGraphRoot((graphRoot) => {
+  return useAtomCallback(
+    useCallback(
+      (
+        get,
+        _,
+        {
+          nodeIds,
+          parentId,
+          insertIndex,
+        }: {
+          nodeIds: string[]
+          parentId: string | null
+          insertIndex: number
+        }
+      ) => {
+        if (!parentId) {
+          console.log("Drag and drop without destination parent")
+          return
+        }
+        const graphRoot = get(graphRootAtom)
         // Put all nodes that are moving into a map for easy lookup
         const movingNodeIdMap = new Map(nodeIds.map((id) => [id, true]))
 
@@ -123,7 +132,7 @@ export function useMoveNodes() {
         // Create new edges with the updated source
         const updatedIncomingEdges = incomingEdges.map((edge) => ({
           ...edge,
-          source: destinationParentId,
+          source: parentId,
         }))
 
         // Create a new edge map with the updated edges
@@ -137,7 +146,7 @@ export function useMoveNodes() {
 
         // Find the existing outgoing edges of the parent
         const parentOutgoingEdges = [...graphRoot.edgeMap.values()].filter(
-          (edge) => edge.source === destinationParentId
+          (edge) => edge.source === parentId
         )
         // Sort the outgoing edges of the parent
         const parentOutgoingEdgeSorted = graphSortEdges(
@@ -146,8 +155,8 @@ export function useMoveNodes() {
         )
 
         // Find the index of the first outgoing edge that is not moving
-        const beforeNode = parentOutgoingEdgeSorted[destinationParentIndex - 1]
-        const afterNode = parentOutgoingEdgeSorted[destinationParentIndex]
+        const beforeNode = parentOutgoingEdgeSorted[insertIndex - 1]
+        const afterNode = parentOutgoingEdgeSorted[insertIndex]
         const beforePriority =
           graphRoot.edgePriorityMap.get(beforeNode?.id ?? null) || null
         const afterPriority =
@@ -165,14 +174,15 @@ export function useMoveNodes() {
         parentOutgoingEdgeSorted.forEach((edge, i) => {
           newEdgePriorityMap.set(edge.id, priorities[i])
         })
+        console.log("newedgeprioritymap", [...newEdgePriorityMap.entries()])
 
-        return {
+        setGraphRoot({
           ...graphRoot,
           edgeMap: newEdgeMap,
           edgePriorityMap: newEdgePriorityMap,
-        }
-      })
-    },
-    [setGraphRoot]
+        })
+      },
+      [setGraphRoot]
+    )
   )
 }
