@@ -47,8 +47,8 @@ export function rangeBetween(
   start: number,
   end: number
 ): number[] {
-  if (end >= start) {
-    return times(count)
+  if (end <= start) {
+    return times(count, () => start)
   }
   const step = (end - start) / (count + 1)
   return times(count, (i) => start + step * (i + 1))
@@ -70,8 +70,8 @@ export function calculateInsertNodePriorities(
   if (beforePriority !== null) {
     return rangeBetween(
       insertCount,
-      beforePriority,
-      beforePriority + insertCount
+      beforePriority + 1,
+      beforePriority + insertCount + 1
     )
   }
 

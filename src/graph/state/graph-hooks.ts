@@ -152,14 +152,18 @@ export function useMoveNodes() {
           graphRoot.edgePriorityMap.get(beforeNode?.id ?? null) || null
         const afterPriority =
           graphRoot.edgePriorityMap.get(afterNode?.id ?? null) || null
+        console.log("bp", beforePriority)
+        console.log("ap", afterPriority)
 
         const priorities = calculateInsertNodePriorities(
-          nodeIds.length,
+          parentOutgoingEdgeSorted.length,
           beforePriority,
           afterPriority
         )
-        nodeIds.forEach((id, i) => {
-          newEdgePriorityMap.set(id, priorities[i])
+        console.log("priorities2", priorities)
+
+        parentOutgoingEdgeSorted.forEach((edge, i) => {
+          newEdgePriorityMap.set(edge.id, priorities[i])
         })
 
         return {

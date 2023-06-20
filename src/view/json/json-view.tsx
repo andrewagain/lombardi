@@ -6,7 +6,6 @@ import {
   graphTreeRootNodesAtom,
 } from "@/graph/state/tree-atoms.ts"
 
-// https://github.com/brimdata/react-arborist
 export default function JsonView() {
   const root = useAtomValue(graphRootAtom)
   const rootNodes = useAtomValue(graphNodesWithoutIncomingEdgesAtom)
@@ -15,8 +14,9 @@ export default function JsonView() {
   return (
     <div className="w-full h-full">
       <div className="border-2 border-red-400">
-        {JSON.stringify([...root.nodeMap.values()])}
+        {JSON.stringify([...root.edgePriorityMap.entries()])}
       </div>
+      <div>{JSON.stringify([...root.nodeMap.values()])}</div>
       <div>{JSON.stringify([...root.edgeMap.values()])}</div>
       <div>{JSON.stringify(rootNodes)}</div>
       <div>{JSON.stringify(tree)}</div>
