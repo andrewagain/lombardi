@@ -118,6 +118,7 @@ export function useMoveNodes() {
           console.log("Drag and drop without destination parent")
           return
         }
+
         const graphRoot = get(graphRootAtom)
         // Put all nodes that are moving into a map for easy lookup
         const movingNodeIdMap = new Map(nodeIds.map((id) => [id, true]))
@@ -159,21 +160,16 @@ export function useMoveNodes() {
           graphRoot.edgePriorityMap.get(beforeNode?.id ?? null) || null
         const afterPriority =
           graphRoot.edgePriorityMap.get(afterNode?.id ?? null) || null
-        console.log("bp", beforePriority)
-        console.log("ap", afterPriority)
 
         const priorities = calculateInsertNodePriorities(
-          parentOutgoingEdgeSorted.length,
+          incomingEdges.length,
           beforePriority,
           afterPriority
         )
-        console.log("priorities", priorities)
 
-        parentOutgoingEdgeSorted.forEach((edge, i) => {
+        incomingEdges.forEach((edge, i) => {
           newEdgePriorityMap.set(edge.id, priorities[i])
         })
-
-        console.log("newedgeprioritymap", [...newEdgePriorityMap.entries()])
 
         set(graphRootAtom, {
           ...graphRoot,
