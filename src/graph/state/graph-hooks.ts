@@ -99,13 +99,11 @@ export function useDeleteNodes() {
 // The edge source should be changed to the new parent, and an index should be
 // added to the edge position map.
 export function useMoveNodes() {
-  const setGraphRoot = useSetAtom(graphRootAtom)
-
   return useAtomCallback(
     useCallback(
       (
         get,
-        _,
+        set,
         {
           nodeIds,
           parentId,
@@ -176,13 +174,13 @@ export function useMoveNodes() {
         })
         console.log("newedgeprioritymap", [...newEdgePriorityMap.entries()])
 
-        setGraphRoot({
+        set(graphRootAtom, {
           ...graphRoot,
           edgeMap: newEdgeMap,
           edgePriorityMap: newEdgePriorityMap,
         })
       },
-      [setGraphRoot]
+      []
     )
   )
 }
