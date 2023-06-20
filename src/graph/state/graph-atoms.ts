@@ -1,28 +1,51 @@
 import { atom } from "jotai"
 
-import { GraphEdge, GraphRoot } from "../graph-types.ts"
-import { createEmptyGraph } from "../graph-util.ts"
+import {
+  GraphCoreData,
+  GraphEdge,
+  GraphEdgePriority,
+  GraphNode,
+} from "../graph-types.ts"
 
-export const graphRootAtom = atom<GraphRoot>(createEmptyGraph())
+/**
+ * Core graph data
+ */
+export const graphNodeMapAtom = atom(new Map<string, GraphNode>())
+
+export const graphEdgeMapAtom = atom(new Map<string, GraphEdge>())
+
+export const graphEdgePriorityMapAtom = atom(
+  new Map<string, GraphEdgePriority>()
+)
+
+export const graphRootAtom = atom(
+  (get) => {
+    const data: GraphCoreData = {
+      nodeMap: get(graphNodeMapAtom),
+      edgeMap: get(graphEdgeMapAtom),
+      edgePriorityMap: get(graphEdgePriorityMapAtom),
+    }
+    return data
+  },
+  (_, set, update: GraphCoreData) => {
+    set(graphNodeMapAtom, update.nodeMap)
+    set(graphEdgeMapAtom, update.edgeMap)
+    set(graphEdgePriorityMapAtom, update.edgePriorityMap)
+  }
+)
 
 /**
  * Node-specific
  */
-export const graphNodeMapAtom = atom((get) => get(graphRootAtom).nodeMap)
-
 export const graphNodeIdsAtom = atom((get) => [...get(graphNodeMapAtom).keys()])
 
 export const graphNodesAtom = atom((get) => [...get(graphNodeMapAtom).values()])
 
+export const graphNodeCountAtom = atom((get) => get(graphNodeMapAtom).size)
+
 /**
  * Edge-specific
  */
-export const graphEdgeMapAtom = atom((get) => get(graphRootAtom).edgeMap)
-
-export const graphEdgePriorityMapAtom = atom(
-  (get) => get(graphRootAtom).edgePriorityMap
-)
-
 export const graphEdgeIdsAtom = atom((get) => [...get(graphEdgeMapAtom).keys()])
 
 export const graphEdgesAtom = atom((get) => [...get(graphEdgeMapAtom).values()])
@@ -57,5 +80,3 @@ export const graphEdgeMapByTargetAtom = atom((get) => {
   }
   return edgeMapByTarget
 })
-
-export const graphNodeCountAtom = atom((get) => get(graphNodeMapAtom).size)

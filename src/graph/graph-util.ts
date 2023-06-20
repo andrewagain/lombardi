@@ -1,13 +1,13 @@
 import { sortBy, times } from "lodash-es"
 
 import {
+  GraphCoreData,
   GraphEdge,
   GraphEdgePriorityMap,
-  GraphRoot,
   GraphShorthand,
 } from "./graph-types.ts"
 
-export function createEmptyGraph(): GraphRoot {
+export function createEmptyGraph(): GraphCoreData {
   return {
     nodeMap: new Map(
       [
@@ -26,7 +26,7 @@ export function createEmptyGraph(): GraphRoot {
   }
 }
 
-export function translateShorthandGraph(g: GraphShorthand): GraphRoot {
+export function translateShorthandGraph(g: GraphShorthand): GraphCoreData {
   return {
     nodeMap: new Map(g.nodes.map((n) => [n.id, n])),
     edgeMap: new Map(g.edges?.map((e) => [e.id, e])),
