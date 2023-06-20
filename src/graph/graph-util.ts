@@ -1,4 +1,4 @@
-import { sortBy } from "lodash-es"
+import { after, sortBy, times } from "lodash-es"
 
 import {
   GraphEdge,
@@ -39,4 +39,41 @@ export function graphSortEdges(
   edgePriorityMap: GraphEdgePriorityMap
 ): GraphEdge[] {
   return sortBy(edges, (e) => edgePriorityMap.get(e.id) ?? -1)
+}
+
+// Create an exclusive range between start and end
+export function rangeBetween(
+  count: number,
+  start: number,
+  end: number
+): number[] {
+  if (end >= start) {
+    return times(count)
+  }
+  const step = (end - start) / (count + 1)
+  return times(count, (i) => start + step * (i + 1))
+}
+
+export function calculateInsertNodePriorities(
+  insertCount: number,
+  beforePriority: number | null,
+  afterPriority: number | null
+): number[] {
+  if (afterPriority !== null && beforePriority !== null) {
+    return rangeBetween(insertCount, beforePriority, afterPriority)
+  }
+
+  if (afterPriority !== null) {
+    return rangeBetween(insertCount, 0, afterPriority)
+  }
+
+  if (beforePriority !== null) {
+    return rangeBetween(
+      insertCount,
+      beforePriority,
+      beforePriority + insertCount
+    )
+  }
+
+  return times(insertCount, (i) => i + 1)
 }
