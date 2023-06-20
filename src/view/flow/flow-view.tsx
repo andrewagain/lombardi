@@ -2,7 +2,7 @@
 
 import "reactflow/dist/style.css"
 
-import { atom, useAtomValue } from "jotai"
+import { atom, useAtom, useAtomValue } from "jotai"
 import { useAtomCallback } from "jotai/utils"
 import { useCallback } from "react"
 import {
@@ -30,21 +30,43 @@ type FlowEdge = Edge<GraphEdge>
 
 const flowPositionMapAtom = atom(new Map<GraphNodeId, XYPosition>())
 
-const flowNodesAtom = atom((get) => {
-  const nodes = get(graphNodesAtom)
-  const positions = get(flowPositionMapAtom)
-  const flowNodes: FlowNode[] = nodes.map((node) => {
-    return {
-      id: node.id,
-      position: positions.get(node.id) ?? { x: 0, y: 0 },
-      data: {
-        ...node,
-        label: node.name,
-      },
-    }
-  })
-  return flowNodes
-})
+const flowNodesAtom = atom(
+  (get) => {
+    const nodes = get(graphNodesAtom)
+    const positions = get(flowPositionMapAtom)
+    const flowNodes: FlowNode[] = nodes.map((node) => {
+      return {
+        id: node.id,
+        position: positions.get(node.id) ?? { x: 0, y: 0 },
+        data: {
+          ...node,
+          label: node.name,
+        },
+      }
+    })
+    return flowNodes
+  },
+  (_, set, flowNodes: FlowNode[]) => {
+    const nodes: GraphNode[] = flowNodes.map((flowNode) => {
+      return {
+        ...flowNode.data,
+        id: flowNode.id,
+        name: flowNode.data.name,
+      }
+    })
+    const positions = new Map<GraphNodeId, XYPosition>()
+    flowNodes.forEach((flowNode) => {
+      positions.set(flowNode.id, flowNode.position)
+    })
+    set(flowPositionMapAtom, positions)
+
+    const nodeMap = new Map<GraphNodeId, GraphNode>()
+    nodes.forEach((node) => {
+      nodeMap.set(node.id, node)
+    })
+    set(graphNodeMapAtom, nodeMap)
+  }
+)
 
 const flowEdgesAtom = atom((get) => {
   const edges = get(graphEdgesAtom)
@@ -60,21 +82,15 @@ const flowEdgesAtom = atom((get) => {
 })
 
 export default function FlowView() {
-  const nodes = useAtomValue(flowNodesAtom)
+  const [nodes, setNodes] = useAtom(flowNodesAtom)
   const edges = useAtomValue(flowEdgesAtom)
 
-  // const onNodesChange = useAtomCallback(
-  //   useCallback((get, set, changes: NodeChange[]) => {
-  //     const newNodes = applyNodeChanges(get(graphNodesAtom), changes)
-  //     const nodesMap = new Map(get(graphNodeMapAtom))
-  //     changes.forEach((change) => {
-  //       if (change.type === "add" || change.type === "update") {
-  //         nodesMap.set(change.node.id, change.node.position)
-  //       }
-  //     }
-
-  //   }, [])
-  // )
+  const onNodesChange = useCallback(
+    (changes: NodeChange[]) => {
+      setNodes(applyNodeChanges(changes, nodes))
+    },
+    [nodes, setNodes]
+  )
 
   return (
     <ReactFlow nodes={nodes} edges={edges} onNodesChange={onNodesChange}>
