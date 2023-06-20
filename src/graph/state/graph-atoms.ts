@@ -1,5 +1,7 @@
 import { atom } from "jotai"
 
+import { listToMap } from "@/util/datastructure/map.ts"
+
 import {
   GraphCoreData,
   GraphEdge,
@@ -39,7 +41,15 @@ export const graphRootAtom = atom(
  */
 export const graphNodeIdsAtom = atom((get) => [...get(graphNodeMapAtom).keys()])
 
-export const graphNodesAtom = atom((get) => [...get(graphNodeMapAtom).values()])
+export const graphNodesAtom = atom(
+  (get) => [...get(graphNodeMapAtom).values()],
+  (_, set, nodes: GraphNode[]) => {
+    set(
+      graphNodeMapAtom,
+      listToMap(nodes, (n) => n.id)
+    )
+  }
+)
 
 export const graphNodeCountAtom = atom((get) => get(graphNodeMapAtom).size)
 

@@ -18,11 +18,8 @@ import {
 } from "reactflow"
 
 import { GraphEdge, GraphNode, GraphNodeId } from "@/graph/graph-types"
-import {
-  graphEdgesAtom,
-  graphNodeMapAtom,
-  graphNodesAtom,
-} from "@/graph/state/graph-atoms"
+import { graphEdgesAtom, graphNodesAtom } from "@/graph/state/graph-atoms"
+import { listToMap } from "@/util/datastructure/map"
 
 type FlowNode = Node<GraphNode>
 type FlowEdge = Edge<GraphEdge>
@@ -53,17 +50,14 @@ const flowNodesAtom = atom(
         name: flowNode.data.name,
       }
     })
-    const positions = new Map<GraphNodeId, XYPosition>()
-    flowNodes.forEach((flowNode) => {
-      positions.set(flowNode.id, flowNode.position)
-    })
-    set(flowPositionMapAtom, positions)
+    set(graphNodesAtom, nodes)
 
-    const nodeMap = new Map<GraphNodeId, GraphNode>()
-    nodes.forEach((node) => {
-      nodeMap.set(node.id, node)
-    })
-    set(graphNodeMapAtom, nodeMap)
+    const positionsMap: Map<GraphNodeId, XYPosition> = listToMap(
+      flowNodes,
+      (f) => f.id,
+      (f) => f.position
+    )
+    set(flowPositionMapAtom, positionsMap)
   }
 )
 
