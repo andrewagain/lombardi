@@ -23,8 +23,7 @@
     /* Custom config (not in vite defaults) */
     "paths": {
       "@/*": ["./src/*"]
-    },
-    "baseUrl": "./"
+    }
   },
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]

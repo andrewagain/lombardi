@@ -172,7 +172,7 @@ export function useMoveNodes() {
         parentOutgoingEdgeSorted.forEach((edge, i) => {
           newEdgePriorityMap.set(edge.id, priorities[i])
         })
-        console.log("newedgeprioritymap", [...newEdgePriorityMap.entries()])
+        console.log("newedgeprioritymap2", [...newEdgePriorityMap.entries()])
 
         set(graphRootAtom, {
           ...graphRoot,
