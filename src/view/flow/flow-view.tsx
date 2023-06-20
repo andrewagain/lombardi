@@ -29,7 +29,10 @@ const flowNodesAtom = atom((get) => {
     return {
       id: node.id,
       position: positions.get(node.id) ?? { x: 0, y: 0 },
-      data: node,
+      data: {
+        ...node,
+        label: node.name,
+      },
     }
   })
   return flowNodes
