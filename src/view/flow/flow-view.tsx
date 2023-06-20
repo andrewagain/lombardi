@@ -1,5 +1,7 @@
 // https://reactflow.dev/
 
+import "reactflow/dist/style.css"
+
 import { atom, useAtomValue } from "jotai"
 import {
   Background,
