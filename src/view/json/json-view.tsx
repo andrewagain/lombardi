@@ -14,7 +14,9 @@ export default function JsonView() {
 
   return (
     <div className="w-full h-full">
-      <div>{JSON.stringify([...root.nodeMap.values()])}</div>
+      <div className="border-2 border-red-400">
+        {JSON.stringify([...root.nodeMap.values()])}
+      </div>
       <div>{JSON.stringify([...root.edgeMap.values()])}</div>
       <div>{JSON.stringify(rootNodes)}</div>
       <div>{JSON.stringify(tree)}</div>
