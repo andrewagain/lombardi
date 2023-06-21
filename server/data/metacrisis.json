@@ -1,0 +1,62 @@
+{
+  "nodes": [
+    {
+      "id": "node-1687388440083",
+      "name": "Metacrisis",
+      "label": "Metacrisis"
+    },
+    {
+      "id": "node-1687388443233",
+      "name": "Health",
+      "label": "Health"
+    },
+    {
+      "id": "node-1687388451548",
+      "name": "Nutrition Guidelines",
+      "label": "Nutrition Guidelines"
+    },
+    {
+      "id": "node-1687388473667",
+      "name": "Medicine",
+      "label": "Medicine"
+    },
+    {
+      "id": "node-1687388480459",
+      "name": "Financial",
+      "label": "Financial"
+    },
+    {
+      "id": "node-1687388496297",
+      "name": "Government",
+      "label": "Government"
+    }
+  ],
+  "edges": [
+    {
+      "id": "edge-1687388443233",
+      "source": "node-1687388440083",
+      "target": "node-1687388443233"
+    },
+    {
+      "id": "edge-1687388451548",
+      "source": "node-1687388443233",
+      "target": "node-1687388451548"
+    },
+    {
+      "id": "edge-1687388473667",
+      "source": "node-1687388443233",
+      "target": "node-1687388473667"
+    },
+    {
+      "id": "edge-1687388480460",
+      "source": "node-1687388440083",
+      "target": "node-1687388480459"
+    },
+    {
+      "id": "edge-1687388496298",
+      "source": "node-1687388440083",
+      "target": "node-1687388496297"
+    }
+  ],
+  "edgePriorities": []
+}
