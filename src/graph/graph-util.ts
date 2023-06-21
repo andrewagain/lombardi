@@ -9,20 +9,9 @@ import {
 
 export function createEmptyGraph(): GraphCoreData {
   return {
-    nodeMap: new Map(
-      [
-        { id: "root", name: "root" },
-        { id: "a", name: "a" },
-        { id: "b", name: "b" },
-      ].map((n) => [n.id, n])
-    ),
-    edgeMap: new Map(
-      [
-        { id: "ra", source: "root", target: "a" },
-        { id: "rb", source: "root", target: "b" },
-      ].map((e) => [e.id, e])
-    ),
-    edgePriorityMap: new Map([["ra", 1]]),
+    nodeMap: new Map(),
+    edgeMap: new Map(),
+    edgePriorityMap: new Map(),
   }
 }
 

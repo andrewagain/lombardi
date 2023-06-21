@@ -6,6 +6,11 @@ import { createServer as createViteServer } from "vite"
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
+function getDataPath(req: express.Request) {
+  const graphId = req.body.graphId
+  return path.join(__dirname, `data/${graphId}.json`)
+}
+
 async function createServer() {
   const app = express()
 
@@ -17,18 +22,20 @@ async function createServer() {
   app.use(express.json())
 
   app.post("/api/load", (req, res) => {
-    const data = fs.readFileSync(
-      path.join(__dirname, `data/${req.body.graphId}.json`),
-      "utf-8"
-    )
+    const dataPath = getDataPath(req)
+    if (!fs.existsSync(dataPath)) {
+      res.status(404)
+      res.send("")
+      return
+    }
+
+    const data = fs.readFileSync(dataPath, "utf-8")
     res.send(data)
   })
 
   app.post("/api/save", (req, res) => {
-    fs.writeFileSync(
-      path.join(__dirname, `data/${req.body.graphId}.json`),
-      JSON.stringify(req.body.data, null, 2)
-    )
+    const dataPath = getDataPath(req)
+    fs.writeFileSync(dataPath, JSON.stringify(req.body.data, null, 2))
     res.send("ok")
   })
 
