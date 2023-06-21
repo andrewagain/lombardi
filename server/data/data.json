@@ -7,8 +7,8 @@
     },
     {
       "id": "node-1687333450652",
-      "name": "Opiods",
-      "label": "Opiods"
+      "name": "Opioids",
+      "label": "Opioids"
     },
     {
       "id": "node-1687333456368",
@@ -24,6 +24,26 @@
       "id": "node-1687369383820",
       "name": "Hydrocodone",
       "label": "Hydrocodone"
+    },
+    {
+      "id": "node-1687369842483",
+      "name": "Oxycodone",
+      "label": "Oxycodone"
+    },
+    {
+      "id": "node-1687369852771",
+      "name": "Morphine",
+      "label": "Morphine"
+    },
+    {
+      "id": "node-1687369861290",
+      "name": "Methadone",
+      "label": "Methadone"
+    },
+    {
+      "id": "node-1687369873458",
+      "name": "Fentanyl",
+      "label": "Fentanyl"
     }
   ],
   "edges": [
@@ -46,6 +66,26 @@
       "id": "edge-1687369383821",
       "source": "node-1687369379981",
       "target": "node-1687369383820"
+    },
+    {
+      "id": "edge-1687369842483",
+      "source": "node-1687369379981",
+      "target": "node-1687369842483"
+    },
+    {
+      "id": "edge-1687369852771",
+      "source": "node-1687369379981",
+      "target": "node-1687369852771"
+    },
+    {
+      "id": "edge-1687369861291",
+      "source": "node-1687369379981",
+      "target": "node-1687369861290"
+    },
+    {
+      "id": "edge-1687369873458",
+      "source": "node-1687369379981",
+      "target": "node-1687369873458"
     }
   ],
   "edgePriorities": []
