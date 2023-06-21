@@ -1,11 +1,32 @@
 {
   "nodes": [
     {
-      "id": "node-1687332039232",
+      "id": "node-1687333443868",
+      "name": "meow",
+      "label": "meow"
+    },
+    {
+      "id": "node-1687333450652",
+      "name": "what",
+      "label": "what"
+    },
+    {
+      "id": "node-1687333456368",
       "name": "meow",
       "label": "meow"
     }
   ],
-  "edges": [],
+  "edges": [
+    {
+      "id": "edge-1687333450653",
+      "source": "node-1687333443868",
+      "target": "node-1687333450652"
+    },
+    {
+      "id": "edge-1687333456369",
+      "source": "node-1687333450652",
+      "target": "node-1687333456368"
+    }
+  ],
   "edgePriorities": []
 }
