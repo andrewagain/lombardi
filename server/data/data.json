@@ -3,17 +3,27 @@
     {
       "id": "node-1687333443868",
       "name": "Research",
-      "label": "meow"
+      "label": "Research"
     },
     {
       "id": "node-1687333450652",
       "name": "Opiods",
-      "label": "what"
+      "label": "Opiods"
     },
     {
       "id": "node-1687333456368",
       "name": "Manufacturers",
-      "label": "meow"
+      "label": "Manufacturers"
+    },
+    {
+      "id": "node-1687369379981",
+      "name": "Types",
+      "label": "Types"
+    },
+    {
+      "id": "node-1687369383820",
+      "name": "Hydrocodone",
+      "label": "Hydrocodone"
     }
   ],
   "edges": [
@@ -26,6 +36,16 @@
       "id": "edge-1687333456369",
       "source": "node-1687333450652",
       "target": "node-1687333456368"
+    },
+    {
+      "id": "edge-1687369379982",
+      "source": "node-1687333456368",
+      "target": "node-1687369379981"
+    },
+    {
+      "id": "edge-1687369383821",
+      "source": "node-1687369379981",
+      "target": "node-1687369383820"
     }
   ],
   "edgePriorities": []

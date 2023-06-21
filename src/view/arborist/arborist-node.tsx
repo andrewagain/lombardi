@@ -29,14 +29,12 @@ export function ArboristNode({
 }
 
 function Input({ node }: { node: NodeApi<GraphNode> }) {
-  console.log("Input render")
   return (
     <input
       autoFocus
       type="text"
       defaultValue={node.data.name}
       onFocus={(e) => {
-        console.log("FOCUS")
         e.currentTarget.select()
       }}
       onBlur={() => node.reset()}
