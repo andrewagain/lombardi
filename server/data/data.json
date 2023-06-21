@@ -2,17 +2,17 @@
   "nodes": [
     {
       "id": "node-1687333443868",
-      "name": "meow",
+      "name": "Research",
       "label": "meow"
     },
     {
       "id": "node-1687333450652",
-      "name": "what",
+      "name": "Opiods",
       "label": "what"
     },
     {
       "id": "node-1687333456368",
-      "name": "meow",
+      "name": "Manufacturers",
       "label": "meow"
     }
   ],
