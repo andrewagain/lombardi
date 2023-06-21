@@ -20,7 +20,7 @@ export const graphEdgePriorityMapAtom = atom(
   new Map<string, GraphEdgePriority>()
 )
 
-export const graphRootAtom = atom(
+export const graphCoreDataAtom = atom(
   (get) => {
     const data: GraphCoreData = {
       nodeMap: get(graphNodeMapAtom),

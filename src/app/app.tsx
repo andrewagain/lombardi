@@ -2,11 +2,12 @@ import FlowView from "@/view/flow/flow-view.tsx"
 
 import ArboristView from "../view/arborist/arborist-view.tsx"
 import style from "./app.module.css"
+import Header from "./header.tsx"
 
 export default function NuonsApp() {
   return (
     <main className={style.app}>
-      <header>Header</header>
+      <Header />
       <div
         style={{
           gridArea: "a",

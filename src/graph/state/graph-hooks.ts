@@ -11,11 +11,11 @@ import {
 import {
   graphEdgeMapAtom,
   graphNodeMapAtom,
-  graphRootAtom,
+  graphCoreDataAtom,
 } from "./graph-atoms.ts"
 
 export function useClearGraph() {
-  const setGraphCoreData = useSetAtom(graphRootAtom)
+  const setGraphCoreData = useSetAtom(graphCoreDataAtom)
   return useCallback(() => {
     setGraphCoreData(createEmptyGraph())
   }, [setGraphCoreData])
@@ -111,7 +111,7 @@ export function useMoveNodes() {
           return
         }
 
-        const graphRoot = get(graphRootAtom)
+        const graphRoot = get(graphCoreDataAtom)
         // Put all nodes that are moving into a map for easy lookup
         const movingNodeIdMap = new Map(nodeIds.map((id) => [id, true]))
 
@@ -163,7 +163,7 @@ export function useMoveNodes() {
           newEdgePriorityMap.set(edge.id, priorities[i])
         })
 
-        set(graphRootAtom, {
+        set(graphCoreDataAtom, {
           ...graphRoot,
           edgeMap: newEdgeMap,
           edgePriorityMap: newEdgePriorityMap,

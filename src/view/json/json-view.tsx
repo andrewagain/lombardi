@@ -1,13 +1,13 @@
 import { useAtomValue } from "jotai"
 
-import { graphRootAtom } from "@/graph/state/graph-atoms.ts"
+import { graphCoreDataAtom } from "@/graph/state/graph-atoms.ts"
 import {
   graphNodesWithoutIncomingEdgesAtom,
   graphTreeRootNodesAtom,
 } from "@/graph/state/tree-atoms.ts"
 
 export default function JsonView() {
-  const root = useAtomValue(graphRootAtom)
+  const root = useAtomValue(graphCoreDataAtom)
   const rootNodes = useAtomValue(graphNodesWithoutIncomingEdgesAtom)
   const tree = useAtomValue(graphTreeRootNodesAtom)
 
