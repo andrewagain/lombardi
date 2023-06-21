@@ -4,7 +4,7 @@
   grid-template-rows: auto 1fr;
   grid-template-areas:
     "header header header"
-    "a      b      c";
+    "a      b      b";
   height: 100vh;
   width: 100%;
 }
