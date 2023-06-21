@@ -17,8 +17,8 @@
     },
     {
       "id": "node-1687369379981",
-      "name": "Types",
-      "label": "Types"
+      "name": "Opioid Types",
+      "label": "Opioid Types"
     },
     {
       "id": "node-1687369383820",
@@ -44,6 +44,41 @@
       "id": "node-1687369873458",
       "name": "Fentanyl",
       "label": "Fentanyl"
+    },
+    {
+      "id": "node-1687370207228",
+      "name": "Johnson & Johnson",
+      "label": "Johnson & Johnson"
+    },
+    {
+      "id": "node-1687370213485",
+      "name": "Endo",
+      "label": "Endo"
+    },
+    {
+      "id": "node-1687370216694",
+      "name": "Teva",
+      "label": "Teva"
+    },
+    {
+      "id": "node-1687370219458",
+      "name": "Allergan",
+      "label": "Allergan"
+    },
+    {
+      "id": "node-1687370257708",
+      "name": "Questions",
+      "label": "Questions"
+    },
+    {
+      "id": "node-1687370274450",
+      "name": "Difference between opioid and opiates?",
+      "label": "Difference between opioid and opiates?"
+    },
+    {
+      "id": "node-1687370343971",
+      "name": "Opiates are naturally occurring opioids",
+      "label": "Opiates are naturally occurring opioids"
     }
   ],
   "edges": [
@@ -59,7 +94,7 @@
     },
     {
       "id": "edge-1687369379982",
-      "source": "node-1687333456368",
+      "source": "node-1687333450652",
       "target": "node-1687369379981"
     },
     {
@@ -86,7 +121,51 @@
       "id": "edge-1687369873458",
       "source": "node-1687369379981",
       "target": "node-1687369873458"
+    },
+    {
+      "id": "edge-1687370207229",
+      "source": "node-1687333456368",
+      "target": "node-1687370207228"
+    },
+    {
+      "id": "edge-1687370213485",
+      "source": "node-1687333456368",
+      "target": "node-1687370213485"
+    },
+    {
+      "id": "edge-1687370216694",
+      "source": "node-1687333456368",
+      "target": "node-1687370216694"
+    },
+    {
+      "id": "edge-1687370219458",
+      "source": "node-1687333456368",
+      "target": "node-1687370219458"
+    },
+    {
+      "id": "edge-1687370257708",
+      "source": "node-1687333450652",
+      "target": "node-1687370257708"
+    },
+    {
+      "id": "edge-1687370274450",
+      "source": "node-1687370257708",
+      "target": "node-1687370274450"
+    },
+    {
+      "id": "edge-1687370343972",
+      "source": "node-1687370274450",
+      "target": "node-1687370343971"
     }
   ],
-  "edgePriorities": []
+  "edgePriorities": [
+    [
+      "edge-1687369379982",
+      1
+    ],
+    [
+      "edge-1687370257708",
+      2.5
+    ]
+  ]
 }
