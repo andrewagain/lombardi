@@ -1,0 +1,152 @@
+{
+  "nodes": [
+    {
+      "id": "node-1687372239122",
+      "name": "Federal Institutions",
+      "label": "Federal Institutions"
+    },
+    {
+      "id": "node-1687372718204",
+      "name": "NIH",
+      "label": "NIH"
+    },
+    {
+      "id": "node-1687372729914",
+      "name": "CDC",
+      "label": "CDC"
+    },
+    {
+      "id": "node-1687372736837",
+      "name": "White House",
+      "label": "White House"
+    },
+    {
+      "id": "node-1687372740812",
+      "name": "HHS",
+      "label": "HHS"
+    },
+    {
+      "id": "node-1687372850925",
+      "name": "FBI",
+      "label": "FBI"
+    },
+    {
+      "id": "node-1687372854165",
+      "name": "CIA",
+      "label": "CIA"
+    },
+    {
+      "id": "node-1687372886615",
+      "name": "DHS",
+      "label": "DHS"
+    },
+    {
+      "id": "node-1687372891356",
+      "name": "ICE",
+      "label": "ICE"
+    },
+    {
+      "id": "node-1687373023197",
+      "name": "FCC",
+      "label": "FCC"
+    },
+    {
+      "id": "node-1687373035016",
+      "name": "Federal Reserve",
+      "label": "Federal Reserve"
+    },
+    {
+      "id": "node-1687373048973",
+      "name": "Joe Biden",
+      "label": "Joe Biden"
+    },
+    {
+      "id": "node-1687373066255",
+      "name": "Kamala Harris",
+      "label": "Kamala Harris"
+    },
+    {
+      "id": "node-1687373069925",
+      "name": "Janet Yellen",
+      "label": "Janet Yellen"
+    },
+    {
+      "id": "node-1687373114999",
+      "name": "Christopher Wray / Director",
+      "label": "Christopher Wray / Director"
+    }
+  ],
+  "edges": [
+    {
+      "id": "edge-1687372718205",
+      "source": "node-1687372239122",
+      "target": "node-1687372718204"
+    },
+    {
+      "id": "edge-1687372729914",
+      "source": "node-1687372239122",
+      "target": "node-1687372729914"
+    },
+    {
+      "id": "edge-1687372736838",
+      "source": "node-1687372239122",
+      "target": "node-1687372736837"
+    },
+    {
+      "id": "edge-1687372740813",
+      "source": "node-1687372239122",
+      "target": "node-1687372740812"
+    },
+    {
+      "id": "edge-1687372850926",
+      "source": "node-1687372239122",
+      "target": "node-1687372850925"
+    },
+    {
+      "id": "edge-1687372854165",
+      "source": "node-1687372239122",
+      "target": "node-1687372854165"
+    },
+    {
+      "id": "edge-1687372886615",
+      "source": "node-1687372239122",
+      "target": "node-1687372886615"
+    },
+    {
+      "id": "edge-1687372891356",
+      "source": "node-1687372239122",
+      "target": "node-1687372891356"
+    },
+    {
+      "id": "edge-1687373023198",
+      "source": "node-1687372239122",
+      "target": "node-1687373023197"
+    },
+    {
+      "id": "edge-1687373035016",
+      "source": "node-1687372239122",
+      "target": "node-1687373035016"
+    },
+    {
+      "id": "edge-1687373048973",
+      "source": "node-1687372736837",
+      "target": "node-1687373048973"
+    },
+    {
+      "id": "edge-1687373066256",
+      "source": "node-1687372736837",
+      "target": "node-1687373066255"
+    },
+    {
+      "id": "edge-1687373069925",
+      "source": "node-1687372736837",
+      "target": "node-1687373069925"
+    },
+    {
+      "id": "edge-1687373115000",
+      "source": "node-1687372850925",
+      "target": "node-1687373114999"
+    }
+  ],
+  "edgePriorities": []
+}

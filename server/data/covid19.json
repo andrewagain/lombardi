@@ -1,0 +1,37 @@
+{
+  "nodes": [
+    {
+      "id": "root",
+      "name": "root",
+      "label": "root"
+    },
+    {
+      "id": "a",
+      "name": "a",
+      "label": "a"
+    },
+    {
+      "id": "b",
+      "name": "b",
+      "label": "b"
+    }
+  ],
+  "edges": [
+    {
+      "id": "ra",
+      "source": "root",
+      "target": "a"
+    },
+    {
+      "id": "rb",
+      "source": "root",
+      "target": "b"
+    }
+  ],
+  "edgePriorities": [
+    [
+      "ra",
+      1
+    ]
+  ]
+}
