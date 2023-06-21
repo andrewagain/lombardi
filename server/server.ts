@@ -16,9 +16,9 @@ async function createServer() {
 
   app.use(express.json())
 
-  app.get("/api/load", (_, res) => {
+  app.post("/api/load", (req, res) => {
     const data = fs.readFileSync(
-      path.join(__dirname, "data/data.json"),
+      path.join(__dirname, `data/${req.body.graphId}.json`),
       "utf-8"
     )
     res.send(data)
@@ -26,7 +26,7 @@ async function createServer() {
 
   app.post("/api/save", (req, res) => {
     fs.writeFileSync(
-      path.join(__dirname, "data/data.json"),
+      path.join(__dirname, `data/${req.body.graphId}.json`),
       JSON.stringify(req.body.data, null, 2)
     )
     res.send("ok")

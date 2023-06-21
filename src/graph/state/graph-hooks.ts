@@ -9,9 +9,9 @@ import {
   graphSortEdges,
 } from "../graph-util.ts"
 import {
+  graphCoreDataAtom,
   graphEdgeMapAtom,
   graphNodeMapAtom,
-  graphCoreDataAtom,
 } from "./graph-atoms.ts"
 
 export function useClearGraph() {

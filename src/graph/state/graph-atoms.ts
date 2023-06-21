@@ -12,6 +12,8 @@ import {
 /**
  * Core graph data
  */
+export const graphIdAtom = atom("opioid")
+
 export const graphNodeMapAtom = atom(new Map<string, GraphNode>())
 
 export const graphEdgeMapAtom = atom(new Map<string, GraphEdge>())
