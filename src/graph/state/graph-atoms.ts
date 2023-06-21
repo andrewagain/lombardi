@@ -58,7 +58,15 @@ export const graphNodeCountAtom = atom((get) => get(graphNodeMapAtom).size)
  */
 export const graphEdgeIdsAtom = atom((get) => [...get(graphEdgeMapAtom).keys()])
 
-export const graphEdgesAtom = atom((get) => [...get(graphEdgeMapAtom).values()])
+export const graphEdgesAtom = atom(
+  (get) => [...get(graphEdgeMapAtom).values()],
+  (_, set, edges: GraphEdge[]) => {
+    set(
+      graphEdgeMapAtom,
+      listToMap(edges, (e) => e.id)
+    )
+  }
+)
 
 // Map from source node id to list of edges
 export const graphEdgeMapBySourceAtom = atom((get) => {

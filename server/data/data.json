@@ -1,3 +1,11 @@
 {
-  "hi": "Hello"
+  "nodes": [
+    {
+      "id": "node-1687332039232",
+      "name": "meow",
+      "label": "meow"
+    }
+  ],
+  "edges": [],
+  "edgePriorities": []
 }

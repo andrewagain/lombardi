@@ -14,6 +14,8 @@ async function createServer() {
     appType: "spa",
   })
 
+  app.use(express.json())
+
   app.get("/api/load", (_, res) => {
     console.log("load")
     const data = fs.readFileSync(
@@ -24,8 +26,11 @@ async function createServer() {
   })
 
   app.post("/api/save", (req, res) => {
-    const data = req.body
-    fs.writeFileSync(path.join(__dirname, "data/data.json"), data)
+    console.log("save")
+    fs.writeFileSync(
+      path.join(__dirname, "data/data.json"),
+      JSON.stringify(req.body.data, null, 2)
+    )
     res.send("ok")
   })
 
