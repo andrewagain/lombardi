@@ -30,6 +30,10 @@ export const flowNodesAtom = atom(
     return flowNodes
   },
   (_, set, flowNodes: FlowNode[]) => {
+    // this is called with flow nodes at position=0,0
+    // but why is it called initially?
+    // because node dimensions are updated by flow? does that make sense?
+    console.log("flowNodesAtom.set", flowNodes)
     const nodes: GraphNode[] = flowNodes.map((flowNode) => {
       return {
         ...flowNode.data,

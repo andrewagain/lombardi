@@ -38,6 +38,7 @@ export default function RepositionPanel() {
 
       const nodeIds = get(graphNodeIdsAtom)
       const positionMap = getDagreContractPositionMap(g, nodeIds)
+      console.log("positionMap", [...positionMap.entries()])
       set(graphNodePositionMapAtom, positionMap)
     }, [])
   )
