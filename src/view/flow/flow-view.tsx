@@ -87,7 +87,7 @@ function getDagreContractPositionMap(
 
 const flowDagreAtom = atom((get) => {
   const g = new dagre.graphlib.Graph({ compound: true, directed: true })
-  g.setGraph({ rankdir: "BT", ranksep: 300, nodesep: 100 })
+  g.setGraph({ rankdir: "TB", ranksep: 100, nodesep: 100 })
 
   // Default to assigning a new object as a label for each new edge.
   g.setDefaultEdgeLabel(function () {
