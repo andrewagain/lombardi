@@ -125,6 +125,7 @@ const flowEdgesAtom = atom((get) => {
 })
 
 export default function FlowView() {
+  const plainNodes = useAtomValue(graphNodesAtom)
   const [nodes, setNodes] = useAtom(flowNodesAtom)
   const edges = useAtomValue(flowEdgesAtom)
 
@@ -149,9 +150,9 @@ export default function FlowView() {
   )
 
   useEffect(() => {
-    console.log("reposition nodes", nodes)
+    console.log(`repositioning ${plainNodes.length} nodes`)
     repositionNodes()
-  }, [repositionNodes, nodes])
+  }, [repositionNodes, plainNodes])
 
   return (
     <ReactFlow nodes={nodes} edges={edges} onNodesChange={onNodesChange}>
