@@ -1,0 +1,105 @@
+{
+  "nodes": [
+    {
+      "id": "node-1687413492705",
+      "name": "Node Types",
+      "label": "Node Types"
+    },
+    {
+      "id": "node-1687413506842",
+      "name": "Source",
+      "label": "Source"
+    },
+    {
+      "id": "node-1687413519999",
+      "name": "Study",
+      "label": "Study"
+    },
+    {
+      "id": "node-1687413522748",
+      "name": "Website",
+      "label": "Website"
+    },
+    {
+      "id": "node-1687413539363",
+      "name": "Book",
+      "label": "Book"
+    },
+    {
+      "id": "node-1687413570506",
+      "name": "Quote",
+      "label": "Quote"
+    },
+    {
+      "id": "node-1687413576989",
+      "name": "Logic",
+      "label": "Logic"
+    },
+    {
+      "id": "node-1687413590794",
+      "name": "Claim",
+      "label": "Claim"
+    },
+    {
+      "id": "node-1687413625634",
+      "name": "Category",
+      "label": "Category"
+    }
+  ],
+  "edges": [
+    {
+      "id": "edge-1687413506842",
+      "source": "node-1687413492705",
+      "target": "node-1687413506842"
+    },
+    {
+      "id": "edge-1687413520000",
+      "source": "node-1687413506842",
+      "target": "node-1687413519999"
+    },
+    {
+      "id": "edge-1687413522749",
+      "source": "node-1687413506842",
+      "target": "node-1687413522748"
+    },
+    {
+      "id": "edge-1687413539364",
+      "source": "node-1687413506842",
+      "target": "node-1687413539363"
+    },
+    {
+      "id": "edge-1687413570506",
+      "source": "node-1687413492705",
+      "target": "node-1687413570506"
+    },
+    {
+      "id": "edge-1687413576990",
+      "source": "node-1687413492705",
+      "target": "node-1687413576989"
+    },
+    {
+      "id": "edge-1687413590795",
+      "source": "node-1687413576989",
+      "target": "node-1687413590794"
+    },
+    {
+      "id": "edge-1687413625635",
+      "source": "node-1687413492705",
+      "target": "node-1687413625634"
+    }
+  ],
+  "edgePriorities": [
+    [
+      "edge-1687413520000",
+      0.125
+    ],
+    [
+      "edge-1687413522749",
+      0.5
+    ],
+    [
+      "edge-1687413539364",
+      0.25
+    ]
+  ]
+}

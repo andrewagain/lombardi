@@ -16,6 +16,7 @@ export default function GraphSelect() {
           setGraphId(event.target.value)
         }}
       >
+        <option value="nodetypes">Node Types</option>
         <option value="opioid">Opioid Overdose Epidemic</option>
         <option value="metacrisis">Metacrisis</option>
         <option value="covid19">Covid-19 Pandemic</option>
