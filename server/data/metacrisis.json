@@ -39,6 +39,16 @@
       "id": "node-1687419323790",
       "name": "Christmas",
       "label": "Christmas"
+    },
+    {
+      "id": "node-1687419461068",
+      "name": "War",
+      "label": "War"
+    },
+    {
+      "id": "node-1687419468226",
+      "name": "Thalidomide",
+      "label": "thalidomide"
     }
   ],
   "edges": [
@@ -76,7 +86,22 @@
       "id": "edge-1687419323791",
       "source": "node-1687419319122",
       "target": "node-1687419323790"
+    },
+    {
+      "id": "edge-1687419461069",
+      "source": "node-1687388440083",
+      "target": "node-1687419461068"
+    },
+    {
+      "id": "edge-1687419468226",
+      "source": "node-1687388473667",
+      "target": "node-1687419468226"
     }
   ],
-  "edgePriorities": []
+  "edgePriorities": [
+    [
+      "edge-1687419468226",
+      1
+    ]
+  ]
 }
