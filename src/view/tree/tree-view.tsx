@@ -19,7 +19,7 @@ import { graphTreeRootNodesAtom } from "@/graph/state/tree-atoms.ts"
 
 import styles from "./tree.module.css"
 import TreeCursor from "./tree-cursor.tsx"
-import { TreeNode } from "./tree-node.tsx"
+import { TreeRow } from "./tree-row.tsx"
 
 // https://github.com/brimdata/react-arborist
 export default function TreeView() {
@@ -66,7 +66,7 @@ export default function TreeView() {
       renderCursor={TreeCursor}
       className={styles.tree}
     >
-      {TreeNode}
+      {TreeRow}
     </Tree>
   )
 }

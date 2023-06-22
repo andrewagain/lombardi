@@ -7,7 +7,7 @@ import { GraphNode } from "@/graph/graph-types.ts"
 
 import styles from "./tree.module.css"
 
-export function TreeNode({
+export function TreeRow({
   node,
   style,
   dragHandle,
