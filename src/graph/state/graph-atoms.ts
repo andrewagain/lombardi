@@ -61,6 +61,8 @@ export const graphNodePositionMapAtom = atom(
   new Map<GraphNodeId, NodePosition>()
 )
 
+export const graphNodeVisibilityMapAtom = atom(new Map<GraphNodeId, boolean>())
+
 /**
  * Edge-specific
  */

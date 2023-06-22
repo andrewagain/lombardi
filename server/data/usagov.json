@@ -84,6 +84,26 @@
       "id": "node-1687418732014",
       "name": "Lindsey Graham",
       "label": "Lindsey Graham"
+    },
+    {
+      "id": "node-1687420988897",
+      "name": "Pentagon",
+      "label": "Pentagon"
+    },
+    {
+      "id": "node-1687420995502",
+      "name": "Contractors",
+      "label": "Contractors"
+    },
+    {
+      "id": "node-1687421007651",
+      "name": "Lockheed Martin",
+      "label": "Lockheed Martin"
+    },
+    {
+      "id": "node-1687421014154",
+      "name": "Boeing",
+      "label": "Boeing"
     }
   ],
   "edges": [
@@ -166,7 +186,32 @@
       "id": "edge-1687418732015",
       "source": "node-1687418728932",
       "target": "node-1687418732014"
+    },
+    {
+      "id": "edge-1687420988897",
+      "source": "node-1687372239122",
+      "target": "node-1687420988897"
+    },
+    {
+      "id": "edge-1687420995502",
+      "source": "node-1687420988897",
+      "target": "node-1687420995502"
+    },
+    {
+      "id": "edge-1687421007652",
+      "source": "node-1687420995502",
+      "target": "node-1687421007651"
+    },
+    {
+      "id": "edge-1687421014154",
+      "source": "node-1687420995502",
+      "target": "node-1687421014154"
     }
   ],
-  "edgePriorities": []
+  "edgePriorities": [
+    [
+      "edge-1687421014154",
+      1
+    ]
+  ]
 }
