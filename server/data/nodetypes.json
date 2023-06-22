@@ -44,6 +44,16 @@
       "id": "node-1687413625634",
       "name": "Category",
       "label": "Category"
+    },
+    {
+      "id": "node-1687417359555",
+      "name": "Institution",
+      "label": "Institution"
+    },
+    {
+      "id": "node-1687417389636",
+      "name": "Corporation",
+      "label": "Corporation"
     }
   ],
   "edges": [
@@ -86,6 +96,16 @@
       "id": "edge-1687413625635",
       "source": "node-1687413492705",
       "target": "node-1687413625634"
+    },
+    {
+      "id": "edge-1687417359556",
+      "source": "node-1687413492705",
+      "target": "node-1687417359555"
+    },
+    {
+      "id": "edge-1687417389637",
+      "source": "node-1687417359555",
+      "target": "node-1687417389636"
     }
   ],
   "edgePriorities": [
