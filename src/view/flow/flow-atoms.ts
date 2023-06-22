@@ -6,7 +6,7 @@ import { GraphEdge, GraphNode, GraphNodeId } from "@/graph/graph-types"
 import {
   graphEdgesAtom,
   graphNodePositionMapAtom,
-  graphNodesAtom,
+  graphVisibleNodesAtom,
 } from "@/graph/state/graph-atoms"
 import { listToMap } from "@/util/datastructure/map"
 
@@ -15,7 +15,7 @@ export type FlowEdge = Edge<GraphEdge>
 
 export const flowNodesAtom = atom(
   (get) => {
-    const nodes = get(graphNodesAtom)
+    const nodes = get(graphVisibleNodesAtom)
     const positions = get(graphNodePositionMapAtom)
     const flowNodes: FlowNode[] = nodes.map((node) => {
       return {
@@ -37,7 +37,7 @@ export const flowNodesAtom = atom(
         name: flowNode.data.name,
       }
     })
-    set(graphNodesAtom, nodes)
+    set(graphVisibleNodesAtom, nodes)
 
     const positionsMap: Map<GraphNodeId, XYPosition> = listToMap(
       flowNodes,
