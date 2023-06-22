@@ -1,0 +1,22 @@
+{
+  "nodes": [
+    {
+      "id": "node-1687420022792",
+      "name": "RFK Jr",
+      "label": "RFK Jr"
+    },
+    {
+      "id": "node-1687420047453",
+      "name": "75% CNN revenue is pharma",
+      "label": "75% CNN revenue is pharma"
+    }
+  ],
+  "edges": [
+    {
+      "id": "edge-1687420047453",
+      "source": "node-1687420022792",
+      "target": "node-1687420047453"
+    }
+  ],
+  "edgePriorities": []
+}
