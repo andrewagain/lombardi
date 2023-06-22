@@ -79,6 +79,21 @@
       "id": "node-1687370343971",
       "name": "Opiates are naturally occurring opioids",
       "label": "Opiates are naturally occurring opioids"
+    },
+    {
+      "id": "node-1687419605304",
+      "name": "Alternative Medicine",
+      "label": "Alternative Medicine"
+    },
+    {
+      "id": "node-1687419612737",
+      "name": "Psilocybin",
+      "label": "Psilocybin"
+    },
+    {
+      "id": "node-1687419622703",
+      "name": "LDN",
+      "label": "LDN"
     }
   ],
   "edges": [
@@ -156,6 +171,21 @@
       "id": "edge-1687370343972",
       "source": "node-1687370274450",
       "target": "node-1687370343971"
+    },
+    {
+      "id": "edge-1687419605306",
+      "source": "node-1687333443868",
+      "target": "node-1687419605304"
+    },
+    {
+      "id": "edge-1687419612738",
+      "source": "node-1687419605304",
+      "target": "node-1687419612737"
+    },
+    {
+      "id": "edge-1687419622705",
+      "source": "node-1687419605304",
+      "target": "node-1687419622703"
     }
   ],
   "edgePriorities": [
@@ -165,6 +195,14 @@
     ],
     [
       "edge-1687370257708",
+      2.5
+    ],
+    [
+      "edge-1687419622705",
+      1
+    ],
+    [
+      "edge-1687419612738",
       2.5
     ]
   ]
