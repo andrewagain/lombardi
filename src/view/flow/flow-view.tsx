@@ -151,7 +151,11 @@ export default function FlowView() {
   return (
     <ReactFlow nodes={nodes} edges={edges} onNodesChange={onNodesChange}>
       <Controls />
-      <MiniMap />
+      <MiniMap
+        style={{
+          backgroundColor: "#222",
+        }}
+      />
       <Background variant={BackgroundVariant.Dots} gap={12} size={1} />
       <Panel position="top-right">
         <button onClick={repositionNodes}>Reposition</button>

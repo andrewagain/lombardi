@@ -74,6 +74,16 @@
       "id": "node-1687373114999",
       "name": "Christopher Wray / Director",
       "label": "Christopher Wray / Director"
+    },
+    {
+      "id": "node-1687418728932",
+      "name": "Congress",
+      "label": "Congress"
+    },
+    {
+      "id": "node-1687418732014",
+      "name": "Lindsey Graham",
+      "label": "Lindsey Graham"
     }
   ],
   "edges": [
@@ -146,6 +156,16 @@
       "id": "edge-1687373115000",
       "source": "node-1687372850925",
       "target": "node-1687373114999"
+    },
+    {
+      "id": "edge-1687418728932",
+      "source": "node-1687372239122",
+      "target": "node-1687418728932"
+    },
+    {
+      "id": "edge-1687418732015",
+      "source": "node-1687418728932",
+      "target": "node-1687418732014"
     }
   ],
   "edgePriorities": []
