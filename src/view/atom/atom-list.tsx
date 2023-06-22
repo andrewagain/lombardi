@@ -1,8 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Atom, useAtom } from "jotai"
 import { atomFamily, atomWithStorage } from "jotai/utils"
 import { useCallback, useMemo, useState } from "react"
 
-import { StateCell } from "./atom-cell"
+import { AtomCell } from "./atom-cell"
 
 const MISSING_LABEL_TEXT = "debugLabelFailure"
 
@@ -40,7 +41,7 @@ function ToggleButton({ title, param }: { title: string; param: string }) {
 
 type ValueTuple = [Atom<any>, any?]
 
-export function StateList({
+export function AtomList({
   values,
   title,
 }: {
@@ -88,21 +89,21 @@ export function StateList({
 
   return (
     <div
-      css={{
+      style={{
         overflow: "hidden",
         whiteSpace: "normal",
         width: "100%",
       }}
     >
       <div
-        css={{
+        style={{
           flex: "0 0 auto",
           display: "flex",
           flexDirection: "column",
         }}
       >
         {selectedValues.map((pair) => (
-          <StateCell
+          <AtomCell
             atomConfig={pair[0]}
             formatType={pair[1]}
             key={pair[0].debugLabel}
@@ -112,12 +113,12 @@ export function StateList({
         ))}
       </div>
       <div
-        css={{
+        style={{
           flex: "0 0 auto",
         }}
       >
         <input
-          css={{
+          style={{
             backgroundColor: "#0004",
             border: 0,
             color: "white",
@@ -134,23 +135,23 @@ export function StateList({
         />
       </div>
       <div
-        css={{
+        style={{
           flex: "1 1 auto",
 
-          "> button": {
-            border: "1px solid gray",
-            borderRadius: 2,
-            color: "white",
-            margin: "0 2px 2px 0",
-          },
+          // "> button": {
+          //   border: "1px solid gray",
+          //   borderRadius: 2,
+          //   color: "white",
+          //   margin: "0 2px 2px 0",
+          // },
 
-          "> button[data-selected]": {
-            borderColor: "#6fcade",
-          },
+          // "> button[data-selected]": {
+          //   borderColor: "#6fcade",
+          // },
 
-          "> button:hover": {
-            backgroundColor: "#fff4",
-          },
+          // "> button:hover": {
+          //   backgroundColor: "#fff4",
+          // },
         }}
       >
         {filteredValues.map((pair) => (
