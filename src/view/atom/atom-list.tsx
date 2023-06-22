@@ -11,7 +11,7 @@ const MISSING_LABEL_TEXT = "debugLabelFailure"
 type WindowParam = string
 
 function getStateParameter(type: "open" | "rows", title: string) {
-  return `pactgraph.${title.replace(/\s/g, "")}.${type}`
+  return `nuons.${title.replace(/\s/g, "")}.${type}`
 }
 
 const selectedRowsFamily = atomFamily((param: WindowParam) =>
