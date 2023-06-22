@@ -16,23 +16,24 @@ export function TreeRow({
 }: NodeRendererProps<GraphNode>) {
   const [visible, toggleVisibility] = useToggleNodeVisibility(node.data.id)
   return (
-    <div
-      ref={dragHandle}
-      style={style}
-      className={clsx(styles.node, node.state)}
-      onClick={() => node.isInternal && node.toggle()}
-    >
-      <FolderArrow node={node} />
-      <span>
-        <BsTree />
-      </span>
-      <span>{node.isEditing ? <Input node={node} /> : node.data.name}</span>
-
-      <span className={styles.nodeActions}>
+    <div className={styles.row}>
+      <div
+        ref={dragHandle}
+        style={style}
+        className={clsx(styles.row, node.state)}
+        onClick={() => node.isInternal && node.toggle()}
+      >
+        <FolderArrow node={node} />
+        <span>
+          <BsTree />
+        </span>
+        <span>{node.isEditing ? <Input node={node} /> : node.data.name}</span>
+      </div>
+      <div className={styles.rowActions}>
         <button onClick={toggleVisibility}>
           {visible ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
         </button>
-      </span>
+      </div>
     </div>
   )
 }

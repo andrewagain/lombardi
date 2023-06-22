@@ -34,11 +34,23 @@
   }
 }
 
-.node {
+.row {
   display: flex;
   align-items: center;
-  margin: 0 12px 0 2px;
+  margin: 0;
   height: 100%;
   line-height: 20px;
   white-space: nowrap;
+}
+
+.rowHandle {
+  display: flex;
+  flex: 1 1 auto;
+}
+
+.rowActions {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: row-reverse;
+  padding-right: 10px;
 }
