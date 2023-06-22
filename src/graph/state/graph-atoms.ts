@@ -7,6 +7,8 @@ import {
   GraphEdge,
   GraphEdgePriority,
   GraphNode,
+  GraphNodeId,
+  NodePosition,
 } from "../graph-types.ts"
 
 /**
@@ -54,6 +56,10 @@ export const graphNodesAtom = atom(
 )
 
 export const graphNodeCountAtom = atom((get) => get(graphNodeMapAtom).size)
+
+export const graphNodePositionMapAtom = atom(
+  new Map<GraphNodeId, NodePosition>()
+)
 
 /**
  * Edge-specific

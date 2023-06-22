@@ -34,3 +34,8 @@ export interface GraphShorthand {
   nodes: GraphNode[]
   edges?: GraphEdge[]
 }
+
+export interface NodePosition {
+  x: number
+  y: number
+}

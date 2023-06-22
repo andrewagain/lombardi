@@ -1,5 +1,5 @@
 import dagre from "dagre"
-import { useAtomValue, useSetAtom } from "jotai"
+import { atom, useAtomValue, useSetAtom } from "jotai"
 import { useCallback, useEffect } from "react"
 
 import { mapMapValues } from "@/util/datastructure/map"
@@ -13,6 +13,33 @@ import {
   getEncompassingBoundingRect,
   getRectCenter,
 } from "@/util/geometry/rect"
+
+const graphDagre = atom(get => {
+    const g = new dagre.graphlib.Graph({ compound: true, directed: true })
+    g.setGraph({ rankdir: "BT", ranksep: 300, nodesep: 100 })
+
+    // Default to assigning a new object as a label for each new edge.
+    g.setDefaultEdgeLabel(function () {
+      return {}
+    })
+
+    for (let i = 0; i < graphContractKeys.length; i++) {
+      const graphNodeId = graphContractKeys[i]
+      const contractId = graphKeyToContractId(graphNodeId)
+      g.setNode(contractId, {
+        label: graphNodeId,
+        width: ContractStyle.Width,
+        height: ContractStyle.Height,
+      })
+    }
+
+    for (let i = 0; i < graphLinks.length; i++) {
+      const link = graphLinks[i]
+      g.setEdge(link.fromId, link.toId)
+    }
+    return g
+})
+
 
 function getGraphOffset(m: Map<string, Point>): Point {
   if (m.size === 0) {
@@ -59,13 +86,8 @@ function getDagreLinkPositionMap(
 }
 
 export default function LayoutButton() {
-  const setGraphPositionMap = useSetAtom(graphPositionMapAtom)
-  const setGraphLinkPathMap = useSetAtom(graphLinkPathMapAtom)
-  const graphContractKeys = useAtomValue(graphVisibleContractKeysAtom)
-  const graphLinks = useAtomValue(graphVisibleLinksAtom)
-  const layoutTrigger = useAtomValue(graphLayoutTriggerAtom)
 
-  const relayout = useAtomCallback(
+  const relayout = 
     useCallback(() => {
       const g = new dagre.graphlib.Graph({ compound: true, directed: true })
       g.setGraph({ rankdir: "BT", ranksep: 300, nodesep: 100 })
@@ -94,9 +116,9 @@ export default function LayoutButton() {
       dagre.layout(g)
       console.log(`layout in ${Date.now() - start}ms`)
 
-      const contractPositionMap = getDagreContractPositionMap(
+      const positionMap = getDagreContractPositionMap(
         g,
-        graphContractKeys
+        nodeIds
       )
       const offset = getGraphOffset(contractPositionMap)
       setGraphPositionMap(shiftMap(contractPositionMap, offset))
