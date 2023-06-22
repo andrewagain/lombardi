@@ -8,7 +8,6 @@ import {
   graphEdgeMapByTargetAtom,
   graphEdgePriorityMapAtom,
   graphNodeMapAtom,
-  graphNodeVisibilityMapAtom,
 } from "./graph-atoms.ts"
 
 export interface GraphTreeNode extends GraphNode {
@@ -33,7 +32,6 @@ export const graphTreeRootNodesAtom = atom<GraphTreeNode[]>((get) => {
   const nodeMap = get(graphNodeMapAtom)
   const edgePriorityMap = get(graphEdgePriorityMapAtom)
   const outgoingEdgeMap = get(graphEdgeMapBySourceAtom)
-  const visibilityMap = get(graphNodeVisibilityMapAtom)
 
   const rootTreeNodes: GraphTreeNode[] = rootNodes.map((node) => {
     return {
@@ -47,9 +45,6 @@ export const graphTreeRootNodesAtom = atom<GraphTreeNode[]>((get) => {
     // Since we just checked the nodeStack length, we know that nodeStack.pop() will not return undefined
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const node = nodeStack.pop()!
-    if (visibilityMap.get(node.id) === false) {
-      continue
-    }
 
     const outgoingEdges = graphSortEdges(
       outgoingEdgeMap.get(node.id) || [],

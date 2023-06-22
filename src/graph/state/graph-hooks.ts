@@ -1,8 +1,8 @@
-import { useSetAtom } from "jotai"
+import { useAtom, useSetAtom } from "jotai"
 import { useAtomCallback } from "jotai/utils"
 import { useCallback } from "react"
 
-import { GraphEdge, GraphNode } from "../graph-types.ts"
+import { GraphEdge, GraphNode, GraphNodeId } from "../graph-types.ts"
 import {
   calculateInsertNodePriorities,
   createEmptyGraph,
@@ -12,6 +12,7 @@ import {
   graphCoreDataAtom,
   graphEdgeMapAtom,
   graphNodeMapAtom,
+  graphNodeVisibilityMapAtom,
 } from "./graph-atoms.ts"
 
 export function useClearGraph() {
@@ -172,4 +173,16 @@ export function useMoveNodes() {
       []
     )
   )
+}
+
+export function useToggleNodeVisibility(nodeId: GraphNodeId) {
+  const [visibilityMap, setVisibilityMap] = useAtom(graphNodeVisibilityMapAtom)
+  const visible = visibilityMap.get(nodeId) ?? true
+
+  return [
+    visible,
+    useCallback(() => {
+      setVisibilityMap(visibilityMap.set(nodeId, !visible))
+    }, [nodeId, setVisibilityMap, visibilityMap, visible]),
+  ] as [boolean, () => void]
 }

@@ -1,9 +1,11 @@
 import clsx from "clsx"
 import { NodeApi, NodeRendererProps } from "react-arborist"
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai"
 import { BsTree } from "react-icons/bs"
 import { MdArrowDropDown, MdArrowRight } from "react-icons/md"
 
 import { GraphNode } from "@/graph/graph-types.ts"
+import { useToggleNodeVisibility } from "@/graph/state/graph-hooks"
 
 import styles from "./tree.module.css"
 
@@ -12,6 +14,7 @@ export function TreeRow({
   style,
   dragHandle,
 }: NodeRendererProps<GraphNode>) {
+  const [visible, toggleVisibility] = useToggleNodeVisibility(node.data.id)
   return (
     <div
       ref={dragHandle}
@@ -24,6 +27,12 @@ export function TreeRow({
         <BsTree />
       </span>
       <span>{node.isEditing ? <Input node={node} /> : node.data.name}</span>
+
+      <span className={styles.nodeActions}>
+        <button onClick={toggleVisibility}>
+          {visible ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
+        </button>
+      </span>
     </div>
   )
 }
