@@ -27,6 +27,7 @@ export const flowNodesAtom = atom(
         },
       }
     })
+    console.log(`${flowNodes.length} flow nodes`)
     return flowNodes
   },
   (get, set, flowNodes: FlowNode[]) => {

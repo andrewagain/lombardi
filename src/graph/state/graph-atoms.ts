@@ -75,6 +75,7 @@ export const graphVisibleNodesAtom = atom(
     const removedNodes = previousVisibleNodes.filter(
       (n) => !visibleNodesMap.has(n.id)
     )
+    console.log(`removedNodes: ${removedNodes.length}`)
     const nextNodesMap = new Map(get(graphNodeMapAtom))
 
     for (const node of removedNodes) {
