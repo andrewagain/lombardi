@@ -153,7 +153,7 @@ export default function FlowView() {
       <Controls />
       <MiniMap />
       <Background variant={BackgroundVariant.Dots} gap={12} size={1} />
-      <Panel position="top-center">
+      <Panel position="top-right">
         <button onClick={repositionNodes}>Reposition</button>
       </Panel>
     </ReactFlow>
