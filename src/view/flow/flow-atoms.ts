@@ -1,14 +1,14 @@
 import dagre from "dagre"
 import { atom } from "jotai"
-import { Edge, Node, XYPosition } from "reactflow"
+import { Edge, Node } from "reactflow"
 
-import { GraphEdge, GraphNode, GraphNodeId } from "@/graph/graph-types"
+import { GraphEdge, GraphNode } from "@/graph/graph-types"
 import {
   graphEdgesAtom,
   graphNodePositionMapAtom,
   graphVisibleNodesAtom,
 } from "@/graph/state/graph-atoms"
-import { listToMap } from "@/util/datastructure/map"
+import { isZeroPoint } from "@/util/geometry/point"
 
 export type FlowNode = Node<GraphNode>
 export type FlowEdge = Edge<GraphEdge>
@@ -29,11 +29,10 @@ export const flowNodesAtom = atom(
     })
     return flowNodes
   },
-  (_, set, flowNodes: FlowNode[]) => {
+  (get, set, flowNodes: FlowNode[]) => {
     // this is called with flow nodes at position=0,0
     // but why is it called initially?
     // because node dimensions are updated by flow? does that make sense?
-    console.log("flowNodesAtom.set", flowNodes)
     const nodes: GraphNode[] = flowNodes.map((flowNode) => {
       return {
         ...flowNode.data,
@@ -43,12 +42,13 @@ export const flowNodesAtom = atom(
     })
     set(graphVisibleNodesAtom, nodes)
 
-    const positionsMap: Map<GraphNodeId, XYPosition> = listToMap(
-      flowNodes,
-      (f) => f.id,
-      (f) => f.position
-    )
-    set(graphNodePositionMapAtom, positionsMap)
+    const positionMap = new Map(get(graphNodePositionMapAtom))
+    flowNodes.forEach((flowNode) => {
+      if (!isZeroPoint(flowNode.position)) {
+        positionMap.set(flowNode.id, flowNode.position)
+      }
+    })
+    set(graphNodePositionMapAtom, positionMap)
   }
 )
 

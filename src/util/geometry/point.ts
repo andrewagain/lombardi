@@ -43,3 +43,7 @@ export function pointSignFlip(p: Point): Point {
     y: p.y * -1,
   }
 }
+
+export function isZeroPoint(p: Point): boolean {
+  return p.x === 0 && p.y === 0
+}
