@@ -48,7 +48,27 @@
     {
       "id": "node-1687419468226",
       "name": "Thalidomide",
-      "label": "thalidomide"
+      "label": "Thalidomide"
+    },
+    {
+      "id": "node-1687419724383",
+      "name": "Obesity",
+      "label": "Obesity"
+    },
+    {
+      "id": "node-1687419738487",
+      "name": "Sickness Incentive",
+      "label": "Sickness Incentive"
+    },
+    {
+      "id": "node-1687419896008",
+      "name": "Ukraine",
+      "label": "Ukraine"
+    },
+    {
+      "id": "node-1687419899230",
+      "name": "Iraq",
+      "label": "Iraq"
     }
   ],
   "edges": [
@@ -96,6 +116,26 @@
       "id": "edge-1687419468226",
       "source": "node-1687388473667",
       "target": "node-1687419468226"
+    },
+    {
+      "id": "edge-1687419724384",
+      "source": "node-1687388473667",
+      "target": "node-1687419724383"
+    },
+    {
+      "id": "edge-1687419738488",
+      "source": "node-1687388473667",
+      "target": "node-1687419738487"
+    },
+    {
+      "id": "edge-1687419896008",
+      "source": "node-1687419461068",
+      "target": "node-1687419896008"
+    },
+    {
+      "id": "edge-1687419899230",
+      "source": "node-1687419896008",
+      "target": "node-1687419899230"
     }
   ],
   "edgePriorities": [

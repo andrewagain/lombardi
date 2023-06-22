@@ -5,7 +5,7 @@ import "reactflow/dist/style.css"
 import dagre from "dagre"
 import { atom, useAtom, useAtomValue } from "jotai"
 import { useAtomCallback } from "jotai/utils"
-import { useCallback } from "react"
+import { useCallback, useEffect } from "react"
 import {
   applyNodeChanges,
   Background,
@@ -147,6 +147,11 @@ export default function FlowView() {
       set(graphNodePositionMapAtom, positionMap)
     }, [])
   )
+
+  useEffect(() => {
+    console.log("reposition nodes", nodes)
+    repositionNodes()
+  }, [repositionNodes, nodes])
 
   return (
     <ReactFlow nodes={nodes} edges={edges} onNodesChange={onNodesChange}>
