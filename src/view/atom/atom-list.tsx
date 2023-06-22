@@ -4,6 +4,7 @@ import { atomFamily, atomWithStorage } from "jotai/utils"
 import { useCallback, useMemo, useState } from "react"
 
 import { AtomCell } from "./atom-cell"
+import styles from "./atom-list.module.css"
 
 const MISSING_LABEL_TEXT = "debugLabelFailure"
 
@@ -88,20 +89,8 @@ export function AtomList({
   )
 
   return (
-    <div
-      style={{
-        overflow: "hidden",
-        whiteSpace: "normal",
-        width: "100%",
-      }}
-    >
-      <div
-        style={{
-          flex: "0 0 auto",
-          display: "flex",
-          flexDirection: "column",
-        }}
-      >
+    <div className={styles.container}>
+      <div className={styles.selectedValues}>
         {selectedValues.map((pair) => (
           <AtomCell
             atomConfig={pair[0]}
@@ -112,20 +101,9 @@ export function AtomList({
           />
         ))}
       </div>
-      <div
-        style={{
-          flex: "0 0 auto",
-        }}
-      >
+      <div className={styles.inputWrapper}>
         <input
-          style={{
-            backgroundColor: "#0004",
-            border: 0,
-            color: "white",
-            width: "100%",
-            margin: "4px 0",
-            outline: 0,
-          }}
+          className={styles.inputField}
           onChange={(e) => {
             setFilterText(e.target.value)
           }}
@@ -134,26 +112,7 @@ export function AtomList({
           value={filterText}
         />
       </div>
-      <div
-        style={{
-          flex: "1 1 auto",
-
-          // "> button": {
-          //   border: "1px solid gray",
-          //   borderRadius: 2,
-          //   color: "white",
-          //   margin: "0 2px 2px 0",
-          // },
-
-          // "> button[data-selected]": {
-          //   borderColor: "#6fcade",
-          // },
-
-          // "> button:hover": {
-          //   backgroundColor: "#fff4",
-          // },
-        }}
-      >
+      <div className={styles.filterButtons}>
         {filteredValues.map((pair) => (
           <ToggleButton
             key={pair[0].debugLabel}
