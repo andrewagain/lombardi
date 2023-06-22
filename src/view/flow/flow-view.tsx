@@ -2,11 +2,10 @@
 
 import "reactflow/dist/style.css"
 
-import { log } from "console"
 import dagre from "dagre"
 import { atom, useAtom, useAtomValue } from "jotai"
 import { useAtomCallback } from "jotai/utils"
-import { useCallback, useEffect } from "react"
+import { useCallback, useEffect, useRef } from "react"
 import {
   applyNodeChanges,
   Background,
@@ -127,7 +126,8 @@ const flowEdgesAtom = atom((get) => {
 })
 
 function RepositionPanel() {
-  const plainNodes = useAtomValue(graphNodeMapAtom)
+  const nodeMap = useAtomValue(graphNodeMapAtom)
+  const nodeCountRef = useRef(nodeMap.size)
 
   const repositionNodes = useAtomCallback(
     useCallback((get, set) => {
@@ -143,9 +143,13 @@ function RepositionPanel() {
   )
 
   useEffect(() => {
-    console.log(`repositioning ${plainNodes.size} nodes`)
+    if (nodeMap.size === nodeCountRef.current) {
+      return
+    }
+    nodeCountRef.current = nodeMap.size
+    console.log(`repositioning ${nodeMap.size} nodes`)
     repositionNodes()
-  }, [repositionNodes, plainNodes])
+  }, [repositionNodes, nodeMap])
 
   return (
     <Panel position="top-right">

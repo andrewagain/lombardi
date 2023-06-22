@@ -82,7 +82,7 @@
     },
     {
       "id": "node-1687419605304",
-      "name": "Alternative Medicine",
+      "name": "Opioid Alternatives",
       "label": "Alternative Medicine"
     },
     {
@@ -204,6 +204,10 @@
     [
       "edge-1687419612738",
       2.5
+    ],
+    [
+      "edge-1687422753357",
+      0.5
     ]
   ]
 }
