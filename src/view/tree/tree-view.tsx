@@ -17,12 +17,12 @@ import {
 } from "@/graph/state/graph-hooks.ts"
 import { graphTreeRootNodesAtom } from "@/graph/state/tree-atoms.ts"
 
-import styles from "./arborist.module.css"
-import ArboristCursor from "./arborist-cursor.tsx"
-import { ArboristNode } from "./arborist-node.tsx"
+import styles from "./tree.module.css"
+import TreeCursor from "./tree-cursor.tsx"
+import { TreeNode } from "./tree-node.tsx"
 
 // https://github.com/brimdata/react-arborist
-export default function ArboristView() {
+export default function TreeView() {
   const treeData = useAtomValue(graphTreeRootNodesAtom)
   const addNode = useAddNode()
   const addEdge = useAddEdge()
@@ -63,10 +63,10 @@ export default function ArboristView() {
       onRename={onRename}
       onMove={onMove}
       onDelete={onDelete}
-      renderCursor={ArboristCursor}
-      className={styles.arborist}
+      renderCursor={TreeCursor}
+      className={styles.tree}
     >
-      {ArboristNode}
+      {TreeNode}
     </Tree>
   )
 }

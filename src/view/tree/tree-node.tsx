@@ -5,9 +5,9 @@ import { MdArrowDropDown, MdArrowRight } from "react-icons/md"
 
 import { GraphNode } from "@/graph/graph-types.ts"
 
-import styles from "./arborist.module.css"
+import styles from "./tree.module.css"
 
-export function ArboristNode({
+export function TreeNode({
   node,
   style,
   dragHandle,

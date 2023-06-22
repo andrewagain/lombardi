@@ -1,7 +1,7 @@
 import { PersistGraphEffect } from "@/graph/graph-persist.tsx"
 import FlowView from "@/view/flow/flow-view.tsx"
+import TreeView from "@/view/tree/tree-view.tsx"
 
-import ArboristView from "../view/arborist/arborist-view.tsx"
 import style from "./app.module.css"
 import Header from "./header.tsx"
 
@@ -17,7 +17,7 @@ export default function NuonsApp() {
           border: "2px solid green",
         }}
       >
-        <ArboristView />
+        <TreeView />
       </div>
       <div
         style={{

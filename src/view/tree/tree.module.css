@@ -1,15 +1,15 @@
-.arborist {
+.tree {
 }
 
 /* row */
-.arborist [role="treeitem"] {
+.tree [role="treeitem"] {
   cursor: pointer;
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
 }
 
 /* row hover */
-.arborist [role="treeitem"]:hover {
+.tree [role="treeitem"]:hover {
   background-color: #eee;
 
   @media (prefers-color-scheme: dark) {
@@ -17,7 +17,7 @@
   }
 }
 
-.arborist [role="treeitem"] [data-focused="true"] {
+.tree [role="treeitem"] [data-focused="true"] {
   background-color: #eee;
 
   @media (prefers-color-scheme: dark) {
@@ -26,7 +26,7 @@
 }
 
 /* row selected */
-.arborist [aria-selected="true"] {
+.tree [aria-selected="true"] {
   background-color: #ccc;
 
   @media (prefers-color-scheme: dark) {
