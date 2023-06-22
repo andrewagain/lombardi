@@ -1,7 +1,10 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { format } from "date-fns"
 import { Atom, useAtomValue } from "jotai"
 import React, { useCallback, useMemo, useRef, useState } from "react"
 import { BsX } from "react-icons/bs"
+
+import styles from "./atom-cell.module.css"
 
 const log = console.log
 
@@ -165,98 +168,25 @@ export function AtomCell({
 
   return (
     <React.Fragment>
-      <div
-        css={{
-          position: "relative",
-          "& button": {
-            padding: 0,
-            position: "absolute",
-            display: "none",
-            backgroundColor: "black",
-            width: 16,
-            height: 16,
-            borderRadius: 2,
-            alignItems: "center",
-            justifyContent: "center",
-          },
-          "& button:hover": {
-            backgroundColor: "#222",
-          },
-          "&:hover button": {
-            display: "flex",
-          },
-        }}
-      >
+      <div className={styles.atomCellContainer}>
         <button onClick={remove}>
           <BsX size={10} />
         </button>
-        <span css={{ color: colors.gray[400] }}>{label}</span>
+        <span className={styles.label}>{label}</span>
       </div>
       <div
-        css={{
-          minWidth: 0,
-          display: "flex",
-          alignItems: "flex-start",
-          position: "relative",
-          backgroundColor: colors.blue[900],
-
-          "&:not([data-expanded])": {
-            overflow: "hidden",
-            whiteSpace: "nowrap",
-          },
-
-          "&[data-expanded]": {
-            wordWrap: "break-word",
-            wordBreak: "break-all",
-            whiteSpace: "pre-wrap",
-            maxHeight: 300,
-            overflowY: "scroll",
-            border: `1px solid ${colors.cyan[400]}`,
-            padding: "20px 4px 10px 4px",
-          },
-        }}
+        className={styles.cellContent}
         data-expanded={expanded ? true : undefined}
       >
         <div
-          css={{
-            flex: "1 1 auto",
-            overflow: "hidden",
-          }}
+          className={styles.cellInner}
           dangerouslySetInnerHTML={{
             __html: formatValue(value, formatType, expanded, highlighted),
           }}
           ref={valueElementRef}
         />
         <nav
-          css={{
-            flex: "0 0 auto",
-            userSelect: "none",
-
-            "&[data-expanded]": {
-              position: "absolute",
-              right: 0,
-              top: 0,
-
-              "& > div": {
-                position: "sticky",
-              },
-            },
-
-            "& > div": {
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "flex-end",
-            },
-
-            "& > div > button": {
-              color: colors.cyan[400],
-              height: 20,
-            },
-            "& > div > button:hover": {
-              backgroundColor: colors.blue[800],
-              borderRadius: 1,
-            },
-          }}
+          className={styles.cellNav}
           data-expanded={expanded ? true : undefined}
         >
           <div>
@@ -265,19 +195,7 @@ export function AtomCell({
                 <button onClick={onCopy}>Copy</button>
                 <button onClick={onVariable}>Var</button>
                 {highlightable && (
-                  <label
-                    css={{
-                      display: "flex",
-                      alignItems: "center",
-                      color: colors.cyan[200],
-                      cursor: "pointer",
-
-                      "&:hover": {
-                        backgroundColor: colors.blue[800],
-                        borderRadius: 1,
-                      },
-                    }}
-                  >
+                  <label className={styles.checkboxLabel}>
                     <input
                       checked={highlighted}
                       onChange={toggleHighlighted}
@@ -289,28 +207,7 @@ export function AtomCell({
               </React.Fragment>
             )}
             <button
-              css={{
-                width: 30,
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                transition: "width 0.2s",
-
-                "&[data-expanded]": {
-                  width: 50,
-                },
-                "& > div": {
-                  transition: "transform 0.2s",
-                  width: 0,
-                  height: 0,
-                  borderTop: "6px solid transparent",
-                  borderBottom: "6px solid transparent",
-                  borderRight: `6px solid ${colors.blue[400]}`,
-                },
-                "&[data-expanded] > div": {
-                  transform: "rotate(-90deg)",
-                },
-              }}
+              className={styles.expandButton}
               data-expanded={expanded ? true : undefined}
               onClick={toggleExpanded}
             >

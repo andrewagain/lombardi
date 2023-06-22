@@ -84,7 +84,7 @@
 .checkboxLabel {
   display: flex;
   align-items: center;
-  color: colors.cyan[200];
+  color: var(--cyan-200);
   cursor: pointer;
 }
 
