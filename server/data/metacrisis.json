@@ -29,6 +29,16 @@
       "id": "node-1687388496297",
       "name": "Government",
       "label": "Government"
+    },
+    {
+      "id": "node-1687419319122",
+      "name": "Capitalism",
+      "label": "Capitalism"
+    },
+    {
+      "id": "node-1687419323790",
+      "name": "Christmas",
+      "label": "Christmas"
     }
   ],
   "edges": [
@@ -56,6 +66,16 @@
       "id": "edge-1687388496298",
       "source": "node-1687388440083",
       "target": "node-1687388496297"
+    },
+    {
+      "id": "edge-1687419319122",
+      "source": "node-1687388440083",
+      "target": "node-1687419319122"
+    },
+    {
+      "id": "edge-1687419323791",
+      "source": "node-1687419319122",
+      "target": "node-1687419323790"
     }
   ],
   "edgePriorities": []
