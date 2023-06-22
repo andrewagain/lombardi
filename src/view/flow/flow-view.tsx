@@ -2,6 +2,7 @@
 
 import "reactflow/dist/style.css"
 
+import { log } from "console"
 import dagre from "dagre"
 import { atom, useAtom, useAtomValue } from "jotai"
 import { useAtomCallback } from "jotai/utils"
@@ -29,6 +30,7 @@ import {
 import {
   graphEdgesAtom,
   graphNodeIdsAtom,
+  graphNodeMapAtom,
   graphNodePositionMapAtom,
   graphNodesAtom,
 } from "@/graph/state/graph-atoms"
@@ -124,17 +126,8 @@ const flowEdgesAtom = atom((get) => {
   return flowEdges
 })
 
-export default function FlowView() {
-  const plainNodes = useAtomValue(graphNodesAtom)
-  const [nodes, setNodes] = useAtom(flowNodesAtom)
-  const edges = useAtomValue(flowEdgesAtom)
-
-  const onNodesChange = useCallback(
-    (changes: NodeChange[]) => {
-      setNodes(applyNodeChanges(changes, nodes))
-    },
-    [nodes, setNodes]
-  )
+function RepositionPanel() {
+  const plainNodes = useAtomValue(graphNodeMapAtom)
 
   const repositionNodes = useAtomCallback(
     useCallback((get, set) => {
@@ -150,12 +143,31 @@ export default function FlowView() {
   )
 
   useEffect(() => {
-    console.log(`repositioning ${plainNodes.length} nodes`)
+    console.log(`repositioning ${plainNodes.size} nodes`)
     repositionNodes()
   }, [repositionNodes, plainNodes])
 
   return (
+    <Panel position="top-right">
+      <button onClick={repositionNodes}>Reposition</button>
+    </Panel>
+  )
+}
+
+export default function FlowView() {
+  const [nodes, setNodes] = useAtom(flowNodesAtom)
+  const edges = useAtomValue(flowEdgesAtom)
+
+  const onNodesChange = useCallback(
+    (changes: NodeChange[]) => {
+      setNodes(applyNodeChanges(changes, nodes))
+    },
+    [nodes, setNodes]
+  )
+
+  return (
     <ReactFlow nodes={nodes} edges={edges} onNodesChange={onNodesChange}>
+      <RepositionPanel />
       <Controls />
       <MiniMap
         style={{
@@ -163,9 +175,6 @@ export default function FlowView() {
         }}
       />
       <Background variant={BackgroundVariant.Dots} gap={12} size={1} />
-      <Panel position="top-right">
-        <button onClick={repositionNodes}>Reposition</button>
-      </Panel>
     </ReactFlow>
   )
 }
