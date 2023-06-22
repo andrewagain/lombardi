@@ -69,6 +69,21 @@
       "id": "node-1687419899230",
       "name": "Iraq",
       "label": "Iraq"
+    },
+    {
+      "id": "node-1687424550835",
+      "name": "Prison",
+      "label": "Prison"
+    },
+    {
+      "id": "node-1687424560657",
+      "name": "Prison Industrial Complex",
+      "label": "Prison Industrial Complex"
+    },
+    {
+      "id": "node-1687424571280",
+      "name": "Unions Lobbied to Keep Marijuana Illegal",
+      "label": "Unions Lobbied to Keep Marijuana Illegal"
     }
   ],
   "edges": [
@@ -136,6 +151,21 @@
       "id": "edge-1687419899230",
       "source": "node-1687419896008",
       "target": "node-1687419899230"
+    },
+    {
+      "id": "edge-1687424550836",
+      "source": "node-1687388440083",
+      "target": "node-1687424550835"
+    },
+    {
+      "id": "edge-1687424560658",
+      "source": "node-1687424550835",
+      "target": "node-1687424560657"
+    },
+    {
+      "id": "edge-1687424571281",
+      "source": "node-1687424560657",
+      "target": "node-1687424571280"
     }
   ],
   "edgePriorities": [
