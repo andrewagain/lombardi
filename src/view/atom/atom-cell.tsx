@@ -3,10 +3,18 @@ import { format } from "date-fns"
 import { Atom, useAtomValue } from "jotai"
 import React, { useCallback, useMemo, useRef, useState } from "react"
 import { BsX } from "react-icons/bs"
+import { LightAsync as SyntaxHighlighter } from "react-syntax-highlighter"
 
 import styles from "./atom-cell.module.css"
 
 const log = console.log
+
+log(
+  "SyntaxHighlighter",
+  SyntaxHighlighter.registerLanguage("json", () => {
+    log("lang registered")
+  })
+)
 
 type FormatType = "time" | "timerange" | null
 
@@ -18,58 +26,12 @@ function defaultFormat(value: any) {
   }
 }
 
-type PrismMainType = typeof import("prismjs")
-
-async function importPrism(): Promise<PrismMainType> {
-  import("prismjs/themes/prism-tomorrow.css")
-  const p = await (await import("prismjs")).default
-  const loadLanguages = await import("prismjs/components/")
-  loadLanguages.default(["json"])
-  return p
-}
-
-let prismImport: PrismMainType | null = null
-let prismPromise: Promise<PrismMainType> | null = null
-function getPrismImport() {
-  if (prismImport) {
-    return prismImport
-  }
-  if (prismPromise) {
-    // console.log("Prism import in progress. Refusing to double-import");
-    return null
-  }
-  log("Import prism: start")
-  prismPromise = importPrism()
-  prismPromise.then((p) => {
-    log("Import prism: finish")
-    prismImport = p
-  })
-}
-
-const IDENTITY_FUNCTION = (x: string) => x
-
-function getHighlightFunction(highlighted: boolean) {
-  const p = getPrismImport()
-  if (!p || !highlighted) {
-    return IDENTITY_FUNCTION
-  }
-  return (json: string) => {
-    return `<code class="language-json">${p.highlight(
-      json,
-      p.languages.json,
-      "json"
-    )}</code>`
-  }
-}
-
 function formatValue(
   value: any,
   formatType?: FormatType,
-  expanded = false,
-  highlighted = false
-) {
+  expanded = false
+): string {
   const jsonSpaces = expanded ? 2 : 0
-  const highlightFunction = getHighlightFunction(highlighted)
 
   if (value === null) {
     return "<null>"
@@ -81,9 +43,7 @@ function formatValue(
     return value ? "true" : "false"
   }
   if (value instanceof Map) {
-    return highlightFunction(
-      JSON.stringify([...value.entries()], null, jsonSpaces)
-    )
+    return JSON.stringify([...value.entries()], null, jsonSpaces)
   }
   if (formatType === "time" && typeof value === "number") {
     return `${defaultFormat(value)} / ${value}`
@@ -96,10 +56,10 @@ function formatValue(
     return `${defaultFormat(value.start)} -> ${defaultFormat(value.end)}`
   }
   if (typeof value === "number" || typeof value === "string") {
-    return value
+    return `${value}`
   }
   if (typeof value === "object") {
-    return highlightFunction(JSON.stringify(value, null, jsonSpaces))
+    return JSON.stringify(value, null, jsonSpaces)
   }
   if (!value) {
     return "<unknown falsey>"
@@ -166,6 +126,11 @@ export function AtomCell({
     onRemove(label)
   }, [label, onRemove])
 
+  const formattedValue = useMemo(
+    () => formatValue(value, formatType, expanded),
+    [expanded, formatType, value]
+  )
+
   return (
     <React.Fragment>
       <div className={styles.atomCellContainer}>
@@ -178,13 +143,15 @@ export function AtomCell({
         className={styles.cellContent}
         data-expanded={expanded ? true : undefined}
       >
-        <div
-          className={styles.cellInner}
-          dangerouslySetInnerHTML={{
-            __html: formatValue(value, formatType, expanded, highlighted),
-          }}
-          ref={valueElementRef}
-        />
+        <div className={styles.cellInner} ref={valueElementRef}>
+          {highlighted ? (
+            <SyntaxHighlighter language="json">
+              {formattedValue}
+            </SyntaxHighlighter>
+          ) : (
+            formattedValue
+          )}
+        </div>
         <nav
           className={styles.cellNav}
           data-expanded={expanded ? true : undefined}
