@@ -10,19 +10,14 @@ export default function NuonsApp() {
   return (
     <main className={style.app}>
       <Header />
-      <div className={style.views}>
-        <div>
-          <TreeView />
-        </div>
-        <div>
-          <FlowView />
-        </div>
-        <div>
-          <AtomView />
-        </div>
+      <TreeView />
+      <div style={{ gridArea: "flow" }}>
+        <FlowView />
+      </div>
+      <div style={{ gridArea: "atom" }}>
+        <AtomView />
       </div>
       <footer>Footer</footer>
-
       <PersistGraphEffect />
     </main>
   )

@@ -1,4 +1,6 @@
 .tree {
+  grid-area: tree;
+  height: 100%;
 }
 
 /* row */

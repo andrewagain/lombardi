@@ -56,17 +56,19 @@ export default function TreeView() {
     deleteNodes(ids)
   }
 
+  // TODO: resizeobserver on parent
   return (
-    <Tree<GraphNode>
-      data={treeData}
-      onCreate={onCreate}
-      onRename={onRename}
-      onMove={onMove}
-      onDelete={onDelete}
-      renderCursor={TreeCursor}
-      className={styles.tree}
-    >
-      {TreeRow}
-    </Tree>
+    <div className={styles.tree}>
+      <Tree<GraphNode>
+        data={treeData}
+        onCreate={onCreate}
+        onRename={onRename}
+        onMove={onMove}
+        onDelete={onDelete}
+        renderCursor={TreeCursor}
+      >
+        {TreeRow}
+      </Tree>
+    </div>
   )
 }
