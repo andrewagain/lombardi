@@ -1,11 +1,11 @@
+import { Box } from "@chakra-ui/react"
 import { Atom, useAtom } from "jotai"
 import { atomFamily, atomWithStorage } from "jotai/utils"
 import { useCallback, useEffect, useMemo, useState } from "react"
 import { LightAsync as SyntaxHighlighter } from "react-syntax-highlighter"
 import json from "react-syntax-highlighter/dist/esm/languages/hljs/json"
 
-import { AtomCell } from "./atom-cell"
-import styles from "./atom-list.module.css"
+import { AtomCell } from "./cell/atom-cell"
 
 const MISSING_LABEL_TEXT = "debugLabelFailure"
 
@@ -94,8 +94,20 @@ export function AtomList({
   )
 
   return (
-    <div className={styles.container}>
-      <div className={styles.selectedValues}>
+    <Box
+      css={{
+        overflow: "hidden",
+        whiteSpace: "normal",
+        width: "100%",
+      }}
+    >
+      <Box
+        css={{
+          flex: "0 0 auto",
+          display: "flex",
+          flexDirection: "column",
+        }}
+      >
         {selectedValues.map((pair) => (
           <AtomCell
             atomConfig={pair[0]}
@@ -105,10 +117,22 @@ export function AtomList({
             onRemove={removeCell}
           />
         ))}
-      </div>
-      <div className={styles.inputWrapper}>
-        <input
-          className={styles.inputField}
+      </Box>
+      <Box
+        css={{
+          flex: "0 0 auto",
+        }}
+      >
+        <Box
+          as="input"
+          css={{
+            backgroundColor: "#0004",
+            border: 0,
+            color: "white",
+            width: "100%",
+            margin: "4px 0",
+            outline: 0,
+          }}
           onChange={(e) => {
             setFilterText(e.target.value)
           }}
@@ -116,8 +140,27 @@ export function AtomList({
           type="search"
           value={filterText}
         />
-      </div>
-      <div className={styles.filterButtons}>
+      </Box>
+      <Box
+        css={{
+          flex: "1 1 auto",
+
+          "> button": {
+            border: "1px solid gray",
+            borderRadius: 2,
+            color: "white",
+            margin: "0 2px 2px 0",
+          },
+
+          "> button[data-selected]": {
+            borderColor: "#6fcade",
+          },
+
+          "> button:hover": {
+            backgroundColor: "#fff4",
+          },
+        }}
+      >
         {filteredValues.map((pair) => (
           <ToggleButton
             key={pair[0].debugLabel}
@@ -125,7 +168,7 @@ export function AtomList({
             title={pair[0].debugLabel || MISSING_LABEL_TEXT}
           />
         ))}
-      </div>
-    </div>
+      </Box>
+    </Box>
   )
 }

@@ -5,7 +5,8 @@ import { BsX } from "react-icons/bs"
 import { LightAsync as SyntaxHighlighter } from "react-syntax-highlighter"
 import agate from "react-syntax-highlighter/dist/esm/styles/hljs/agate"
 
-import styles from "./atom-cell.module.css"
+import colors from "@/app/theme/colors"
+
 import { formatAtomValue, FormatType } from "./format-atom-value"
 
 export function AtomCell({
@@ -99,13 +100,40 @@ export function AtomCell({
         <button onClick={remove}>
           <BsX size={10} />
         </button>
-        <span className={styles.label}>{label}</span>
+        <Box css={{ color: colors.gray[400], display: "inline" }}>{label}</Box>
       </Box>
-      <div
-        className={styles.cellContent}
+      <Box
+        css={{
+          minWidth: 0,
+          display: "flex",
+          alignItems: "flex-start",
+          position: "relative",
+          backgroundColor: colors.blue[900],
+
+          "&:not([data-expanded])": {
+            overflow: "hidden",
+            whiteSpace: "nowrap",
+          },
+
+          "&[data-expanded]": {
+            wordWrap: "break-word",
+            wordBreak: "break-all",
+            whiteSpace: "pre-wrap",
+            maxHeight: 300,
+            overflowY: "scroll",
+            border: `1px solid ${colors.cyan[400]}`,
+            padding: "20px 4px 10px 4px",
+          },
+        }}
         data-expanded={expanded ? true : undefined}
       >
-        <div className={styles.cellInner} ref={valueElementRef}>
+        <Box
+          ref={valueElementRef}
+          css={{
+            flex: "1 1 auto",
+            overflow: "hidden",
+          }}
+        >
           {highlighted ? (
             <SyntaxHighlighter language="json" style={agate}>
               {formattedValue}
@@ -113,9 +141,38 @@ export function AtomCell({
           ) : (
             formattedValue
           )}
-        </div>
-        <nav
-          className={styles.cellNav}
+        </Box>
+        <Box
+          as="nav"
+          css={{
+            flex: "0 0 auto",
+            userSelect: "none",
+
+            "&[data-expanded]": {
+              position: "absolute",
+              right: 0,
+              top: 0,
+
+              "& > div": {
+                position: "sticky",
+              },
+            },
+
+            "& > div": {
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "flex-end",
+            },
+
+            "& > div > button": {
+              color: colors.cyan[400],
+              height: 20,
+            },
+            "& > div > button:hover": {
+              backgroundColor: colors.blue[800],
+              borderRadius: 1,
+            },
+          }}
           data-expanded={expanded ? true : undefined}
         >
           <div>
@@ -124,27 +181,62 @@ export function AtomCell({
                 <button onClick={onCopy}>Copy</button>
                 <button onClick={onVariable}>Var</button>
                 {highlightable && (
-                  <label className={styles.checkboxLabel}>
+                  <Box
+                    as="label"
+                    css={{
+                      display: "flex",
+                      alignItems: "center",
+                      color: colors.cyan[200],
+                      cursor: "pointer",
+
+                      "&:hover": {
+                        backgroundColor: colors.blue[800],
+                        borderRadius: 1,
+                      },
+                    }}
+                  >
                     <input
                       checked={highlighted}
                       onChange={toggleHighlighted}
                       type="checkbox"
                     />
                     Color
-                  </label>
+                  </Box>
                 )}
               </React.Fragment>
             )}
-            <button
-              className={styles.expandButton}
+            <Box
+              as="button"
+              css={{
+                width: 30,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                transition: "width 0.2s",
+
+                "&[data-expanded]": {
+                  width: 50,
+                },
+                "& > div": {
+                  transition: "transform 0.2s",
+                  width: 0,
+                  height: 0,
+                  borderTop: "6px solid transparent",
+                  borderBottom: "6px solid transparent",
+                  borderRight: `6px solid ${colors.blue[400]}`,
+                },
+                "&[data-expanded] > div": {
+                  transform: "rotate(-90deg)",
+                },
+              }}
               data-expanded={expanded ? true : undefined}
               onClick={toggleExpanded}
             >
               <div />
-            </button>
+            </Box>
           </div>
-        </nav>
-      </div>
+        </Box>
+      </Box>
     </React.Fragment>
   )
 }
