@@ -24,4 +24,6 @@ const theme = extendTheme({
   },
 })
 
+export const mediaDarkMode = "@media (prefers-color-scheme: dark)"
+
 export default theme

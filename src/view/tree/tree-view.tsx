@@ -1,3 +1,4 @@
+import { Box } from "@chakra-ui/react"
 import { useAtomValue } from "jotai"
 import {
   CreateHandler,
@@ -17,9 +18,8 @@ import {
 } from "@/graph/state/graph-hooks.ts"
 import { graphTreeRootNodesAtom } from "@/graph/state/tree-atoms.ts"
 
-import styles from "./tree.module.css"
+import { TreeRow } from "./row/tree-row.tsx"
 import TreeCursor from "./tree-cursor.tsx"
-import { TreeRow } from "./tree-row.tsx"
 
 // https://github.com/brimdata/react-arborist
 export default function TreeView() {
@@ -58,7 +58,11 @@ export default function TreeView() {
 
   // TODO: resizeobserver on parent
   return (
-    <div className={styles.tree}>
+    <Box
+      css={{
+        height: "100%",
+      }}
+    >
       <Tree<GraphNode>
         data={treeData}
         onCreate={onCreate}
@@ -69,6 +73,6 @@ export default function TreeView() {
       >
         {TreeRow}
       </Tree>
-    </div>
+    </Box>
   )
 }
