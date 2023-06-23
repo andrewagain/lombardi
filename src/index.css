@@ -22,19 +22,4 @@ body {
 
 #root {
   min-height: 100vh;
-  --gray-400: #9ca3af;
-  --cyan-200: #a0f0ed;
-  --cyan-400: #22d3ee;
-  --cyan-800: #0ea5e9;
-  --blue-200: #dbeafe;
-  --blue-400: #3b82f6;
-  --blue-800: #1d4ed8;
-}
-
-.w-full {
-  width: 100%;
-}
-
-.h-full {
-  height: 100%;
 }

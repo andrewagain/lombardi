@@ -1,3 +1,4 @@
+import { Box } from "@chakra-ui/react"
 import { useAtomValue } from "jotai"
 
 import { graphCoreDataAtom } from "@/graph/state/graph-atoms.ts"
@@ -12,7 +13,7 @@ export default function JsonView() {
   const tree = useAtomValue(graphTreeRootNodesAtom)
 
   return (
-    <div className="w-full h-full">
+    <Box css={{ width: "100%", height: "100%" }}>
       <div style={{ border: "2px solid green" }}>
         {JSON.stringify([...root.edgePriorityMap.entries()])}
       </div>
@@ -20,6 +21,6 @@ export default function JsonView() {
       <div>{JSON.stringify([...root.edgeMap.values()])}</div>
       <div>{JSON.stringify(rootNodes)}</div>
       <div>{JSON.stringify(tree)}</div>
-    </div>
+    </Box>
   )
 }
