@@ -23,13 +23,7 @@ function defaultFormat(value: any) {
   }
 }
 
-function formatValue(
-  value: any,
-  formatType?: FormatType,
-  expanded = false
-): string {
-  const jsonSpaces = expanded ? 2 : 0
-
+function formatValue(value: any, formatType?: FormatType): string {
   if (value === null) {
     return "<null>"
   }
@@ -40,7 +34,7 @@ function formatValue(
     return value ? "true" : "false"
   }
   if (value instanceof Map) {
-    return JSON.stringify([...value.entries()], null, jsonSpaces)
+    return JSON.stringify([...value.entries()], null, 2)
   }
   if (formatType === "time" && typeof value === "number") {
     return `${defaultFormat(value)} / ${value}`
@@ -56,7 +50,7 @@ function formatValue(
     return `${value}`
   }
   if (typeof value === "object") {
-    return JSON.stringify(value, null, jsonSpaces)
+    return JSON.stringify(value, null, 2)
   }
   if (!value) {
     return "<unknown falsey>"
@@ -124,8 +118,8 @@ export function AtomCell({
   }, [label, onRemove])
 
   const formattedValue = useMemo(
-    () => formatValue(value, formatType, expanded),
-    [expanded, formatType, value]
+    () => formatValue(value, formatType),
+    [formatType, value]
   )
 
   return (
