@@ -1,14 +1,30 @@
 .app {
   display: grid;
-  grid-template-columns: auto 1fr 1fr;
-  grid-template-rows: auto 1fr;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto 1fr auto;
   grid-template-areas:
-    "header header header"
-    "a      b      c";
+    "header"
+    "views"
+    "footer";
   height: 100vh;
   width: 100%;
 }
 
 .app > header {
   grid-area: header;
+}
+
+.app > footer {
+  grid-area: footer;
+}
+
+.views {
+  grid-area: views;
+  display: flex;
+}
+
+.views > div {
+  flex: 1 1 auto;
+  min-width: 200px;
+  overflow: hidden;
 }

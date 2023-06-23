@@ -94,6 +94,11 @@
       "id": "node-1687419622703",
       "name": "LDN",
       "label": "LDN"
+    },
+    {
+      "id": "node-1687501746073",
+      "name": "Marijuana",
+      "label": "Marijuana"
     }
   ],
   "edges": [
@@ -186,6 +191,11 @@
       "id": "edge-1687419622705",
       "source": "node-1687419605304",
       "target": "node-1687419622703"
+    },
+    {
+      "id": "edge-1687501746077",
+      "source": "node-1687419605304",
+      "target": "node-1687501746073"
     }
   ],
   "edgePriorities": [

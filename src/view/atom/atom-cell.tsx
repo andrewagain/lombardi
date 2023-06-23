@@ -5,7 +5,7 @@ import React, { useCallback, useMemo, useRef, useState } from "react"
 import { BsX } from "react-icons/bs"
 import { LightAsync as SyntaxHighlighter } from "react-syntax-highlighter"
 import json from "react-syntax-highlighter/dist/esm/languages/hljs/json"
-import docco from "react-syntax-highlighter/dist/esm/styles/hljs/docco"
+import agate from "react-syntax-highlighter/dist/esm/styles/hljs/agate"
 
 import styles from "./atom-cell.module.css"
 
@@ -142,7 +142,7 @@ export function AtomCell({
       >
         <div className={styles.cellInner} ref={valueElementRef}>
           {highlighted ? (
-            <SyntaxHighlighter language="json" style={docco}>
+            <SyntaxHighlighter language="json" style={agate}>
               {formattedValue}
             </SyntaxHighlighter>
           ) : (

@@ -9,34 +9,21 @@ import Header from "./header.tsx"
 export default function NuonsApp() {
   return (
     <main className={style.app}>
-      <PersistGraphEffect />
-
       <Header />
-      <div
-        style={{
-          gridArea: "a",
-          border: "2px solid green",
-        }}
-      >
-        <TreeView />
+      <div className={style.views}>
+        <div>
+          <TreeView />
+        </div>
+        <div>
+          <FlowView />
+        </div>
+        <div>
+          <AtomView />
+        </div>
       </div>
-      <div
-        style={{
-          gridArea: "b",
-          border: "2px solid purple",
-        }}
-      >
-        <FlowView />
-      </div>
+      <footer>Footer</footer>
 
-      <div
-        style={{
-          gridArea: "c",
-          border: "2px solid cyan",
-        }}
-      >
-        <AtomView />
-      </div>
+      <PersistGraphEffect />
     </main>
   )
 }
