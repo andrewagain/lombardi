@@ -26,7 +26,7 @@ function getTargetElement(
   return dividerElement.nextElementSibling as HTMLElement
 }
 
-export function PaneDivider({
+export function PanelDivider({
   gridArea,
   orientation,
   ...boxProps
