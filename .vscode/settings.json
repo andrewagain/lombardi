@@ -20,5 +20,6 @@
     "editorGutter.deletedBackground": "#ffffff"
   },
   "javascript.preferences.importModuleSpecifier": "shortest",
-  "typescript.preferences.importModuleSpecifier": "shortest"
+  "typescript.preferences.importModuleSpecifier": "shortest",
+  "editor.autoClosingBrackets": "never"
 }

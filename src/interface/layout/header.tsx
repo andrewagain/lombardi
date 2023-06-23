@@ -1,4 +1,4 @@
-import GraphSelect from "./control/graph-select"
+import GraphSelect from "../controls/graph-select"
 
 export default function Header() {
   return (
