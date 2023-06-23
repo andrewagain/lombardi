@@ -4,17 +4,14 @@ import { Atom, useAtomValue } from "jotai"
 import React, { useCallback, useMemo, useRef, useState } from "react"
 import { BsX } from "react-icons/bs"
 import { LightAsync as SyntaxHighlighter } from "react-syntax-highlighter"
+import json from "react-syntax-highlighter/dist/esm/languages/hljs/json"
+import docco from "react-syntax-highlighter/dist/esm/styles/hljs/docco"
 
 import styles from "./atom-cell.module.css"
 
 const log = console.log
 
-log(
-  "SyntaxHighlighter",
-  SyntaxHighlighter.registerLanguage("json", () => {
-    log("lang registered")
-  })
-)
+log("SyntaxHighlighter", SyntaxHighlighter.registerLanguage("json", json))
 
 type FormatType = "time" | "timerange" | null
 
@@ -145,7 +142,7 @@ export function AtomCell({
       >
         <div className={styles.cellInner} ref={valueElementRef}>
           {highlighted ? (
-            <SyntaxHighlighter language="json">
+            <SyntaxHighlighter language="json" style={docco}>
               {formattedValue}
             </SyntaxHighlighter>
           ) : (
