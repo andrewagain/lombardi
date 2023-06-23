@@ -11,5 +11,8 @@ module.exports = {
   rules: {
     "simple-import-sort/imports": "warn",
     "react-refresh/only-export-components": "warn",
+
+    // 3rd-party modules often force us to use 'any'
+    "@typescript-eslint/no-explicit-any": "off",
   },
 }

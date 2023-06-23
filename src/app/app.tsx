@@ -19,7 +19,7 @@ export default function NuonsApp() {
         <FlowView />
       </div>
       <PaneDivider gridArea="r-div" orientation="right" />
-      <div style={{ gridArea: "atom" }}>
+      <div style={{ gridArea: "atom", width: 300 }}>
         <AtomView />
       </div>
       <footer>Footer</footer>
