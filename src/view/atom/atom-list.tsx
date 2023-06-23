@@ -1,7 +1,8 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Atom, useAtom } from "jotai"
 import { atomFamily, atomWithStorage } from "jotai/utils"
-import { useCallback, useMemo, useState } from "react"
+import { useCallback, useEffect, useMemo, useState } from "react"
+import { LightAsync as SyntaxHighlighter } from "react-syntax-highlighter"
+import json from "react-syntax-highlighter/dist/esm/languages/hljs/json"
 
 import { AtomCell } from "./atom-cell"
 import styles from "./atom-list.module.css"
@@ -64,6 +65,10 @@ export function AtomList({
     [values]
   )
   const [filterText, setFilterText] = useState("")
+
+  useEffect(() => {
+    SyntaxHighlighter.registerLanguage("json", json)
+  }, [])
 
   const selectedValues = useMemo(
     () =>

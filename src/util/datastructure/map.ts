@@ -24,7 +24,6 @@ export function booleanMapCopyWithKeys<T>(
 export function listToMap<Item, Key, Value = Item>(
   items: Item[],
   getKey: (item: Item, index: number) => Key,
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   getValue: (item: Item, index: number) => Value = (x) => x as any as Value
 ): Map<Key, Value> {
   const m = new Map<Key, Value>()

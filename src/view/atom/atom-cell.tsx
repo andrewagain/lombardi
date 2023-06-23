@@ -1,62 +1,12 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { format } from "date-fns"
+import { Box } from "@chakra-ui/react"
 import { Atom, useAtomValue } from "jotai"
 import React, { useCallback, useMemo, useRef, useState } from "react"
 import { BsX } from "react-icons/bs"
 import { LightAsync as SyntaxHighlighter } from "react-syntax-highlighter"
-import json from "react-syntax-highlighter/dist/esm/languages/hljs/json"
 import agate from "react-syntax-highlighter/dist/esm/styles/hljs/agate"
 
 import styles from "./atom-cell.module.css"
-
-const log = console.log
-
-log("SyntaxHighlighter", SyntaxHighlighter.registerLanguage("json", json))
-
-type FormatType = "time" | "timerange" | null
-
-function defaultFormat(value: any) {
-  try {
-    return format(value, "yyyy MMM d, hh:mm:ss a")
-  } catch (err) {
-    return `format(${value}) error:${err}`
-  }
-}
-
-function formatValue(value: any, formatType?: FormatType): string {
-  if (value === null) {
-    return "<null>"
-  }
-  if (typeof value === "undefined") {
-    return "<undefined>"
-  }
-  if (typeof value === "boolean") {
-    return value ? "true" : "false"
-  }
-  if (value instanceof Map) {
-    return JSON.stringify([...value.entries()], null, 2)
-  }
-  if (formatType === "time" && typeof value === "number") {
-    return `${defaultFormat(value)} / ${value}`
-  }
-  if (
-    formatType === "timerange" &&
-    typeof value?.start === "number" &&
-    typeof value?.end === "number"
-  ) {
-    return `${defaultFormat(value.start)} -> ${defaultFormat(value.end)}`
-  }
-  if (typeof value === "number" || typeof value === "string") {
-    return `${value}`
-  }
-  if (typeof value === "object") {
-    return JSON.stringify(value, null, 2)
-  }
-  if (!value) {
-    return "<unknown falsey>"
-  }
-  return value
-}
+import { formatAtomValue, FormatType } from "./format-atom-value"
 
 export function AtomCell({
   label,
@@ -118,18 +68,39 @@ export function AtomCell({
   }, [label, onRemove])
 
   const formattedValue = useMemo(
-    () => formatValue(value, formatType),
+    () => formatAtomValue(value, formatType),
     [formatType, value]
   )
 
   return (
     <React.Fragment>
-      <div className={styles.atomCellContainer}>
+      <Box
+        css={{
+          position: "relative",
+          "& button": {
+            padding: 0,
+            position: "absolute",
+            display: "none",
+            backgroundColor: "black",
+            width: 16,
+            height: 16,
+            borderRadius: 2,
+            alignItems: "center",
+            justifyContent: "center",
+          },
+          "& button:hover": {
+            backgroundColor: "#222",
+          },
+          "&:hover button": {
+            display: "flex",
+          },
+        }}
+      >
         <button onClick={remove}>
           <BsX size={10} />
         </button>
         <span className={styles.label}>{label}</span>
-      </div>
+      </Box>
       <div
         className={styles.cellContent}
         data-expanded={expanded ? true : undefined}
