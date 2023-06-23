@@ -21,5 +21,6 @@
   },
   "javascript.preferences.importModuleSpecifier": "shortest",
   "typescript.preferences.importModuleSpecifier": "shortest",
-  "editor.autoClosingBrackets": "never"
+  "editor.autoClosingBrackets": "never",
+  "editor.autoClosingQuotes": "never"
 }
