@@ -1,5 +1,6 @@
 import { Box } from "@chakra-ui/react"
 import { useAtomValue } from "jotai"
+import { useState } from "react"
 import {
   CreateHandler,
   DeleteHandler,
@@ -17,6 +18,7 @@ import {
   useRenameNode,
 } from "@/graph/state/graph-hooks.ts"
 import { graphTreeRootNodesAtom } from "@/graph/state/tree-atoms.ts"
+import ElementBoundsEffect from "@/util/component/bounds-effect.tsx"
 
 import { TreeRow } from "./row/tree-row.tsx"
 import TreeCursor from "./tree-cursor.tsx"
@@ -24,6 +26,10 @@ import TreeCursor from "./tree-cursor.tsx"
 // https://github.com/brimdata/react-arborist
 export default function TreeView() {
   const treeData = useAtomValue(graphTreeRootNodesAtom)
+
+  const [boundsElement, setBoundsElement] = useState<HTMLDivElement | null>()
+  const [bounds, setBounds] = useState<DOMRect | undefined>()
+
   const addNode = useAddNode()
   const addEdge = useAddEdge()
   const deleteNodes = useDeleteNodes()
@@ -56,11 +62,12 @@ export default function TreeView() {
     deleteNodes(ids)
   }
 
-  // TODO: resizeobserver on parent
   return (
     <Box
+      ref={setBoundsElement}
       css={{
         height: "100%",
+        width: "100%",
       }}
     >
       <Tree<GraphNode>
@@ -70,9 +77,12 @@ export default function TreeView() {
         onMove={onMove}
         onDelete={onDelete}
         renderCursor={TreeCursor}
+        width={bounds?.width}
+        height={bounds?.height}
       >
         {TreeRow}
       </Tree>
+      <ElementBoundsEffect element={boundsElement} onBoundsChange={setBounds} />
     </Box>
   )
 }
