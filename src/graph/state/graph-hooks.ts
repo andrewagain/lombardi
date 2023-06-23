@@ -182,8 +182,9 @@ export function useToggleNodeVisibility(nodeId: GraphNodeId) {
   return [
     visible,
     useCallback(() => {
-      console.log("switching nodeID", nodeId, "to", !visible)
-      setVisibilityMap(visibilityMap.set(nodeId, !visible))
+      const nextVisibilityMap = new Map(visibilityMap)
+      nextVisibilityMap.set(nodeId, !visible)
+      setVisibilityMap(nextVisibilityMap)
     }, [nodeId, setVisibilityMap, visibilityMap, visible]),
   ] as [boolean, () => void]
 }
