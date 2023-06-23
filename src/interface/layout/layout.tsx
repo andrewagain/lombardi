@@ -1,14 +1,18 @@
 import { Box } from "@chakra-ui/react"
+import { useAtomValue } from "jotai"
 
 import { PersistGraphEffect } from "@/graph/graph-persist.tsx"
 import FlowView from "@/view/flow/flow-view.tsx"
 
 import { PanelDivider } from "../controls/panel-divider"
+import { interfaceSidePanelsAtom, SidePanel } from "../interface-state"
 import Header from "./header"
 import LeftPanel from "./panel/left-panel"
 import RightPanel from "./panel/right-panel"
 
 export default function Layout() {
+  const panels = useAtomValue(interfaceSidePanelsAtom)
+
   return (
     <Box
       css={{
@@ -32,13 +36,22 @@ export default function Layout() {
       }}
     >
       <Header />
-      <LeftPanel />
-      <PanelDivider gridArea="l-div" orientation="right" />
+      {panels.includes(SidePanel.Left) && (
+        <>
+          <LeftPanel />
+          <PanelDivider gridArea="l-div" orientation="right" />
+        </>
+      )}
       <div style={{ gridArea: "main" }}>
         <FlowView />
       </div>
-      <PanelDivider gridArea="r-div" orientation="left" />
-      <RightPanel />
+      {panels.includes(SidePanel.Right) && (
+        <>
+          <PanelDivider gridArea="r-div" orientation="left" />
+          <RightPanel />
+        </>
+      )}
+
       <footer>Footer</footer>
       <PersistGraphEffect />
     </Box>

@@ -69,8 +69,8 @@ export function AtomCell({
   }, [label, onRemove])
 
   const formattedValue = useMemo(
-    () => formatAtomValue(value, formatType),
-    [formatType, value]
+    () => formatAtomValue(value, formatType, expanded),
+    [formatType, value, expanded]
   )
 
   return (
@@ -111,15 +111,16 @@ export function AtomCell({
           backgroundColor: colors.blue[900],
 
           "&:not([data-expanded])": {
+            maxHeight: 60,
             overflow: "hidden",
             whiteSpace: "nowrap",
           },
 
           "&[data-expanded]": {
+            maxHeight: 300,
             wordWrap: "break-word",
             wordBreak: "break-all",
             whiteSpace: "pre-wrap",
-            maxHeight: 300,
             overflowY: "scroll",
             border: `1px solid ${colors.cyan[400]}`,
             padding: "20px 4px 10px 4px",

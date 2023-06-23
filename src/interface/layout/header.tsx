@@ -1,6 +1,8 @@
 import { Box } from "@chakra-ui/react"
 
 import GraphSelect from "../controls/graph-select"
+import { SidePanel } from "../interface-state"
+import { PanelToggle } from "./panel/button/panel-toggle"
 
 export default function Header() {
   return (
@@ -13,7 +15,9 @@ export default function Header() {
       gridAutoFlow="column"
       as="header"
     >
+      <PanelToggle side={SidePanel.Left} />
       <GraphSelect />
+      <PanelToggle side={SidePanel.Right} />
     </Box>
   )
 }
