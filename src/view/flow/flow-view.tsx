@@ -23,11 +23,6 @@ export default function FlowView() {
 
   const onNodesChange = useCallback(
     (changes: NodeChange[]) => {
-      console.log("onNodesChange", changes)
-      // okay so it looks like when you initially set the nodes,
-      // this gets called with a dimension change for each node (which is good)
-      // but the problem is that this happens after we have calculated the layout,
-      // and this wipes out the layout positions to 0,0
       setNodes(applyNodeChanges(changes, nodes))
     },
     [nodes, setNodes]
