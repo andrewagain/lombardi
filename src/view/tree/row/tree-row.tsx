@@ -18,7 +18,6 @@ export function TreeRow({
   const [visible, toggleVisibility] = useToggleNodeVisibility(node.data.id)
   return (
     <Box
-      style={style}
       css={{
         display: "flex",
         alignItems: "center",
@@ -29,6 +28,8 @@ export function TreeRow({
         cursor: "pointer",
         borderTopRightRadius: 10,
         borderBottomRightRadius: 10,
+        overflow: "hidden",
+
         "&:hover": {
           backgroundColor: "#eee",
           [mediaDarkMode]: {
@@ -50,6 +51,7 @@ export function TreeRow({
       }}
     >
       <Box
+        style={style}
         ref={dragHandle}
         css={{
           flex: "1 1 auto",
