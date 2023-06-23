@@ -1,4 +1,4 @@
-import { Box } from "@chakra-ui/react"
+import { Box, Input } from "@chakra-ui/react"
 import { Atom, useAtom } from "jotai"
 import { atomFamily, atomWithStorage } from "jotai/utils"
 import { useCallback, useEffect, useMemo, useState } from "react"
@@ -123,8 +123,7 @@ export function AtomList({
           flex: "0 0 auto",
         }}
       >
-        <Box
-          as="input"
+        <Input
           css={{
             backgroundColor: "#0004",
             border: 0,
