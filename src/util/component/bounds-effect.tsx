@@ -1,7 +1,5 @@
 import { useEffect } from "react"
 
-const log = console.log
-
 // Call 'onBoundsChange' any time the bounds of the given element change
 export default function ElementBoundsEffect({
   element,
@@ -16,7 +14,7 @@ export default function ElementBoundsEffect({
     }
     const resizeObserver = new ResizeObserver(() => {
       const bounds = element.getBoundingClientRect()
-      log("Calculate bounds", JSON.stringify(bounds))
+      // log("Calculate bounds", JSON.stringify(bounds))
       onBoundsChange(bounds)
     })
     resizeObserver.observe(element)

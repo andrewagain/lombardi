@@ -28,7 +28,7 @@ const graphVisibleNodesAtom = atom(
     const removedNodes = previousVisibleNodes.filter(
       (n) => !updatedNodesMap.has(n.id)
     )
-    console.log(`removedNodes: ${removedNodes.length}`)
+    // console.log(`removedNodes: ${removedNodes.length}`)
     const nextNodesMap = new Map(get(graphNodeMapAtom))
 
     for (const node of removedNodes) {
@@ -55,7 +55,7 @@ export const flowNodesAtom = atom(
         },
       }
     })
-    console.log(`${flowNodes.length} flow nodes`)
+    // console.log(`${flowNodes.length} flow nodes`)
     return flowNodes
   },
   (get, set, flowNodes: FlowNode[]) => {

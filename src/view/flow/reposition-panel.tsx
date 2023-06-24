@@ -37,13 +37,13 @@ export default function RepositionPanel() {
   const repositionNodes = useAtomCallback(
     useCallback((get, set) => {
       const g = get(flowDagreAtom)
-      const start = Date.now()
+      // const start = Date.now()
       dagre.layout(g)
-      console.log(`layout in ${Date.now() - start}ms`)
+      // console.log(`layout in ${Date.now() - start}ms`)
 
       const nodeIds = get(graphNodeIdsAtom)
       const positionMap = getDagreContractPositionMap(g, nodeIds)
-      console.log("positionMap", [...positionMap.entries()])
+      // console.log("positionMap", [...positionMap.entries()])
       set(graphNodePositionMapAtom, positionMap)
     }, [])
   )
@@ -53,7 +53,7 @@ export default function RepositionPanel() {
       return
     }
     nodeCountRef.current = nodeMap.size
-    console.log(`repositioning ${nodeMap.size} nodes`)
+    // console.log(`repositioning ${nodeMap.size} nodes`)
     repositionNodes()
   }, [repositionNodes, nodeMap])
 
