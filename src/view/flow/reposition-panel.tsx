@@ -1,7 +1,9 @@
+import { IconButton } from "@chakra-ui/react"
 import dagre from "dagre"
 import { useAtomValue } from "jotai"
 import { useAtomCallback } from "jotai/utils"
 import { useCallback, useEffect, useRef } from "react"
+import { TbLayout2 } from "react-icons/tb"
 import { Panel } from "reactflow"
 
 import { NodePosition } from "@/graph/graph-types"
@@ -54,7 +56,9 @@ export default function RepositionPanel() {
 
   return (
     <Panel position="top-right">
-      <button onClick={repositionNodes}>Reposition</button>
+      <IconButton onClick={repositionNodes} aria-label="Reposition">
+        <TbLayout2 />
+      </IconButton>
     </Panel>
   )
 }
