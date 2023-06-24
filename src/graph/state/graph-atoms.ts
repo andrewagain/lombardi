@@ -63,6 +63,13 @@ export const graphNodePositionMapAtom = atom(
 
 export const graphNodeVisibilityMapAtom = atom(new Map<GraphNodeId, boolean>())
 
+// WIP
+// export const graphNodeIndirectVisibilityMapAtom = atom(
+//   (get) => {
+//     const nodeMap = get(graphNodeMapAtom)
+//     const edgeMap = get(graphEdgeMapAtom)
+//     const edgePriorityMap = get(graphEdgePriorityMapAtom)
+
 export const graphVisibleNodesAtom = atom(
   (get) => {
     const m = get(graphNodeVisibilityMapAtom)
