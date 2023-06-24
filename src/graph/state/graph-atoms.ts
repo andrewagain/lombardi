@@ -3,7 +3,6 @@ import { atom } from "jotai"
 import { listToMap } from "@/util/datastructure/map.ts"
 
 import {
-  GraphCoreData,
   GraphEdge,
   GraphEdgePriority,
   GraphNode,
@@ -22,22 +21,6 @@ export const graphEdgeMapAtom = atom(new Map<string, GraphEdge>())
 
 export const graphEdgePriorityMapAtom = atom(
   new Map<string, GraphEdgePriority>()
-)
-
-export const graphCoreDataAtom = atom(
-  (get) => {
-    const data: GraphCoreData = {
-      nodeMap: get(graphNodeMapAtom),
-      edgeMap: get(graphEdgeMapAtom),
-      edgePriorityMap: get(graphEdgePriorityMapAtom),
-    }
-    return data
-  },
-  (_, set, update: GraphCoreData) => {
-    set(graphNodeMapAtom, update.nodeMap)
-    set(graphEdgeMapAtom, update.edgeMap)
-    set(graphEdgePriorityMapAtom, update.edgePriorityMap)
-  }
 )
 
 /**

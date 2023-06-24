@@ -5,23 +5,24 @@ import { useCallback } from "react"
 import { setCopyWithToggledItem } from "@/util/datastructure/set.ts"
 
 import { GraphEdge, GraphNode, GraphNodeId } from "../graph-types.ts"
+import { calculateInsertNodePriorities, graphSortEdges } from "../graph-util.ts"
 import {
-  calculateInsertNodePriorities,
-  createEmptyGraph,
-  graphSortEdges,
-} from "../graph-util.ts"
-import {
-  graphCoreDataAtom,
   graphEdgeMapAtom,
+  graphEdgePriorityMapAtom,
   graphNodeHiddenSetAtom,
   graphNodeMapAtom,
 } from "./graph-atoms.ts"
 
 export function useClearGraph() {
-  const setGraphCoreData = useSetAtom(graphCoreDataAtom)
+  const setNodeMap = useSetAtom(graphNodeMapAtom)
+  const setEdgeMap = useSetAtom(graphEdgeMapAtom)
+  const setEdgePriorityMap = useSetAtom(graphEdgePriorityMapAtom)
+
   return useCallback(() => {
-    setGraphCoreData(createEmptyGraph())
-  }, [setGraphCoreData])
+    setNodeMap(new Map<GraphNodeId, GraphNode>())
+    setEdgeMap(new Map<string, GraphEdge>())
+    setEdgePriorityMap(new Map<string, number>())
+  }, [setEdgeMap, setEdgePriorityMap, setNodeMap])
 }
 
 export function useAddNode() {
@@ -114,12 +115,14 @@ export function useMoveNodes() {
           return
         }
 
-        const graphRoot = get(graphCoreDataAtom)
+        const edgeMap = get(graphEdgeMapAtom)
+        const edgePriorityMap = get(graphEdgePriorityMapAtom)
+
         // Put all nodes that are moving into a map for easy lookup
         const movingNodeIdMap = new Map(nodeIds.map((id) => [id, true]))
 
         // Find all edges that are incoming on any of the nodes that are moving
-        const incomingEdges = [...graphRoot.edgeMap.values()].filter((e) =>
+        const incomingEdges = [...edgeMap.values()].filter((e) =>
           movingNodeIdMap.has(e.target)
         )
 
@@ -130,31 +133,30 @@ export function useMoveNodes() {
         }))
 
         // Create a new edge map with the updated edges
-        const newEdgeMap = new Map(graphRoot.edgeMap)
+        const newEdgeMap = new Map(edgeMap)
         updatedIncomingEdges.forEach((edge) => {
           newEdgeMap.set(edge.id, edge)
         })
 
         // Update the edge priority such that the moved edges are in the correct position
-        const newEdgePriorityMap = new Map(graphRoot.edgePriorityMap)
+        const newEdgePriorityMap = new Map(edgePriorityMap)
 
         // Find the existing outgoing edges of the parent
-        const parentOutgoingEdges = [...graphRoot.edgeMap.values()].filter(
+        const parentOutgoingEdges = [...edgeMap.values()].filter(
           (edge) => edge.source === parentId
         )
         // Sort the outgoing edges of the parent
         const parentOutgoingEdgeSorted = graphSortEdges(
           parentOutgoingEdges,
-          graphRoot.edgePriorityMap
+          edgePriorityMap
         )
 
         // Find the index of the first outgoing edge that is not moving
         const beforeNode = parentOutgoingEdgeSorted[insertIndex - 1]
         const afterNode = parentOutgoingEdgeSorted[insertIndex]
         const beforePriority =
-          graphRoot.edgePriorityMap.get(beforeNode?.id ?? null) || null
-        const afterPriority =
-          graphRoot.edgePriorityMap.get(afterNode?.id ?? null) || null
+          edgePriorityMap.get(beforeNode?.id ?? null) || null
+        const afterPriority = edgePriorityMap.get(afterNode?.id ?? null) || null
 
         const priorities = calculateInsertNodePriorities(
           incomingEdges.length,
@@ -166,11 +168,8 @@ export function useMoveNodes() {
           newEdgePriorityMap.set(edge.id, priorities[i])
         })
 
-        set(graphCoreDataAtom, {
-          ...graphRoot,
-          edgeMap: newEdgeMap,
-          edgePriorityMap: newEdgePriorityMap,
-        })
+        set(graphEdgeMapAtom, newEdgeMap)
+        set(graphEdgePriorityMapAtom, newEdgePriorityMap)
       },
       []
     )
