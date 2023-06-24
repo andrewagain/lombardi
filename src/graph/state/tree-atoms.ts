@@ -11,12 +11,13 @@ import {
 } from "./graph-atoms.ts"
 
 export interface GraphTreeNode extends GraphNode {
+  isLeaf: boolean
   children: GraphTreeNode[]
 }
 
 // Nodes without incoming edges
 // Cycles will be ignored
-// TODO: handle cycles
+// TODO: handle cycles by refusing to re-visit the same node twice
 export const graphNodesWithoutIncomingEdgesAtom = atom<GraphNode[]>((get) => {
   const edgeMapByTarget = get(graphEdgeMapByTargetAtom)
   const nodeMap = get(graphNodeMapAtom)
@@ -36,6 +37,7 @@ export const graphTreeRootNodesAtom = atom<GraphTreeNode[]>((get) => {
   const rootTreeNodes: GraphTreeNode[] = rootNodes.map((node) => {
     return {
       ...node,
+      isLeaf: false,
       children: [],
     }
   })
@@ -51,6 +53,11 @@ export const graphTreeRootNodesAtom = atom<GraphTreeNode[]>((get) => {
       edgePriorityMap
     )
 
+    if (outgoingEdges.length === 0) {
+      node.isLeaf = true
+      continue
+    }
+
     const destinationNodes = outgoingEdges.map((edge) => {
       const targetNode = nodeMap.get(edge.target)
       if (!targetNode) {
@@ -59,7 +66,11 @@ export const graphTreeRootNodesAtom = atom<GraphTreeNode[]>((get) => {
       return targetNode
     })
 
-    node.children = destinationNodes.map((x) => ({ ...x, children: [] }))
+    node.children = destinationNodes.map((x) => ({
+      ...x,
+      children: [],
+      isLeaf: false,
+    }))
     nodeStack = [...nodeStack, ...node.children]
   }
 
