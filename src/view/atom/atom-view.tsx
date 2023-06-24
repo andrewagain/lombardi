@@ -1,16 +1,17 @@
 import { Box } from "@chakra-ui/react"
-import { Atom } from "jotai"
 
 import * as graphCoreAtoms from "@/graph/state/graph-core-atoms"
 
-import { AtomList } from "./atom-list"
+import { AtomList, AtomValueTuple } from "./atom-list"
+
+function getImportTuples(i: object): AtomValueTuple[] {
+  return Object.values(i).map((atom) => [atom])
+}
 
 export default function AtomView() {
-  const coreAtoms: Atom<any>[] = Object.values(graphCoreAtoms)
-
   return (
     <Box padding={3}>
-      <AtomList title="Atoms" values={coreAtoms.map((atom) => [atom])} />
+      <AtomList title="Atoms" values={getImportTuples(graphCoreAtoms)} />
     </Box>
   )
 }
