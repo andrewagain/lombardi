@@ -11,8 +11,7 @@ import {
 } from "./graph-atoms.ts"
 
 export interface GraphTreeNode extends GraphNode {
-  isLeaf: boolean
-  children: GraphTreeNode[]
+  children?: GraphTreeNode[]
 }
 
 // Nodes without incoming edges
@@ -34,13 +33,8 @@ export const graphTreeRootNodesAtom = atom<GraphTreeNode[]>((get) => {
   const edgePriorityMap = get(graphEdgePriorityMapAtom)
   const outgoingEdgeMap = get(graphEdgeMapBySourceAtom)
 
-  const rootTreeNodes: GraphTreeNode[] = rootNodes.map((node) => {
-    return {
-      ...node,
-      isLeaf: false,
-      children: [],
-    }
-  })
+  // Create copies of all the root nodes
+  const rootTreeNodes = rootNodes.map((x) => ({ ...x }))
 
   let nodeStack: GraphTreeNode[] = [...rootTreeNodes]
   while (nodeStack.length > 0) {
@@ -53,11 +47,6 @@ export const graphTreeRootNodesAtom = atom<GraphTreeNode[]>((get) => {
       edgePriorityMap
     )
 
-    if (outgoingEdges.length === 0) {
-      node.isLeaf = true
-      continue
-    }
-
     const destinationNodes = outgoingEdges.map((edge) => {
       const targetNode = nodeMap.get(edge.target)
       if (!targetNode) {
@@ -66,12 +55,10 @@ export const graphTreeRootNodesAtom = atom<GraphTreeNode[]>((get) => {
       return targetNode
     })
 
-    node.children = destinationNodes.map((x) => ({
-      ...x,
-      children: [],
-      isLeaf: false,
-    }))
-    nodeStack = [...nodeStack, ...node.children]
+    if (destinationNodes.length > 0) {
+      node.children = destinationNodes.map((x) => ({ ...x }))
+      nodeStack = [...nodeStack, ...node.children]
+    }
   }
 
   return rootTreeNodes
