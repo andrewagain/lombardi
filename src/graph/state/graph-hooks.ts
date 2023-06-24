@@ -179,16 +179,19 @@ export function useToggleNodeVisibility(nodeId: GraphNodeId) {
   const [hiddenSet, setHiddenSet] = useAtom(graphNodeHiddenSetAtom)
   const visible = !hiddenSet.has(nodeId)
 
-  return [
-    visible,
-    useCallback(() => {
-      const nextHiddenSet = new Set(hiddenSet)
-      if (visible) {
-        nextHiddenSet.add(nodeId)
-      } else {
-        nextHiddenSet.delete(nodeId)
-      }
-      setHiddenSet(hiddenSet)
-    }, [hiddenSet, nodeId, setHiddenSet, visible]),
-  ] as [boolean, () => void]
+  const toggleVisibility = useCallback(() => {
+    console.log("hidden set count:", hiddenSet.size)
+    console.log("nodeId:", nodeId)
+
+    const nextHiddenSet = new Set([...hiddenSet])
+    if (visible) {
+      nextHiddenSet.add(nodeId)
+    } else {
+      nextHiddenSet.delete(nodeId)
+    }
+    console.log("next hidden set count:", nextHiddenSet.size)
+    setHiddenSet(hiddenSet)
+  }, [hiddenSet, nodeId, setHiddenSet, visible])
+
+  return [visible, toggleVisibility] as [boolean, () => void]
 }
