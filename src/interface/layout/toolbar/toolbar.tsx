@@ -1,8 +1,8 @@
-import { Box, IconButton } from "@chakra-ui/react"
-import { PiTreeStructureDuotone } from "react-icons/pi"
+import { Box } from "@chakra-ui/react"
 
 import { SidePanel } from "../../interface-state"
 import GraphSelect from "./graph-select"
+import LogoIcon from "./LogoIcon"
 import { PanelToggle } from "./panel-toggle"
 
 export default function Toolbar() {
@@ -16,7 +16,7 @@ export default function Toolbar() {
       gridAutoFlow="column"
       as="header"
     >
-      <PiTreeStructureDuotone style={{ marginLeft: 10, marginRight: 10 }} />
+      <LogoIcon />
       <PanelToggle side={SidePanel.Left} />
       <Box />
       <GraphSelect />
