@@ -29,6 +29,9 @@ export function formatAtomValue(
   if (value instanceof Map) {
     return JSON.stringify([...value.entries()], null, jsonSpaces)
   }
+  if (value instanceof Set) {
+    return JSON.stringify([...value.values()], null, jsonSpaces)
+  }
   if (formatType === "time" && typeof value === "number") {
     return `${defaultFormat(value)} / ${value}`
   }

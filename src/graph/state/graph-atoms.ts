@@ -63,31 +63,6 @@ export const graphNodePositionMapAtom = atom(
 
 export const graphNodeHiddenSetAtom = atom(new Set<GraphNodeId>())
 
-export const graphVisibleNodesAtom = atom(
-  (get) => {
-    const s = get(graphNodeHiddenSetAtom)
-    return get(graphNodesAtom).filter((n) => !s.has(n.id))
-  },
-  (get, set, visibleNodes: GraphNode[]) => {
-    const visibleNodesMap = listToMap(visibleNodes, (n) => n.id)
-    const previousVisibleNodes = get(graphVisibleNodesAtom)
-
-    const removedNodes = previousVisibleNodes.filter(
-      (n) => !visibleNodesMap.has(n.id)
-    )
-    console.log(`removedNodes: ${removedNodes.length}`)
-    const nextNodesMap = new Map(get(graphNodeMapAtom))
-
-    for (const node of removedNodes) {
-      nextNodesMap.delete(node.id)
-    }
-    for (const node of visibleNodes) {
-      nextNodesMap.set(node.id, node)
-    }
-    set(graphNodeMapAtom, nextNodesMap)
-  }
-)
-
 /**
  * Edge-specific
  */

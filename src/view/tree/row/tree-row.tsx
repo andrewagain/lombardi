@@ -1,10 +1,12 @@
 import { Box } from "@chakra-ui/react"
+import { useAtomValue } from "jotai"
 import { NodeRendererProps } from "react-arborist"
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai"
 
 import { mediaDarkMode } from "@/app/theme/theme"
 import { GraphNode } from "@/graph/graph-types.ts"
 import { useToggleNodeVisibility } from "@/graph/state/graph-hooks"
+import { graphNodeHiddenIndirectlySetAtom } from "@/graph/state/visibility-atoms"
 
 import FolderArrow from "./folder-arrow"
 import TreeInput from "./tree-input"
@@ -15,6 +17,9 @@ export function TreeRow({
   dragHandle,
 }: NodeRendererProps<GraphNode>) {
   const [visible, toggleVisibility] = useToggleNodeVisibility(node.data.id)
+  const indirectlyHiddenSet = useAtomValue(graphNodeHiddenIndirectlySetAtom)
+  const indirectlyHidden = indirectlyHiddenSet.has(node.data.id)
+
   return (
     <Box
       css={{
@@ -62,7 +67,7 @@ export function TreeRow({
           flex: "1 1 auto",
           display: "flex",
           overflow: "hidden",
-          opacity: visible ? 1 : 0.5,
+          opacity: indirectlyHidden ? 0.5 : 1,
         }}
         onClick={() => node.isInternal && node.toggle()}
       >
