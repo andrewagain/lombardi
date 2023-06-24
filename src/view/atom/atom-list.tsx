@@ -41,13 +41,13 @@ function ToggleButton({ title, param }: { title: string; param: string }) {
   )
 }
 
-type ValueTuple = [Atom<any>, any?]
+export type AtomValueTuple = [Atom<any>, any?]
 
 export function AtomList({
   values,
   title,
 }: {
-  values: ValueTuple[]
+  values: AtomValueTuple[]
   title: string
 }) {
   const param = getStateParameter("rows", title)
@@ -56,7 +56,7 @@ export function AtomList({
   )
   const valuesMap = useMemo(
     () =>
-      new Map<string, ValueTuple>(
+      new Map<string, AtomValueTuple>(
         values.map((value) => [
           value[0].debugLabel || MISSING_LABEL_TEXT,
           value,
@@ -74,7 +74,7 @@ export function AtomList({
     () =>
       selectedRowTitles
         .map((title) => valuesMap.get(title))
-        .filter((x) => x) as ValueTuple[],
+        .filter((x) => x) as AtomValueTuple[],
     [selectedRowTitles, valuesMap]
   )
 

@@ -1,10 +1,11 @@
 import { Box } from "@chakra-ui/react"
-import { useAtomValue } from "jotai"
+import { useAtom, useAtomValue } from "jotai"
 import { useState } from "react"
 import {
   CreateHandler,
   DeleteHandler,
   MoveHandler,
+  NodeApi,
   RenameHandler,
   Tree,
 } from "react-arborist"
@@ -17,7 +18,9 @@ import {
   useMoveNodes,
   useRenameNode,
 } from "@/graph/state/derived/modify-hooks.ts"
+import { graphNodeFirstSelectedIdAtom } from "@/graph/state/derived/node-atoms.ts"
 import { graphTreeRootNodesAtom } from "@/graph/state/derived/tree-atoms.ts"
+import { graphNodeSelectedIdsAtom } from "@/graph/state/graph-core-atoms.ts"
 import ElementBoundsEffect from "@/util/component/bounds-effect.tsx"
 
 import { TreeRow } from "./row/tree-row.tsx"
@@ -26,6 +29,7 @@ import TreeCursor from "./tree-cursor.tsx"
 // https://github.com/brimdata/react-arborist
 export default function TreeView() {
   const treeData = useAtomValue(graphTreeRootNodesAtom)
+  const [selectedIds, setSelectedIds] = useAtom(graphNodeSelectedIdsAtom)
 
   const [boundsElement, setBoundsElement] = useState<HTMLDivElement | null>()
   const [bounds, setBounds] = useState<DOMRect | undefined>()
@@ -62,6 +66,11 @@ export default function TreeView() {
     deleteNodes(ids)
   }
 
+  const onSelect: (nodes: NodeApi<GraphNode>[]) => void = (nodes) => {
+    console.log("onSelect", nodes)
+    setSelectedIds(nodes.map((node) => node.id))
+  }
+
   return (
     <Box
       ref={setBoundsElement}
@@ -76,6 +85,7 @@ export default function TreeView() {
         onRename={onRename}
         onMove={onMove}
         onDelete={onDelete}
+        onSelect={onSelect}
         renderCursor={TreeCursor}
         width={bounds?.width}
         height={bounds?.height}
