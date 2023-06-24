@@ -5,11 +5,11 @@ import { Edge, Node } from "reactflow"
 import { GraphEdge, GraphNode } from "@/graph/graph-types"
 import {
   graphEdgesAtom,
-  graphNodeHiddenSetAtom,
   graphNodeMapAtom,
   graphNodePositionMapAtom,
   graphNodesAtom,
 } from "@/graph/state/graph-atoms"
+import { graphNodeHiddenIndirectlySetAtom } from "@/graph/state/visibility-atoms"
 import { listToMap } from "@/util/datastructure/map"
 import { isZeroPoint } from "@/util/geometry/point"
 
@@ -18,15 +18,15 @@ export type FlowEdge = Edge<GraphEdge>
 
 const graphVisibleNodesAtom = atom(
   (get) => {
-    const s = get(graphNodeHiddenSetAtom)
+    const s = get(graphNodeHiddenIndirectlySetAtom)
     return get(graphNodesAtom).filter((n) => !s.has(n.id))
   },
-  (get, set, visibleNodes: GraphNode[]) => {
-    const visibleNodesMap = listToMap(visibleNodes, (n) => n.id)
+  (get, set, updatedNodes: GraphNode[]) => {
+    const updatedNodesMap = listToMap(updatedNodes, (n) => n.id)
     const previousVisibleNodes = get(graphVisibleNodesAtom)
 
     const removedNodes = previousVisibleNodes.filter(
-      (n) => !visibleNodesMap.has(n.id)
+      (n) => !updatedNodesMap.has(n.id)
     )
     console.log(`removedNodes: ${removedNodes.length}`)
     const nextNodesMap = new Map(get(graphNodeMapAtom))
@@ -34,7 +34,7 @@ const graphVisibleNodesAtom = atom(
     for (const node of removedNodes) {
       nextNodesMap.delete(node.id)
     }
-    for (const node of visibleNodes) {
+    for (const node of updatedNodes) {
       nextNodesMap.set(node.id, node)
     }
     set(graphNodeMapAtom, nextNodesMap)
