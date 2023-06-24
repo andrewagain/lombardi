@@ -1,5 +1,5 @@
 import { IconButton } from "@chakra-ui/react"
-import { BsLayoutSidebar, BsLayoutSidebarReverse } from "react-icons/bs"
+import { RiLayoutLeftFill, RiLayoutRightFill } from "react-icons/ri"
 
 import { SidePanel, useToggleSidePanel } from "@/interface/interface-state"
 
@@ -12,11 +12,7 @@ export function PanelToggle({ side }: { side: SidePanel }) {
       onClick={toggle}
       title="Toggle State Pane"
     >
-      {side === SidePanel.Left ? (
-        <BsLayoutSidebar />
-      ) : (
-        <BsLayoutSidebarReverse />
-      )}
+      {side === SidePanel.Left ? <RiLayoutLeftFill /> : <RiLayoutRightFill />}
     </IconButton>
   )
 }
