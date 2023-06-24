@@ -28,11 +28,17 @@ export function TreeRow({
         borderTopRightRadius: 10,
         borderBottomRightRadius: 10,
         overflow: "hidden",
+        "[data-actions]": {
+          display: "none",
+        },
 
         "&:hover": {
           backgroundColor: "#eee",
           [mediaDarkMode]: {
             backgroundColor: "#333",
+          },
+          "[data-actions]": {
+            display: "flex",
           },
         },
         '&[data-focused="true"]': {
@@ -56,6 +62,7 @@ export function TreeRow({
           flex: "1 1 auto",
           display: "flex",
           overflow: "hidden",
+          opacity: visible ? 1 : 0.5,
         }}
         onClick={() => node.isInternal && node.toggle()}
       >
@@ -77,6 +84,7 @@ export function TreeRow({
           flexDirection: "row-reverse",
           paddingRight: 10,
         }}
+        data-actions
       >
         <button onClick={toggleVisibility}>
           {visible ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
