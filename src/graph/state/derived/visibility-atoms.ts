@@ -1,13 +1,13 @@
 import { atom } from "jotai"
 
-import { GraphNodeId } from "../../graph-types"
-import {
-  graphEdgeMapBySourceAtom,
-  graphNodeHiddenSetAtom,
-  graphNodeMapAtom,
-} from "../graph-atoms"
+import { listToMap } from "@/util/datastructure/map"
 
-// TODO: 'visit children' function
+import { GraphNode, GraphNodeId } from "../../graph-types"
+import { graphNodeHiddenSetAtom, graphNodeMapAtom } from "../graph-core-atoms"
+import { graphEdgeMapBySourceAtom } from "./edge-atoms"
+import { graphNodesAtom } from "./node-atoms"
+
+// TODO: extract out a 'visit children' utility function
 
 export const graphNodeHiddenIndirectlySetAtom = atom((get) => {
   const nodeMap = get(graphNodeMapAtom)
@@ -43,3 +43,28 @@ export const graphNodeHiddenIndirectlySetAtom = atom((get) => {
   }
   return hiddenIndirectlySet
 })
+
+export const graphVisibleNodesAtom = atom(
+  (get) => {
+    const s = get(graphNodeHiddenIndirectlySetAtom)
+    return get(graphNodesAtom).filter((n) => !s.has(n.id))
+  },
+  (get, set, updatedNodes: GraphNode[]) => {
+    const updatedNodesMap = listToMap(updatedNodes, (n) => n.id)
+    const previousVisibleNodes = get(graphVisibleNodesAtom)
+
+    const removedNodes = previousVisibleNodes.filter(
+      (n) => !updatedNodesMap.has(n.id)
+    )
+    // console.log(`removedNodes: ${removedNodes.length}`)
+    const nextNodesMap = new Map(get(graphNodeMapAtom))
+
+    for (const node of removedNodes) {
+      nextNodesMap.delete(node.id)
+    }
+    for (const node of updatedNodes) {
+      nextNodesMap.set(node.id, node)
+    }
+    set(graphNodeMapAtom, nextNodesMap)
+  }
+)

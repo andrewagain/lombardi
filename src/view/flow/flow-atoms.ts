@@ -3,43 +3,13 @@ import { atom } from "jotai"
 import { Edge, Node } from "reactflow"
 
 import { GraphEdge, GraphNode } from "@/graph/graph-types"
-import {
-  graphEdgesAtom,
-  graphNodeMapAtom,
-  graphNodePositionMapAtom,
-  graphNodesAtom,
-} from "@/graph/state/graph-atoms"
-import { graphNodeHiddenIndirectlySetAtom } from "@/graph/state/derived/visibility-atoms"
-import { listToMap } from "@/util/datastructure/map"
+import { graphEdgesAtom } from "@/graph/state/derived/edge-atoms"
+import { graphVisibleNodesAtom } from "@/graph/state/derived/visibility-atoms"
+import { graphNodePositionMapAtom } from "@/graph/state/graph-core-atoms"
 import { isZeroPoint } from "@/util/geometry/point"
 
 export type FlowNode = Node<GraphNode>
 export type FlowEdge = Edge<GraphEdge>
-
-const graphVisibleNodesAtom = atom(
-  (get) => {
-    const s = get(graphNodeHiddenIndirectlySetAtom)
-    return get(graphNodesAtom).filter((n) => !s.has(n.id))
-  },
-  (get, set, updatedNodes: GraphNode[]) => {
-    const updatedNodesMap = listToMap(updatedNodes, (n) => n.id)
-    const previousVisibleNodes = get(graphVisibleNodesAtom)
-
-    const removedNodes = previousVisibleNodes.filter(
-      (n) => !updatedNodesMap.has(n.id)
-    )
-    // console.log(`removedNodes: ${removedNodes.length}`)
-    const nextNodesMap = new Map(get(graphNodeMapAtom))
-
-    for (const node of removedNodes) {
-      nextNodesMap.delete(node.id)
-    }
-    for (const node of updatedNodes) {
-      nextNodesMap.set(node.id, node)
-    }
-    set(graphNodeMapAtom, nextNodesMap)
-  }
-)
 
 export const flowNodesAtom = atom(
   (get) => {

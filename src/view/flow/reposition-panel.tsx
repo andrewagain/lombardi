@@ -7,11 +7,11 @@ import { TbLayout2 } from "react-icons/tb"
 import { Panel } from "reactflow"
 
 import { NodePosition } from "@/graph/graph-types"
+import { graphNodeIdsAtom } from "@/graph/state/derived/node-atoms"
 import {
-  graphNodeIdsAtom,
   graphNodeMapAtom,
   graphNodePositionMapAtom,
-} from "@/graph/state/graph-atoms"
+} from "@/graph/state/graph-core-atoms"
 import { pointCopy } from "@/util/geometry/point"
 
 import { flowDagreAtom } from "./flow-atoms"

@@ -3,7 +3,7 @@ import { Box } from "@chakra-ui/react"
 import {
   graphNodeHiddenSetAtom,
   graphNodeMapAtom,
-} from "@/graph/state/graph-atoms"
+} from "@/graph/state/graph-core-atoms"
 import { graphNodeHiddenIndirectlySetAtom } from "@/graph/state/derived/visibility-atoms"
 
 import { AtomList } from "./atom-list"

@@ -14,7 +14,7 @@ import {
   graphEdgePriorityMapAtom,
   graphNodeHiddenSetAtom,
   graphNodeMapAtom,
-} from "../graph-atoms.ts"
+} from "../graph-core-atoms.ts"
 
 export function useClearGraph() {
   const setNodeMap = useSetAtom(graphNodeMapAtom)

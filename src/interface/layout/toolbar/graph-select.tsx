@@ -1,6 +1,6 @@
 import { useAtom } from "jotai"
 
-import { graphIdAtom } from "@/graph/state/graph-atoms"
+import { graphIdAtom } from "@/graph/state/graph-core-atoms"
 import { useClearGraph } from "@/graph/state/derived/modify-hooks"
 
 export default function GraphSelect() {

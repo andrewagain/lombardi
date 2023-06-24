@@ -4,7 +4,7 @@ import { useEffect } from "react"
 
 import { serializableDataAtom } from "@/graph/state/derived/serializable-atoms"
 
-import { graphIdAtom } from "../graph-atoms"
+import { graphIdAtom } from "../graph-core-atoms"
 
 export function PersistGraphEffect() {
   const [data, setData] = useAtom(serializableDataAtom)

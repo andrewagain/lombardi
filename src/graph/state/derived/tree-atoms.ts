@@ -4,11 +4,13 @@ import { GraphNode } from "@/graph/graph-types.ts"
 import { graphSortEdges } from "@/graph/graph-util.ts"
 
 import {
-  graphEdgeMapBySourceAtom,
-  graphEdgeMapByTargetAtom,
   graphEdgePriorityMapAtom,
   graphNodeMapAtom,
-} from "../graph-atoms.ts"
+} from "../graph-core-atoms.ts"
+import {
+  graphEdgeMapBySourceAtom,
+  graphEdgeMapByTargetAtom,
+} from "./edge-atoms.ts"
 
 export interface GraphTreeNode extends GraphNode {
   children?: GraphTreeNode[]

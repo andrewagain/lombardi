@@ -6,11 +6,9 @@ import {
   GraphEdgePriority,
   GraphNode,
 } from "../../graph-types"
-import {
-  graphEdgePriorityMapAtom,
-  graphEdgesAtom,
-  graphNodesAtom,
-} from "../graph-atoms"
+import { graphEdgePriorityMapAtom } from "../graph-core-atoms"
+import { graphEdgesAtom } from "./edge-atoms"
+import { graphNodesAtom } from "./node-atoms"
 
 export interface SerializableData {
   nodes: GraphNode[]
