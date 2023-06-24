@@ -22,6 +22,7 @@ export function TreeRow({
 
   return (
     <Box
+      data-selected={node.isSelected}
       css={{
         display: "flex",
         alignItems: "center",
@@ -52,7 +53,7 @@ export function TreeRow({
             backgroundColor: "#444",
           },
         },
-        "&[aria-selected]": {
+        "&[data-selected=true]": {
           backgroundColor: "#ccc",
           [mediaDarkMode]: {
             backgroundColor: "#555",
