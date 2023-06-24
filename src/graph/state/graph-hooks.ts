@@ -2,6 +2,8 @@ import { useAtom, useSetAtom } from "jotai"
 import { useAtomCallback } from "jotai/utils"
 import { useCallback } from "react"
 
+import { setCopyWithToggledItem } from "@/util/datastructure/set.ts"
+
 import { GraphEdge, GraphNode, GraphNodeId } from "../graph-types.ts"
 import {
   calculateInsertNodePriorities,
@@ -180,18 +182,8 @@ export function useToggleNodeVisibility(nodeId: GraphNodeId) {
   const visible = !hiddenSet.has(nodeId)
 
   const toggleVisibility = useCallback(() => {
-    console.log("hidden set count:", hiddenSet.size)
-    console.log("nodeId:", nodeId)
-
-    const nextHiddenSet = new Set([...hiddenSet])
-    if (visible) {
-      nextHiddenSet.add(nodeId)
-    } else {
-      nextHiddenSet.delete(nodeId)
-    }
-    console.log("next hidden set count:", nextHiddenSet.size)
-    setHiddenSet(hiddenSet)
-  }, [hiddenSet, nodeId, setHiddenSet, visible])
+    setHiddenSet((prevSet) => setCopyWithToggledItem(prevSet, nodeId))
+  }, [setHiddenSet, nodeId])
 
   return [visible, toggleVisibility] as [boolean, () => void]
 }
