@@ -9,7 +9,7 @@ import {
 
 // TODO: 'visit children' function
 
-export const graphHiddenIndirectlyNodeIdSetAtom = atom((get) => {
+export const graphNodeHiddenIndirectlySetAtom = atom((get) => {
   const nodeMap = get(graphNodeMapAtom)
   const edgeMap = get(graphEdgeMapBySourceAtom)
   const hiddenSet = get(graphNodeHiddenSetAtom)

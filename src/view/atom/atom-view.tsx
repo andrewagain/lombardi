@@ -1,8 +1,9 @@
 import {
+  graphNodeHiddenSetAtom,
   graphNodeMapAtom,
-  graphNodeVisibilityMapAtom,
   graphVisibleNodesAtom,
 } from "@/graph/state/graph-atoms"
+import { graphNodeHiddenIndirectlySetAtom } from "@/graph/state/visibility-atoms"
 
 import { AtomList } from "./atom-list"
 
@@ -14,7 +15,8 @@ export default function AtomView() {
         values={[
           [graphNodeMapAtom],
           [graphVisibleNodesAtom],
-          [graphNodeVisibilityMapAtom],
+          [graphNodeHiddenSetAtom],
+          [graphNodeHiddenIndirectlySetAtom],
         ]}
       />
     </div>

@@ -22,7 +22,10 @@ function getDagreContractPositionMap(
 ) {
   const m = new Map<string, NodePosition>()
   nodeIds.forEach((nodeId) => {
-    m.set(nodeId, pointCopy(g.node(nodeId)))
+    const node = g.node(nodeId)
+    if (node) {
+      m.set(nodeId, pointCopy(node))
+    }
   })
   return m
 }

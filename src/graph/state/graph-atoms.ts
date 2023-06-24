@@ -66,7 +66,7 @@ export const graphNodeHiddenSetAtom = atom(new Set<GraphNodeId>())
 export const graphVisibleNodesAtom = atom(
   (get) => {
     const s = get(graphNodeHiddenSetAtom)
-    return get(graphNodesAtom).filter((n) => s.has(n.id))
+    return get(graphNodesAtom).filter((n) => !s.has(n.id))
   },
   (get, set, visibleNodes: GraphNode[]) => {
     const visibleNodesMap = listToMap(visibleNodes, (n) => n.id)
