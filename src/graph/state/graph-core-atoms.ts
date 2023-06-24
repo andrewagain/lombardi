@@ -24,4 +24,4 @@ export const graphNodePositionMapAtom = atom(
 
 export const graphNodeHiddenSetAtom = atom(new Set<GraphNodeId>())
 
-export const graphSelectedNodeIdSetAtom = atom(new Set<GraphNodeId>())
+export const graphNodeSelectedSetAtom = atom(new Set<GraphNodeId>())
