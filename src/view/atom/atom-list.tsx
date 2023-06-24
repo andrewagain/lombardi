@@ -1,6 +1,7 @@
 import { Box, Input } from "@chakra-ui/react"
 import { Atom, useAtom } from "jotai"
 import { atomFamily, atomWithStorage } from "jotai/utils"
+import { values } from "lodash-es"
 import { useCallback, useEffect, useMemo, useState } from "react"
 import { LightAsync as SyntaxHighlighter } from "react-syntax-highlighter"
 import json from "react-syntax-highlighter/dist/esm/languages/hljs/json"
@@ -8,8 +9,6 @@ import json from "react-syntax-highlighter/dist/esm/languages/hljs/json"
 import { isTruthy } from "@/util/function"
 
 import { AtomCell } from "./cell/atom-cell"
-
-const MISSING_LABEL_TEXT = "debugLabelFailure"
 
 type WindowParam = string
 
@@ -43,26 +42,25 @@ function ToggleButton({ title, param }: { title: string; param: string }) {
   )
 }
 
-export interface AtomValue {
+export interface AtomSet {
   name: string
-  atom: Atom<any>
-}
-
-function getAtomValueLabel(a: AtomValue) {
-  return `${a.name}:${a.atom.debugLabel || MISSING_LABEL_TEXT}`
+  atom: Atom<any>[]
 }
 
 export function AtomList({
-  values,
+  atomSets,
   title,
 }: {
-  values: AtomValue[]
+  atomSets: AtomSet[]
   title: string
 }) {
   const param = getStateParameter("rows", title)
   const [selectedRowTitles, setSelectedRowTitles] = useAtom(
     selectedRowsFamily(param)
   )
+
+  // TODO
+
   const valuesMap = useMemo(
     () =>
       new Map<string, AtomValue>(
