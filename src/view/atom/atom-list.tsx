@@ -5,6 +5,8 @@ import { useCallback, useEffect, useMemo, useState } from "react"
 import { LightAsync as SyntaxHighlighter } from "react-syntax-highlighter"
 import json from "react-syntax-highlighter/dist/esm/languages/hljs/json"
 
+import { isTruthy } from "@/util/function"
+
 import { AtomCell } from "./cell/atom-cell"
 
 const MISSING_LABEL_TEXT = "debugLabelFailure"
@@ -41,13 +43,20 @@ function ToggleButton({ title, param }: { title: string; param: string }) {
   )
 }
 
-export type AtomValueTuple = [Atom<any>, any?]
+export interface AtomValue {
+  name: string
+  atom: Atom<any>
+}
+
+function getAtomValueLabel(a: AtomValue) {
+  return `${a.name}:${a.atom.debugLabel || MISSING_LABEL_TEXT}`
+}
 
 export function AtomList({
   values,
   title,
 }: {
-  values: AtomValueTuple[]
+  values: AtomValue[]
   title: string
 }) {
   const param = getStateParameter("rows", title)
@@ -56,11 +65,8 @@ export function AtomList({
   )
   const valuesMap = useMemo(
     () =>
-      new Map<string, AtomValueTuple>(
-        values.map((value) => [
-          value[0].debugLabel || MISSING_LABEL_TEXT,
-          value,
-        ])
+      new Map<string, AtomValue>(
+        values.map((value) => [getAtomValueLabel(value), value])
       ),
     [values]
   )
@@ -72,16 +78,14 @@ export function AtomList({
 
   const selectedValues = useMemo(
     () =>
-      selectedRowTitles
-        .map((title) => valuesMap.get(title))
-        .filter((x) => x) as AtomValueTuple[],
+      selectedRowTitles.map((title) => valuesMap.get(title)).filter(isTruthy),
     [selectedRowTitles, valuesMap]
   )
 
   const filteredValues = useMemo(
     () =>
       values.filter((value) =>
-        value[0].debugLabel?.toLowerCase().includes(filterText.toLowerCase())
+        value.atom.debugLabel?.toLowerCase().includes(filterText.toLowerCase())
       ),
     [values, filterText]
   )
@@ -108,12 +112,11 @@ export function AtomList({
           flexDirection: "column",
         }}
       >
-        {selectedValues.map((pair) => (
+        {selectedValues.map((v) => (
           <AtomCell
-            atomConfig={pair[0]}
-            formatType={pair[1]}
-            key={pair[0].debugLabel}
-            label={pair[0].debugLabel || MISSING_LABEL_TEXT}
+            atomConfig={v.atom}
+            key={v.atom.debugLabel}
+            label={getAtomValueLabel(v)}
             onRemove={removeCell}
           />
         ))}
@@ -160,11 +163,11 @@ export function AtomList({
           },
         }}
       >
-        {filteredValues.map((pair) => (
+        {filteredValues.map((v) => (
           <ToggleButton
-            key={pair[0].debugLabel}
+            key={v.atom.debugLabel}
             param={param}
-            title={pair[0].debugLabel || MISSING_LABEL_TEXT}
+            title={getAtomValueLabel(v)}
           />
         ))}
       </Box>
