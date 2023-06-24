@@ -6,6 +6,7 @@ import FlowView from "@/view/flow/flow-view.tsx"
 
 import { PanelDivider } from "../controls/panel-divider"
 import { interfaceSidePanelsAtom, SidePanel } from "../interface-state"
+import Footer from "./footer/footer"
 import LeftPanel from "./panel/left-panel"
 import RightPanel from "./panel/right-panel"
 import Toolbar from "./toolbar/toolbar"
@@ -52,7 +53,7 @@ export default function Layout() {
         </>
       )}
 
-      <footer>Footer</footer>
+      <Footer />
       <PersistGraphEffect />
     </Box>
   )

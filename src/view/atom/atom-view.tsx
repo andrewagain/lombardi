@@ -1,3 +1,5 @@
+import { Box } from "@chakra-ui/react"
+
 import {
   graphNodeHiddenSetAtom,
   graphNodeMapAtom,
@@ -8,7 +10,7 @@ import { AtomList } from "./atom-list"
 
 export default function AtomView() {
   return (
-    <div>
+    <Box padding={3}>
       <AtomList
         title="Atoms"
         values={[
@@ -17,6 +19,6 @@ export default function AtomView() {
           [graphNodeHiddenIndirectlySetAtom],
         ]}
       />
-    </div>
+    </Box>
   )
 }
