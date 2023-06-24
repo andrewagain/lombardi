@@ -25,3 +25,5 @@ export const graphNodePositionMapAtom = atom(
 export const graphNodeHiddenSetAtom = atom(new Set<GraphNodeId>())
 
 export const graphEdgeIdsAtom = atom((get) => [...get(graphEdgeMapAtom).keys()])
+
+export const graphSelectedNodeIdSetAtom = atom(new Set<GraphNodeId>())
