@@ -11,8 +11,8 @@ import {
 import {
   graphCoreDataAtom,
   graphEdgeMapAtom,
+  graphNodeHiddenSetAtom,
   graphNodeMapAtom,
-  graphNodeVisibilityMapAtom,
 } from "./graph-atoms.ts"
 
 export function useClearGraph() {
@@ -176,15 +176,19 @@ export function useMoveNodes() {
 }
 
 export function useToggleNodeVisibility(nodeId: GraphNodeId) {
-  const [visibilityMap, setVisibilityMap] = useAtom(graphNodeVisibilityMapAtom)
-  const visible = visibilityMap.get(nodeId) ?? true
+  const [hiddenSet, setHiddenSet] = useAtom(graphNodeHiddenSetAtom)
+  const visible = !hiddenSet.has(nodeId)
 
   return [
     visible,
     useCallback(() => {
-      const nextVisibilityMap = new Map(visibilityMap)
-      nextVisibilityMap.set(nodeId, !visible)
-      setVisibilityMap(nextVisibilityMap)
-    }, [nodeId, setVisibilityMap, visibilityMap, visible]),
+      const nextHiddenSet = new Set(hiddenSet)
+      if (visible) {
+        nextHiddenSet.add(nodeId)
+      } else {
+        nextHiddenSet.delete(nodeId)
+      }
+      setHiddenSet(hiddenSet)
+    }, [hiddenSet, nodeId, setHiddenSet, visible]),
   ] as [boolean, () => void]
 }

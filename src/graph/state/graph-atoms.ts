@@ -61,19 +61,12 @@ export const graphNodePositionMapAtom = atom(
   new Map<GraphNodeId, NodePosition>()
 )
 
-export const graphNodeVisibilityMapAtom = atom(new Map<GraphNodeId, boolean>())
-
-// WIP
-// export const graphNodeIndirectVisibilityMapAtom = atom(
-//   (get) => {
-//     const nodeMap = get(graphNodeMapAtom)
-//     const edgeMap = get(graphEdgeMapAtom)
-//     const edgePriorityMap = get(graphEdgePriorityMapAtom)
+export const graphNodeHiddenSetAtom = atom(new Set<GraphNodeId>())
 
 export const graphVisibleNodesAtom = atom(
   (get) => {
-    const m = get(graphNodeVisibilityMapAtom)
-    return get(graphNodesAtom).filter((n) => m.get(n.id) !== false)
+    const s = get(graphNodeHiddenSetAtom)
+    return get(graphNodesAtom).filter((n) => s.has(n.id))
   },
   (get, set, visibleNodes: GraphNode[]) => {
     const visibleNodesMap = listToMap(visibleNodes, (n) => n.id)
