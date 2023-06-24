@@ -104,7 +104,6 @@ export function PanelDivider({
         transition: "background-color 200ms, border-color 200ms",
         ":hover": {
           backgroundColor: hoverColor,
-          borderRight: `2px solid ${hoverColor}`,
         },
       }}
       ref={dividerElementRef}
