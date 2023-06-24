@@ -8,6 +8,7 @@ import {
   graphEdgeMapByTargetAtom,
   graphEdgePriorityMapAtom,
   graphNodeMapAtom,
+  graphNodeVisibilityMapAtom,
 } from "./graph-atoms.ts"
 
 export interface GraphTreeNode extends GraphNode {
@@ -32,6 +33,7 @@ export const graphTreeRootNodesAtom = atom<GraphTreeNode[]>((get) => {
   const nodeMap = get(graphNodeMapAtom)
   const edgePriorityMap = get(graphEdgePriorityMapAtom)
   const outgoingEdgeMap = get(graphEdgeMapBySourceAtom)
+  const visibilityMap = get(graphNodeVisibilityMapAtom)
 
   // Create copies of all the root nodes
   const rootTreeNodes = rootNodes.map((x) => ({ ...x }))
@@ -56,7 +58,9 @@ export const graphTreeRootNodesAtom = atom<GraphTreeNode[]>((get) => {
     })
 
     if (destinationNodes.length > 0) {
-      node.children = destinationNodes.map((x) => ({ ...x }))
+      node.children = destinationNodes
+        .filter((n) => visibilityMap.get(n.id) !== false)
+        .map((x) => ({ ...x }))
       nodeStack = [...nodeStack, ...node.children]
     }
   }
