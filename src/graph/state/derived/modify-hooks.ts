@@ -4,14 +4,17 @@ import { useCallback } from "react"
 
 import { setCopyWithToggledItem } from "@/util/datastructure/set.ts"
 
-import { GraphEdge, GraphNode, GraphNodeId } from "../graph-types.ts"
-import { calculateInsertNodePriorities, graphSortEdges } from "../graph-util.ts"
+import { GraphEdge, GraphNode, GraphNodeId } from "../../graph-types.ts"
+import {
+  calculateInsertNodePriorities,
+  graphSortEdges,
+} from "../../graph-util.ts"
 import {
   graphEdgeMapAtom,
   graphEdgePriorityMapAtom,
   graphNodeHiddenSetAtom,
   graphNodeMapAtom,
-} from "./graph-atoms.ts"
+} from "../graph-atoms.ts"
 
 export function useClearGraph() {
   const setNodeMap = useSetAtom(graphNodeMapAtom)

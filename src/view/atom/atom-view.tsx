@@ -4,7 +4,7 @@ import {
   graphNodeHiddenSetAtom,
   graphNodeMapAtom,
 } from "@/graph/state/graph-atoms"
-import { graphNodeHiddenIndirectlySetAtom } from "@/graph/state/visibility-atoms"
+import { graphNodeHiddenIndirectlySetAtom } from "@/graph/state/derived/visibility-atoms"
 
 import { AtomList } from "./atom-list"
 

@@ -1,7 +1,7 @@
 import { Box } from "@chakra-ui/react"
 import { useAtomValue } from "jotai"
 
-import { PersistGraphEffect } from "@/graph/graph-persist.tsx"
+import { PersistGraphEffect } from "@/graph/state/effect/graph-persist"
 import FlowView from "@/view/flow/flow-view.tsx"
 
 import { PanelDivider } from "../controls/panel-divider"

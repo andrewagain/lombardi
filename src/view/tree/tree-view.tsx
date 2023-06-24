@@ -16,8 +16,8 @@ import {
   useDeleteNodes,
   useMoveNodes,
   useRenameNode,
-} from "@/graph/state/graph-hooks.ts"
-import { graphTreeRootNodesAtom } from "@/graph/state/tree-atoms.ts"
+} from "@/graph/state/derived/modify-hooks.ts"
+import { graphTreeRootNodesAtom } from "@/graph/state/derived/tree-atoms.ts"
 import ElementBoundsEffect from "@/util/component/bounds-effect.tsx"
 
 import { TreeRow } from "./row/tree-row.tsx"

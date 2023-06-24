@@ -5,12 +5,12 @@ import {
   GraphEdgeId,
   GraphEdgePriority,
   GraphNode,
-} from "./graph-types"
+} from "../../graph-types"
 import {
   graphEdgePriorityMapAtom,
   graphEdgesAtom,
   graphNodesAtom,
-} from "./state/graph-atoms"
+} from "../graph-atoms"
 
 export interface SerializableData {
   nodes: GraphNode[]

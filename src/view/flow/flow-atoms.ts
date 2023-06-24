@@ -9,7 +9,7 @@ import {
   graphNodePositionMapAtom,
   graphNodesAtom,
 } from "@/graph/state/graph-atoms"
-import { graphNodeHiddenIndirectlySetAtom } from "@/graph/state/visibility-atoms"
+import { graphNodeHiddenIndirectlySetAtom } from "@/graph/state/derived/visibility-atoms"
 import { listToMap } from "@/util/datastructure/map"
 import { isZeroPoint } from "@/util/geometry/point"
 

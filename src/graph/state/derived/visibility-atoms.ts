@@ -1,11 +1,11 @@
 import { atom } from "jotai"
 
-import { GraphNodeId } from "../graph-types"
+import { GraphNodeId } from "../../graph-types"
 import {
   graphEdgeMapBySourceAtom,
   graphNodeHiddenSetAtom,
   graphNodeMapAtom,
-} from "./graph-atoms"
+} from "../graph-atoms"
 
 // TODO: 'visit children' function
 

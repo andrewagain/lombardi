@@ -5,8 +5,8 @@ import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai"
 
 import { mediaDarkMode } from "@/app/theme/theme"
 import { GraphNode } from "@/graph/graph-types.ts"
-import { useToggleNodeVisibility } from "@/graph/state/graph-hooks"
-import { graphNodeHiddenIndirectlySetAtom } from "@/graph/state/visibility-atoms"
+import { useToggleNodeVisibility } from "@/graph/state/derived/modify-hooks"
+import { graphNodeHiddenIndirectlySetAtom } from "@/graph/state/derived/visibility-atoms"
 
 import FolderArrow from "./folder-arrow"
 import TreeInput from "./tree-input"

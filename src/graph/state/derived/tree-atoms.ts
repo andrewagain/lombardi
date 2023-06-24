@@ -8,7 +8,7 @@ import {
   graphEdgeMapByTargetAtom,
   graphEdgePriorityMapAtom,
   graphNodeMapAtom,
-} from "./graph-atoms.ts"
+} from "../graph-atoms.ts"
 
 export interface GraphTreeNode extends GraphNode {
   children?: GraphTreeNode[]
