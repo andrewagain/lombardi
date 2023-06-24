@@ -1,7 +1,6 @@
 import { Box } from "@chakra-ui/react"
 import { NodeRendererProps } from "react-arborist"
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai"
-import { BsTree } from "react-icons/bs"
 
 import { mediaDarkMode } from "@/app/theme/theme"
 import { GraphNode } from "@/graph/graph-types.ts"
@@ -56,16 +55,20 @@ export function TreeRow({
         css={{
           flex: "1 1 auto",
           display: "flex",
+          overflow: "hidden",
         }}
         onClick={() => node.isInternal && node.toggle()}
       >
         <FolderArrow node={node} />
-        <span>
-          <BsTree />
-        </span>
-        <span>
+        <Box
+          minWidth={1}
+          css={{
+            textOverflow: "ellipsis",
+            overflow: "hidden",
+          }}
+        >
           {node.isEditing ? <TreeInput node={node} /> : node.data.name}
-        </span>
+        </Box>
       </Box>
       <Box
         css={{
