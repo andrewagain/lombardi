@@ -18,7 +18,6 @@ import {
   useMoveNodes,
   useRenameNode,
 } from "@/graph/state/derived/modify-hooks.ts"
-import { graphNodeFirstSelectedIdAtom } from "@/graph/state/derived/node-atoms.ts"
 import { graphTreeRootNodesAtom } from "@/graph/state/derived/tree-atoms.ts"
 import { graphNodeSelectedIdsAtom } from "@/graph/state/graph-core-atoms.ts"
 import ElementBoundsEffect from "@/util/component/bounds-effect.tsx"

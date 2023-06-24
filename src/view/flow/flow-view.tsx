@@ -11,8 +11,11 @@ import {
   Controls,
   MiniMap,
   NodeChange,
+  OnSelectionChangeFunc,
   ReactFlow,
 } from "reactflow"
+
+import { graphNodeSelectedIdsAtom } from "@/graph/state/graph-core-atoms"
 
 import { flowEdgesAtom, flowNodesAtom } from "./flow-atoms"
 import RepositionPanel from "./reposition-panel"
@@ -20,6 +23,7 @@ import RepositionPanel from "./reposition-panel"
 export default function FlowView() {
   const [nodes, setNodes] = useAtom(flowNodesAtom)
   const edges = useAtomValue(flowEdgesAtom)
+  const [selectedIds, setSelectedIds] = useAtom(graphNodeSelectedIdsAtom)
 
   const onNodesChange = useCallback(
     (changes: NodeChange[]) => {
@@ -28,8 +32,22 @@ export default function FlowView() {
     [nodes, setNodes]
   )
 
+  const onSelectionChange: OnSelectionChangeFunc = useCallback(
+    (selection) => {
+      console.log("selection", selection)
+      setSelectedIds(selection.nodes.map((node) => node.id))
+    },
+    [setSelectedIds]
+  )
+
   return (
-    <ReactFlow nodes={nodes} edges={edges} onNodesChange={onNodesChange}>
+    <ReactFlow
+      nodes={nodes}
+      edges={edges}
+      onNodesChange={onNodesChange}
+      multiSelectionKeyCode={selectedIds}
+      onSelectionChange={onSelectionChange}
+    >
       <RepositionPanel />
       <Controls />
       <MiniMap
