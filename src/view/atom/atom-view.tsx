@@ -7,16 +7,13 @@ import * as treeAtoms from "@/graph/state/derived/tree-atoms"
 import * as visibilityAtoms from "@/graph/state/derived/visibility-atoms"
 import * as graphCoreAtoms from "@/graph/state/graph-core-atoms"
 
-import { AtomList, AtomValue } from "./atom-list"
+import { AtomList, AtomSet } from "./atom-list"
 
-function getImportAtomValues(
-  importName: string,
-  importObject: object
-): AtomValue[] {
-  return Object.values(importObject).map((atom) => ({
-    atom,
+function getImportAtomSet(importName: string, importObject: object): AtomSet {
+  return {
     name: importName,
-  }))
+    atoms: Object.values(importObject),
+  }
 }
 
 export default function AtomView() {
@@ -24,13 +21,13 @@ export default function AtomView() {
     <Box padding={3}>
       <AtomList
         title="Atoms"
-        values={[
-          ...getImportAtomValues("core", graphCoreAtoms),
-          ...getImportAtomValues("node", nodeAtoms),
-          ...getImportAtomValues("edge", edgeAtoms),
-          ...getImportAtomValues("serial", serialAtoms),
-          ...getImportAtomValues("tree", treeAtoms),
-          ...getImportAtomValues("visibility", visibilityAtoms),
+        atomSets={[
+          getImportAtomSet("core", graphCoreAtoms),
+          getImportAtomSet("node", nodeAtoms),
+          getImportAtomSet("edge", edgeAtoms),
+          getImportAtomSet("serial", serialAtoms),
+          getImportAtomSet("tree", treeAtoms),
+          getImportAtomSet("visibility", visibilityAtoms),
         ]}
       />
     </Box>

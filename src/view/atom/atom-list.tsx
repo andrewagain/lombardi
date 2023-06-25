@@ -1,7 +1,6 @@
-import { Box, Input } from "@chakra-ui/react"
+import { Box, Heading, Input } from "@chakra-ui/react"
 import { Atom, useAtom } from "jotai"
 import { atomFamily, atomWithStorage } from "jotai/utils"
-import { values } from "lodash-es"
 import { useCallback, useEffect, useMemo, useState } from "react"
 import { LightAsync as SyntaxHighlighter } from "react-syntax-highlighter"
 import json from "react-syntax-highlighter/dist/esm/languages/hljs/json"
@@ -16,24 +15,24 @@ function getStateParameter(type: "open" | "rows", title: string) {
   return `nuons.${title.replace(/\s/g, "")}.${type}`
 }
 
-const selectedRowsFamily = atomFamily((param: WindowParam) =>
+const selectedKeysFamily = atomFamily((param: WindowParam) =>
   atomWithStorage<string[]>(param, [])
 )
 
 function ToggleButton({ title, param }: { title: string; param: string }) {
-  const [selectedRowTitles, setSelectedRowTitles] = useAtom(
-    selectedRowsFamily(param)
+  const [selectedKeys, setSelectedRowTitles] = useAtom(
+    selectedKeysFamily(param)
   )
 
-  const isSelected = selectedRowTitles.includes(title)
+  const isSelected = selectedKeys.includes(title)
 
   const toggle = useCallback(() => {
-    if (selectedRowTitles.includes(title)) {
-      setSelectedRowTitles(selectedRowTitles.filter((x) => x !== title))
+    if (selectedKeys.includes(title)) {
+      setSelectedRowTitles(selectedKeys.filter((x) => x !== title))
     } else {
-      setSelectedRowTitles([...selectedRowTitles, title])
+      setSelectedRowTitles([...selectedKeys, title])
     }
-  }, [selectedRowTitles, setSelectedRowTitles, title])
+  }, [selectedKeys, setSelectedRowTitles, title])
 
   return (
     <button data-selected={isSelected ? true : undefined} onClick={toggle}>
@@ -44,7 +43,35 @@ function ToggleButton({ title, param }: { title: string; param: string }) {
 
 export interface AtomSet {
   name: string
-  atom: Atom<any>[]
+  atoms: Atom<any>[]
+}
+
+function getSetCategorizedAtoms(s: AtomSet): CategorizedAtom[] {
+  return s.atoms.map((a) => ({
+    categoryName: s.name,
+    atom: a,
+  }))
+}
+
+interface CategorizedAtom {
+  categoryName: string
+  atom: Atom<any>
+}
+
+function getCategorizedAtomKey(a: CategorizedAtom) {
+  return `${a.categoryName}.${a.atom.debugLabel}`
+}
+
+function getCategorizedAtomMap(
+  atomSets: AtomSet[]
+): Map<string, CategorizedAtom> {
+  const map = new Map<string, CategorizedAtom>()
+  atomSets.forEach((set) => {
+    getSetCategorizedAtoms(set).forEach((ca) => {
+      map.set(getCategorizedAtomKey(ca), ca)
+    })
+  })
+  return map
 }
 
 export function AtomList({
@@ -55,45 +82,41 @@ export function AtomList({
   title: string
 }) {
   const param = getStateParameter("rows", title)
-  const [selectedRowTitles, setSelectedRowTitles] = useAtom(
-    selectedRowsFamily(param)
-  )
-
-  // TODO
-
-  const valuesMap = useMemo(
-    () =>
-      new Map<string, AtomValue>(
-        values.map((value) => [getAtomValueLabel(value), value])
-      ),
-    [values]
-  )
+  const [selectedKeys, setSelectedKeys] = useAtom(selectedKeysFamily(param))
   const [filterText, setFilterText] = useState("")
+  const categorizedAtomMap = useMemo(
+    () => getCategorizedAtomMap(atomSets),
+    [atomSets]
+  )
+
+  const selectedAtoms: CategorizedAtom[] = useMemo(
+    () =>
+      selectedKeys.map((key) => categorizedAtomMap.get(key)).filter(isTruthy),
+    [selectedKeys, categorizedAtomMap]
+  )
+
+  const filteredSets: AtomSet[] = useMemo(() => {
+    if (!filterText) {
+      return atomSets
+    }
+    return atomSets.map((set) => ({
+      ...set,
+      atoms: set.atoms.filter((atom) =>
+        atom.debugLabel?.toLowerCase().includes(filterText.toLowerCase())
+      ),
+    }))
+  }, [atomSets, filterText])
+
+  const removeCell = useCallback(
+    (label: string) => {
+      setSelectedKeys((prev) => prev.filter((x) => x !== label))
+    },
+    [setSelectedKeys]
+  )
 
   useEffect(() => {
     SyntaxHighlighter.registerLanguage("json", json)
   }, [])
-
-  const selectedValues = useMemo(
-    () =>
-      selectedRowTitles.map((title) => valuesMap.get(title)).filter(isTruthy),
-    [selectedRowTitles, valuesMap]
-  )
-
-  const filteredValues = useMemo(
-    () =>
-      values.filter((value) =>
-        value.atom.debugLabel?.toLowerCase().includes(filterText.toLowerCase())
-      ),
-    [values, filterText]
-  )
-
-  const removeCell = useCallback(
-    (label: string) => {
-      setSelectedRowTitles((prev) => prev.filter((x) => x !== label))
-    },
-    [setSelectedRowTitles]
-  )
 
   return (
     <Box
@@ -110,13 +133,20 @@ export function AtomList({
           flexDirection: "column",
         }}
       >
-        {selectedValues.map((v) => (
-          <AtomCell
-            atomConfig={v.atom}
-            key={v.atom.debugLabel}
-            label={getAtomValueLabel(v)}
-            onRemove={removeCell}
-          />
+        {filteredSets.map((set) => (
+          <Box>
+            <Heading size="sm">{set.name}</Heading>
+            <Box>
+              {getSetCategorizedAtoms(set).map((ca) => (
+                <AtomCell
+                  atomConfig={ca.atom}
+                  key={getCategorizedAtomKey(ca)}
+                  label={ca.atom.debugLabel || ""}
+                  onRemove={removeCell}
+                />
+              ))}
+            </Box>
+          </Box>
         ))}
       </Box>
       <Box
@@ -161,11 +191,11 @@ export function AtomList({
           },
         }}
       >
-        {filteredValues.map((v) => (
+        {selectedAtoms.map((ca) => (
           <ToggleButton
-            key={v.atom.debugLabel}
+            key={getCategorizedAtomKey(ca)}
             param={param}
-            title={getAtomValueLabel(v)}
+            title={ca.atom.debugLabel || ""}
           />
         ))}
       </Box>
