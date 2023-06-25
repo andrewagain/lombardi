@@ -45,17 +45,11 @@ export default function AtomView() {
       width="100%"
       minWidth={1}
     >
-      <Box
-        gridArea="t"
-        css={{ height: 200 }}
-        padding={2}
-        minWidth={1}
-        overflowY="scroll"
-      >
+      <Box gridArea="t" css={{ height: 200 }} padding={2} minWidth={1}>
         <AtomCellList atomSets={getAllImportSets()} />
       </Box>
       <PanelDivider orientation="bottom" gridArea="d" />
-      <Box gridArea="b" display="flex" flexDirection="column">
+      <Box gridArea="b" display="flex" flexDirection="column" overflow="hidden">
         <AtomChecklist atomSets={getAllImportSets()} />
       </Box>
     </Box>

@@ -5,8 +5,9 @@ import AtomView from "@/view/atom/atom-view"
 export default function RightPanel() {
   return (
     <Box
+      gridArea="r-panel"
+      minHeight={1}
       css={{
-        gridArea: "r-panel",
         width: "200px",
       }}
     >
