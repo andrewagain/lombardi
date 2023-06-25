@@ -55,7 +55,7 @@ export default function AtomView() {
         <AtomCellList atomSets={getAllImportSets()} />
       </Box>
       <PanelDivider orientation="bottom" gridArea="d" />
-      <Box gridArea="b">
+      <Box gridArea="b" display="flex" flexDirection="column">
         <AtomChecklist atomSets={getAllImportSets()} />
       </Box>
     </Box>

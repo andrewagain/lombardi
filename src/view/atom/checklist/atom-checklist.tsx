@@ -1,4 +1,5 @@
 import { Box, Heading, Input } from "@chakra-ui/react"
+import { set } from "date-fns"
 import { useMemo, useState } from "react"
 
 import colors from "@/app/theme/colors"
@@ -31,7 +32,13 @@ export default function AtomChecklist({ atomSets }: { atomSets: AtomSet[] }) {
   }, [atomSets, filterText])
 
   return (
-    <Box display="flex" flexDirection="column">
+    <Box
+      display="flex"
+      flexDirection="column"
+      flex="1 1 auto"
+      overflowY="scroll"
+      overflowX="hidden"
+    >
       <Box
         flex="0 1 auto"
         padding={2}
@@ -48,23 +55,25 @@ export default function AtomChecklist({ atomSets }: { atomSets: AtomSet[] }) {
       </Box>
 
       <Box flex="1 1 auto" position="relative">
-        <Box position="absolute" top={0} left={0} right={0} bottom={0}>
-          <Box position="relative" overflowY="scroll">
-            {filteredSets.map((set) => (
-              <Box key={set.name} padding={2}>
-                <Heading size="sm" paddingTop={2}>
-                  {set.name}
-                </Heading>
-                <Box>
-                  {getSetCategorizedAtoms(set).map((ca) => (
-                    <AtomCheckbox
-                      categorizedAtom={ca}
-                      key={getCategorizedAtomKey(ca)}
-                    />
-                  ))}
+        <Box position="absolute" top={0} left={0} width="100%" height="100%">
+          <Box position="relative">
+            <Box position="relative" overflowY="scroll" height="100%">
+              {filteredSets.map((set) => (
+                <Box key={set.name} padding={2}>
+                  <Heading size="sm" paddingTop={2}>
+                    {set.name}
+                  </Heading>
+                  <Box>
+                    {getSetCategorizedAtoms(set).map((ca) => (
+                      <AtomCheckbox
+                        categorizedAtom={ca}
+                        key={getCategorizedAtomKey(ca)}
+                      />
+                    ))}
+                  </Box>
                 </Box>
-              </Box>
-            ))}
+              ))}
+            </Box>
           </Box>
         </Box>
       </Box>
