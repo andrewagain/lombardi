@@ -91,6 +91,7 @@ export default function TreeView() {
         renderCursor={TreeCursor}
         width={bounds?.width}
         height={bounds?.height}
+        selection={selectedIds[0]}
       >
         {TreeRow}
       </Tree>
