@@ -7,7 +7,7 @@ import { toggleArrayInclusion } from "@/util/datastructure/array"
 import { selectedAtomKeysAtom } from "../atom-atoms"
 import { CategorizedAtom, getCategorizedAtomKey } from "../atom-util"
 
-export default function AtomToggleButton({
+export default function AtomCheckbox({
   categorizedAtom,
 }: {
   categorizedAtom: CategorizedAtom

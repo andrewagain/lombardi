@@ -22,5 +22,6 @@
   "javascript.preferences.importModuleSpecifier": "shortest",
   "typescript.preferences.importModuleSpecifier": "shortest",
   "editor.autoClosingBrackets": "never",
-  "editor.autoClosingQuotes": "never"
+  "editor.autoClosingQuotes": "never",
+  "typescript.preferences.autoImportFileExcludePatterns": ["framer-motion"]
 }

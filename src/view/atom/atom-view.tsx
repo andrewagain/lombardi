@@ -6,9 +6,11 @@ import * as serialAtoms from "@/graph/state/derived/serializable-atoms"
 import * as treeAtoms from "@/graph/state/derived/tree-atoms"
 import * as visibilityAtoms from "@/graph/state/derived/visibility-atoms"
 import * as graphCoreAtoms from "@/graph/state/graph-core-atoms"
+import { PanelDivider } from "@/interface/controls/panel-divider"
 
 import { AtomSet } from "./atom-util"
-import { AtomList } from "./list/atom-list"
+import { AtomCellList } from "./cell/atom-cell-list"
+import AtomChecklist from "./checklist/atom-checklist"
 
 function getImportAtomSet(importName: string, importObject: object): AtomSet {
   return {
@@ -17,19 +19,38 @@ function getImportAtomSet(importName: string, importObject: object): AtomSet {
   }
 }
 
+let _cachedImportSets: AtomSet[] | null = null
+function getAllImportSets(): AtomSet[] {
+  if (_cachedImportSets) {
+    return _cachedImportSets
+  }
+  _cachedImportSets = [
+    getImportAtomSet("core", graphCoreAtoms),
+    getImportAtomSet("node", nodeAtoms),
+    getImportAtomSet("edge", edgeAtoms),
+    getImportAtomSet("serial", serialAtoms),
+    getImportAtomSet("tree", treeAtoms),
+    getImportAtomSet("visibility", visibilityAtoms),
+  ]
+  return _cachedImportSets
+}
+
 export default function AtomView() {
   return (
-    <Box padding={3}>
-      <AtomList
-        atomSets={[
-          getImportAtomSet("core", graphCoreAtoms),
-          getImportAtomSet("node", nodeAtoms),
-          getImportAtomSet("edge", edgeAtoms),
-          getImportAtomSet("serial", serialAtoms),
-          getImportAtomSet("tree", treeAtoms),
-          getImportAtomSet("visibility", visibilityAtoms),
-        ]}
-      />
+    <Box
+      display="grid"
+      gridTemplateAreas={`"t" "d" "b"`}
+      gridTemplateColumns="auto auto 1fr"
+      height="100%"
+      overflow="hidden"
+    >
+      <Box gridArea="t" css={{ height: 200 }}>
+        <AtomCellList atomSets={getAllImportSets()} />
+      </Box>
+      <PanelDivider orientation="bottom" gridArea="d" />
+      <Box gridArea="b">
+        <AtomChecklist atomSets={getAllImportSets()} />
+      </Box>
     </Box>
   )
 }
