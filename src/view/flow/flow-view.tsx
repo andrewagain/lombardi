@@ -34,7 +34,7 @@ export default function FlowView() {
 
   const onSelectionChange: OnSelectionChangeFunc = useCallback(
     (selection) => {
-      console.log("selection", selection)
+      console.log("FLOW selection", selection)
       setSelectedIds(selection.nodes.map((node) => node.id))
     },
     [setSelectedIds]

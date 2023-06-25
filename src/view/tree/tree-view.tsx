@@ -66,7 +66,10 @@ export default function TreeView() {
   }
 
   const onSelect: (nodes: NodeApi<GraphNode>[]) => void = (nodes) => {
-    console.log("onSelect", nodes)
+    console.log(
+      "onSelect",
+      nodes.map((node) => node.data.id)
+    )
     setSelectedIds(nodes.map((node) => node.data.id))
   }
 
