@@ -2,6 +2,7 @@ import { atom } from "jotai"
 
 import { GraphNode } from "@/graph/graph-types.ts"
 import { graphSortEdges } from "@/graph/graph-util.ts"
+import { isTruthy } from "@/util/function.ts"
 
 import {
   graphEdgePriorityMapAtom,
@@ -49,13 +50,9 @@ export const graphTreeRootNodesAtom = atom<GraphTreeNode[]>((get) => {
       edgePriorityMap
     )
 
-    const destinationNodes = outgoingEdges.map((edge) => {
-      const targetNode = nodeMap.get(edge.target)
-      if (!targetNode) {
-        throw new Error(`Could not find node with id ${edge.target}`)
-      }
-      return targetNode
-    })
+    const destinationNodes = outgoingEdges
+      .map((edge) => nodeMap.get(edge.target))
+      .filter(isTruthy)
 
     if (destinationNodes.length > 0) {
       node.children = destinationNodes.map((x) => ({ ...x }))
