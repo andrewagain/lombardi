@@ -20,19 +20,17 @@ const selectedKeysFamily = atomFamily((param: WindowParam) =>
 )
 
 function ToggleButton({ title, param }: { title: string; param: string }) {
-  const [selectedKeys, setSelectedRowTitles] = useAtom(
-    selectedKeysFamily(param)
-  )
+  const [selectedKeys, setSelectedKeys] = useAtom(selectedKeysFamily(param))
 
   const isSelected = selectedKeys.includes(title)
 
   const toggle = useCallback(() => {
     if (selectedKeys.includes(title)) {
-      setSelectedRowTitles(selectedKeys.filter((x) => x !== title))
+      setSelectedKeys(selectedKeys.filter((x) => x !== title))
     } else {
-      setSelectedRowTitles([...selectedKeys, title])
+      setSelectedKeys([...selectedKeys, title])
     }
-  }, [selectedKeys, setSelectedRowTitles, title])
+  }, [selectedKeys, setSelectedKeys, title])
 
   return (
     <button data-selected={isSelected ? true : undefined} onClick={toggle}>
