@@ -1,6 +1,6 @@
 import { Box } from "@chakra-ui/react"
 import { useAtom, useAtomValue } from "jotai"
-import { useState } from "react"
+import { useCallback, useState } from "react"
 import {
   CreateHandler,
   DeleteHandler,
@@ -39,39 +39,54 @@ export default function TreeView() {
   const renameNode = useRenameNode()
   const moveNodes = useMoveNodes()
 
-  const onCreate: CreateHandler<GraphNode> = ({ parentId, index, type }) => {
-    console.log("onCreate", parentId, index, type)
-    const id = `node-${Date.now()}`
-    const node: GraphNode = { id, name: "" }
-    addNode(node)
-    if (parentId) {
-      addEdge({ id: `edge-${Date.now()}`, source: parentId, target: id })
-    }
-    return node
-  }
+  const onCreate: CreateHandler<GraphNode> = useCallback(
+    ({ parentId, index, type }) => {
+      console.log("onCreate", parentId, index, type)
+      const id = `node-${Date.now()}`
+      const node: GraphNode = { id, name: "" }
+      addNode(node)
+      if (parentId) {
+        addEdge({ id: `edge-${Date.now()}`, source: parentId, target: id })
+      }
+      return node
+    },
+    [addEdge, addNode]
+  )
 
-  const onRename: RenameHandler<GraphNode> = ({ id, name }) => {
-    console.log("onRename", id, name)
-    renameNode(id, name)
-  }
+  const onRename: RenameHandler<GraphNode> = useCallback(
+    ({ id, name }) => {
+      console.log("onRename", id, name)
+      renameNode(id, name)
+    },
+    [renameNode]
+  )
 
-  const onMove: MoveHandler<GraphNode> = ({ dragIds, parentId, index }) => {
-    console.log("onMove", dragIds, parentId, index)
-    moveNodes({ nodeIds: dragIds, parentId, insertIndex: index })
-  }
+  const onMove: MoveHandler<GraphNode> = useCallback(
+    ({ dragIds, parentId, index }) => {
+      console.log("onMove", dragIds, parentId, index)
+      moveNodes({ nodeIds: dragIds, parentId, insertIndex: index })
+    },
+    [moveNodes]
+  )
 
-  const onDelete: DeleteHandler<GraphNode> = ({ ids }) => {
-    console.log("onDelete", ids)
-    deleteNodes(ids)
-  }
+  const onDelete: DeleteHandler<GraphNode> = useCallback(
+    ({ ids }) => {
+      console.log("onDelete", ids)
+      deleteNodes(ids)
+    },
+    [deleteNodes]
+  )
 
-  const onSelect: (nodes: NodeApi<GraphNode>[]) => void = (nodes) => {
-    console.log(
-      "onSelect",
-      nodes.map((node) => node.data.id)
-    )
-    setSelectedIds(nodes.map((node) => node.data.id))
-  }
+  const onSelect: (nodes: NodeApi<GraphNode>[]) => void = useCallback(
+    (nodes) => {
+      console.log(
+        "onSelect",
+        nodes.map((node) => node.data.id)
+      )
+      setSelectedIds(nodes.map((node) => node.data.id))
+    },
+    [setSelectedIds]
+  )
 
   return (
     <Box
