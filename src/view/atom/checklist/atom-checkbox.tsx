@@ -23,7 +23,12 @@ export default function AtomCheckbox({
 
   return (
     <Box>
-      <Checkbox isChecked={isSelected} onChange={toggle}>
+      <Checkbox
+        isChecked={isSelected}
+        onChange={toggle}
+        textOverflow="ellipsis"
+        overflow="hidden"
+      >
         {title}
       </Checkbox>
     </Box>

@@ -47,22 +47,26 @@ export default function AtomChecklist({ atomSets }: { atomSets: AtomSet[] }) {
         />
       </Box>
 
-      <Box flex="1 1 auto" padding={2} overflowY="scroll">
-        {filteredSets.map((set) => (
-          <Box key={set.name}>
-            <Heading size="sm" paddingTop={2}>
-              {set.name}
-            </Heading>
-            <Box minWidth={1} textOverflow="ellipsis" overflow="hidden">
-              {getSetCategorizedAtoms(set).map((ca) => (
-                <AtomCheckbox
-                  categorizedAtom={ca}
-                  key={getCategorizedAtomKey(ca)}
-                />
-              ))}
-            </Box>
+      <Box flex="1 1 auto" position="relative">
+        <Box position="absolute" top={0} left={0} right={0} bottom={0}>
+          <Box position="relative" overflowY="scroll">
+            {filteredSets.map((set) => (
+              <Box key={set.name} padding={2}>
+                <Heading size="sm" paddingTop={2}>
+                  {set.name}
+                </Heading>
+                <Box>
+                  {getSetCategorizedAtoms(set).map((ca) => (
+                    <AtomCheckbox
+                      categorizedAtom={ca}
+                      key={getCategorizedAtomKey(ca)}
+                    />
+                  ))}
+                </Box>
+              </Box>
+            ))}
           </Box>
-        ))}
+        </Box>
       </Box>
     </Box>
   )
