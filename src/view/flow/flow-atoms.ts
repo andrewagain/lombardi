@@ -6,7 +6,10 @@ import { GraphEdge, GraphNode } from "@/graph/graph-types"
 import { graphEdgesAtom } from "@/graph/state/derived/edge-atoms"
 import { graphNodeSelectedIdMapAtom } from "@/graph/state/derived/selection-atoms"
 import { graphVisibleNodesAtom } from "@/graph/state/derived/visibility-atoms"
-import { graphNodePositionMapAtom } from "@/graph/state/graph-core-atoms"
+import {
+  graphNodePositionMapAtom,
+  graphNodeSelectedIdsAtom,
+} from "@/graph/state/graph-core-atoms"
 import { isZeroPoint } from "@/util/geometry/point"
 
 export type FlowNode = Node<GraphNode>
@@ -49,6 +52,9 @@ export const flowNodesAtom = atom(
       }
     })
     set(graphNodePositionMapAtom, positionMap)
+
+    const selectedIds = flowNodes.filter((n) => n.selected).map((n) => n.id)
+    set(graphNodeSelectedIdsAtom, selectedIds)
   }
 )
 
