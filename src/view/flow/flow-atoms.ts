@@ -4,6 +4,7 @@ import { Edge, Node } from "reactflow"
 
 import { GraphEdge, GraphNode } from "@/graph/graph-types"
 import { graphEdgesAtom } from "@/graph/state/derived/edge-atoms"
+import { graphNodeSelectedIdMapAtom } from "@/graph/state/derived/selection-atoms"
 import { graphVisibleNodesAtom } from "@/graph/state/derived/visibility-atoms"
 import { graphNodePositionMapAtom } from "@/graph/state/graph-core-atoms"
 import { isZeroPoint } from "@/util/geometry/point"
@@ -15,11 +16,13 @@ export const flowNodesAtom = atom(
   (get) => {
     const nodes = get(graphVisibleNodesAtom)
     const positions = get(graphNodePositionMapAtom)
+    const selectedMap = get(graphNodeSelectedIdMapAtom)
     const flowNodes: FlowNode[] = nodes.map((node) => {
       return {
         id: node.id,
         position: positions.get(node.id) ?? { x: 0, y: 0 },
         type: "standard",
+        selected: selectedMap.has(node.id),
         data: {
           ...node,
           label: node.name,

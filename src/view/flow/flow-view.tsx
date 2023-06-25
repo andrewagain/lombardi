@@ -3,7 +3,7 @@
 import "reactflow/dist/style.css"
 
 import { useAtom, useAtomValue } from "jotai"
-import { useCallback } from "react"
+import React, { useCallback, useRef } from "react"
 import {
   applyNodeChanges,
   Background,
@@ -13,6 +13,7 @@ import {
   NodeChange,
   OnSelectionChangeFunc,
   ReactFlow,
+  ReactFlowInstance,
 } from "reactflow"
 
 import { graphNodeSelectedIdsAtom } from "@/graph/state/graph-core-atoms"
@@ -25,6 +26,7 @@ export default function FlowView() {
   const [nodes, setNodes] = useAtom(flowNodesAtom)
   const edges = useAtomValue(flowEdgesAtom)
   const [selectedIds, setSelectedIds] = useAtom(graphNodeSelectedIdsAtom)
+  const flowRef = useRef<ReactFlowInstance>()
 
   const onNodesChange = useCallback(
     (changes: NodeChange[]) => {
@@ -48,6 +50,9 @@ export default function FlowView() {
       onNodesChange={onNodesChange}
       onSelectionChange={onSelectionChange}
       nodeTypes={nodeTypes}
+      onInit={(instance) => {
+        flowRef.current = instance
+      }}
     >
       <RepositionPanel />
       <Controls />
