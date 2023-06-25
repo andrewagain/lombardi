@@ -15,12 +15,12 @@ export default function AtomToggleButton({
   const isSelected = selectedKeys.includes(key)
 
   const toggle = useCallback(() => {
-    if (selectedKeys.includes(title)) {
-      setSelectedKeys(selectedKeys.filter((x) => x !== title))
+    if (selectedKeys.includes(key)) {
+      setSelectedKeys(selectedKeys.filter((x) => x !== key))
     } else {
-      setSelectedKeys([...selectedKeys, title])
+      setSelectedKeys([...selectedKeys, key])
     }
-  }, [selectedKeys, setSelectedKeys, title])
+  }, [selectedKeys, setSelectedKeys, key])
 
   return (
     <button data-selected={isSelected ? true : undefined} onClick={toggle}>

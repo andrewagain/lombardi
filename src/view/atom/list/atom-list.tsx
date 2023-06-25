@@ -1,4 +1,4 @@
-import { Box, Heading, Input } from "@chakra-ui/react"
+import { Box, Heading, Input, Text } from "@chakra-ui/react"
 import { useAtom } from "jotai"
 import { useCallback, useEffect, useMemo, useState } from "react"
 import { LightAsync as SyntaxHighlighter } from "react-syntax-highlighter"
@@ -69,20 +69,13 @@ export function AtomList({ atomSets }: { atomSets: AtomSet[] }) {
           flexDirection: "column",
         }}
       >
-        {filteredSets.map((set) => (
-          <Box>
-            <Heading size="sm">{set.name}</Heading>
-            <Box>
-              {getSetCategorizedAtoms(set).map((ca) => (
-                <AtomCell
-                  atomConfig={ca.atom}
-                  key={getCategorizedAtomKey(ca)}
-                  label={ca.atom.debugLabel || ""}
-                  onRemove={removeCell}
-                />
-              ))}
-            </Box>
-          </Box>
+        {selectedAtoms.map((ca) => (
+          <AtomCell
+            atomConfig={ca.atom}
+            key={getCategorizedAtomKey(ca)}
+            label={ca.atom.debugLabel || ""}
+            onRemove={removeCell}
+          />
         ))}
       </Box>
       <Box
@@ -127,8 +120,15 @@ export function AtomList({ atomSets }: { atomSets: AtomSet[] }) {
           },
         }}
       >
-        {selectedAtoms.map((ca) => (
-          <AtomToggleButton categorizedAtom={ca} />
+        {filteredSets.map((set) => (
+          <Box>
+            <Heading size="sm">{set.name}</Heading>
+            <Box>
+              {getSetCategorizedAtoms(set).map((ca) => (
+                <AtomToggleButton categorizedAtom={ca} />
+              ))}
+            </Box>
+          </Box>
         ))}
       </Box>
     </Box>
