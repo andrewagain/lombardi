@@ -1,8 +1,10 @@
 import { Box, Heading, Input } from "@chakra-ui/react"
-import { useMemo, useState } from "react"
+import { useAtom } from "jotai"
+import { useMemo } from "react"
 
 import colors from "@/app/theme/colors"
 
+import { atomFilterTextAtom } from "../atom-atoms"
 import {
   AtomSet,
   getCategorizedAtomKey,
@@ -11,7 +13,7 @@ import {
 import AtomCheckbox from "./atom-checkbox"
 
 export default function AtomChecklist({ atomSets }: { atomSets: AtomSet[] }) {
-  const [filterText, setFilterText] = useState("")
+  const [filterText, setFilterText] = useAtom(atomFilterTextAtom)
 
   const filteredSets: AtomSet[] = useMemo(() => {
     if (!filterText) {
