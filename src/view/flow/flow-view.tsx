@@ -35,8 +35,8 @@ export default function FlowView() {
 
   const onSelectionChange: OnSelectionChangeFunc = useCallback(
     (selection) => {
-      console.log("FLOW selection", selection)
-      setSelectedIds(selection.nodes.map((node) => node.id))
+      console.log("FLOW selection change", selection)
+      setSelectedIds(selection.nodes.map((node) => node.data.id))
     },
     [setSelectedIds]
   )
@@ -46,7 +46,6 @@ export default function FlowView() {
       nodes={nodes}
       edges={edges}
       onNodesChange={onNodesChange}
-      multiSelectionKeyCode={selectedIds}
       onSelectionChange={onSelectionChange}
       nodeTypes={nodeTypes}
     >
