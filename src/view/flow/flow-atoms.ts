@@ -19,6 +19,7 @@ export const flowNodesAtom = atom(
       return {
         id: node.id,
         position: positions.get(node.id) ?? { x: 0, y: 0 },
+        type: "standard",
         data: {
           ...node,
           label: node.name,

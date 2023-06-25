@@ -18,6 +18,7 @@ import {
 import { graphNodeSelectedIdsAtom } from "@/graph/state/graph-core-atoms"
 
 import { flowEdgesAtom, flowNodesAtom } from "./flow-atoms"
+import nodeTypes from "./node/node-types"
 import RepositionPanel from "./reposition-panel"
 
 export default function FlowView() {
@@ -47,6 +48,7 @@ export default function FlowView() {
       onNodesChange={onNodesChange}
       multiSelectionKeyCode={selectedIds}
       onSelectionChange={onSelectionChange}
+      nodeTypes={nodeTypes}
     >
       <RepositionPanel />
       <Controls />
