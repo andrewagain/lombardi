@@ -69,3 +69,11 @@ export function toggleArrayInclusion<T>(array: T[], item: T): T[] {
   }
   return [...array, item]
 }
+
+export function arrayUnsortedIsEqual<T>(a: T[], b: T[]): boolean {
+  if (a.length !== b.length) {
+    return false
+  }
+  const bMap = listToBooleanMap(b)
+  return a.every((x) => bMap.has(x))
+}

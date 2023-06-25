@@ -1,6 +1,6 @@
 import { Box } from "@chakra-ui/react"
 import { useAtom, useAtomValue } from "jotai"
-import { useCallback, useState } from "react"
+import { useCallback, useEffect, useRef, useState } from "react"
 import {
   CreateHandler,
   DeleteHandler,
@@ -8,6 +8,7 @@ import {
   NodeApi,
   RenameHandler,
   Tree,
+  TreeApi,
 } from "react-arborist"
 
 import { GraphNode } from "@/graph/graph-types.ts"
@@ -21,12 +22,15 @@ import {
 import { graphTreeRootNodesAtom } from "@/graph/state/derived/tree-atoms.ts"
 import { graphNodeSelectedIdsAtom } from "@/graph/state/graph-core-atoms.ts"
 import ElementBoundsEffect from "@/util/component/bounds-effect.tsx"
+import { arrayUnsortedIsEqual } from "@/util/datastructure/array.ts"
 
 import { TreeRow } from "./row/tree-row.tsx"
 import TreeCursor from "./tree-cursor.tsx"
 
 // https://github.com/brimdata/react-arborist
 export default function TreeView() {
+  const treeRef = useRef<TreeApi<GraphNode>>()
+
   const treeData = useAtomValue(graphTreeRootNodesAtom)
   const [selectedIds, setSelectedIds] = useAtom(graphNodeSelectedIdsAtom)
 
@@ -79,14 +83,28 @@ export default function TreeView() {
 
   const onSelect: (nodes: NodeApi<GraphNode>[]) => void = useCallback(
     (nodes) => {
-      console.log(
-        "onSelect",
-        nodes.map((node) => node.data.id)
-      )
-      setSelectedIds(nodes.map((node) => node.data.id))
+      // console.log("onSelect", nodes)
+      const next = nodes.map((node) => node.data.id)
+      // TODO: fix this part
+      setSelectedIds((prev) => {
+        console.log("prev", prev)
+        console.log("next", next)
+        console.log("equal", arrayUnsortedIsEqual(prev, next))
+        return arrayUnsortedIsEqual(prev, next) ? prev : next
+      })
     },
     [setSelectedIds]
   )
+
+  useEffect(() => {
+    const tree = treeRef.current
+    if (!tree) return
+    console.log("reset selection to:", selectedIds)
+    tree.deselectAll()
+    selectedIds.forEach((id) => {
+      tree.selectMulti(id)
+    })
+  }, [selectedIds])
 
   return (
     <Box
@@ -106,7 +124,7 @@ export default function TreeView() {
         renderCursor={TreeCursor}
         width={bounds?.width}
         height={bounds?.height}
-        selection={selectedIds[0]}
+        ref={treeRef}
       >
         {TreeRow}
       </Tree>
