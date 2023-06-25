@@ -1,86 +1,24 @@
 import { Box, Heading, Input } from "@chakra-ui/react"
-import { Atom, useAtom } from "jotai"
-import { atomFamily, atomWithStorage } from "jotai/utils"
+import { useAtom } from "jotai"
 import { useCallback, useEffect, useMemo, useState } from "react"
 import { LightAsync as SyntaxHighlighter } from "react-syntax-highlighter"
 import json from "react-syntax-highlighter/dist/esm/languages/hljs/json"
 
 import { isTruthy } from "@/util/function"
 
-import { AtomCell } from "./cell/atom-cell"
+import { selectedAtomKeysAtom } from "../atom-atoms"
+import {
+  AtomSet,
+  CategorizedAtom,
+  getCategorizedAtomKey,
+  getCategorizedAtomMap,
+  getSetCategorizedAtoms,
+} from "../atom-util"
+import { AtomCell } from "../cell/atom-cell"
+import AtomToggleButton from "./atom-toggle-button"
 
-type WindowParam = string
-
-function getStateParameter(type: "open" | "rows", title: string) {
-  return `nuons.${title.replace(/\s/g, "")}.${type}`
-}
-
-const selectedKeysFamily = atomFamily((param: WindowParam) =>
-  atomWithStorage<string[]>(param, [])
-)
-
-function ToggleButton({ title, param }: { title: string; param: string }) {
-  const [selectedKeys, setSelectedKeys] = useAtom(selectedKeysFamily(param))
-
-  const isSelected = selectedKeys.includes(title)
-
-  const toggle = useCallback(() => {
-    if (selectedKeys.includes(title)) {
-      setSelectedKeys(selectedKeys.filter((x) => x !== title))
-    } else {
-      setSelectedKeys([...selectedKeys, title])
-    }
-  }, [selectedKeys, setSelectedKeys, title])
-
-  return (
-    <button data-selected={isSelected ? true : undefined} onClick={toggle}>
-      {title}{" "}
-    </button>
-  )
-}
-
-export interface AtomSet {
-  name: string
-  atoms: Atom<any>[]
-}
-
-function getSetCategorizedAtoms(s: AtomSet): CategorizedAtom[] {
-  return s.atoms.map((a) => ({
-    categoryName: s.name,
-    atom: a,
-  }))
-}
-
-interface CategorizedAtom {
-  categoryName: string
-  atom: Atom<any>
-}
-
-function getCategorizedAtomKey(a: CategorizedAtom) {
-  return `${a.categoryName}.${a.atom.debugLabel}`
-}
-
-function getCategorizedAtomMap(
-  atomSets: AtomSet[]
-): Map<string, CategorizedAtom> {
-  const map = new Map<string, CategorizedAtom>()
-  atomSets.forEach((set) => {
-    getSetCategorizedAtoms(set).forEach((ca) => {
-      map.set(getCategorizedAtomKey(ca), ca)
-    })
-  })
-  return map
-}
-
-export function AtomList({
-  atomSets,
-  title,
-}: {
-  atomSets: AtomSet[]
-  title: string
-}) {
-  const param = getStateParameter("rows", title)
-  const [selectedKeys, setSelectedKeys] = useAtom(selectedKeysFamily(param))
+export function AtomList({ atomSets }: { atomSets: AtomSet[] }) {
+  const [selectedKeys, setSelectedKeys] = useAtom(selectedAtomKeysAtom)
   const [filterText, setFilterText] = useState("")
   const categorizedAtomMap = useMemo(
     () => getCategorizedAtomMap(atomSets),
@@ -190,11 +128,7 @@ export function AtomList({
         }}
       >
         {selectedAtoms.map((ca) => (
-          <ToggleButton
-            key={getCategorizedAtomKey(ca)}
-            param={param}
-            title={ca.atom.debugLabel || ""}
-          />
+          <AtomToggleButton categorizedAtom={ca} />
         ))}
       </Box>
     </Box>
