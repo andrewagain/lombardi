@@ -1,4 +1,4 @@
-import { Box, Heading, Input, Text } from "@chakra-ui/react"
+import { Box, Heading, Input } from "@chakra-ui/react"
 import { useAtom } from "jotai"
 import { useCallback, useEffect, useMemo, useState } from "react"
 import { LightAsync as SyntaxHighlighter } from "react-syntax-highlighter"
@@ -44,8 +44,9 @@ export function AtomList({ atomSets }: { atomSets: AtomSet[] }) {
   }, [atomSets, filterText])
 
   const removeCell = useCallback(
-    (label: string) => {
-      setSelectedKeys((prev) => prev.filter((x) => x !== label))
+    (key: string) => {
+      console.log("removing key:", key)
+      setSelectedKeys((prev) => prev.filter((x) => x !== key))
     },
     [setSelectedKeys]
   )
@@ -71,9 +72,8 @@ export function AtomList({ atomSets }: { atomSets: AtomSet[] }) {
       >
         {selectedAtoms.map((ca) => (
           <AtomCell
-            atomConfig={ca.atom}
+            categorizedAtom={ca}
             key={getCategorizedAtomKey(ca)}
-            label={ca.atom.debugLabel || ""}
             onRemove={removeCell}
           />
         ))}
@@ -121,11 +121,14 @@ export function AtomList({ atomSets }: { atomSets: AtomSet[] }) {
         }}
       >
         {filteredSets.map((set) => (
-          <Box>
+          <Box key={set.name}>
             <Heading size="sm">{set.name}</Heading>
             <Box>
               {getSetCategorizedAtoms(set).map((ca) => (
-                <AtomToggleButton categorizedAtom={ca} />
+                <AtomToggleButton
+                  categorizedAtom={ca}
+                  key={getCategorizedAtomKey(ca)}
+                />
               ))}
             </Box>
           </Box>

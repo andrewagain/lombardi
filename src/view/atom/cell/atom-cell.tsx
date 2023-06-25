@@ -1,5 +1,5 @@
 import { Box } from "@chakra-ui/react"
-import { Atom, useAtomValue } from "jotai"
+import { useAtomValue } from "jotai"
 import React, { useCallback, useMemo, useRef, useState } from "react"
 import { BsX } from "react-icons/bs"
 import { LightAsync as SyntaxHighlighter } from "react-syntax-highlighter"
@@ -7,21 +7,20 @@ import agate from "react-syntax-highlighter/dist/esm/styles/hljs/agate"
 
 import colors from "@/app/theme/colors"
 
-import { formatAtomValue, FormatType } from "./format-atom-value"
+import { CategorizedAtom, getCategorizedAtomKey } from "../atom-util"
+import { formatAtomValue } from "./format-atom-value"
+
+//             label={ca.atom.debugLabel || ""}
 
 export function AtomCell({
-  label,
-  atomConfig,
-  formatType,
+  categorizedAtom,
   onRemove,
 }: {
-  label: string
-  atomConfig: Atom<any>
-  formatType?: FormatType
-  onRemove: (label: string) => void
+  categorizedAtom: CategorizedAtom
+  onRemove: (key: string) => void
 }) {
   const valueElementRef = useRef<HTMLDivElement | null>(null)
-  const value = useAtomValue(atomConfig)
+  const value = useAtomValue(categorizedAtom.atom)
 
   // collapse/expand logic
   const [expanded, setExpanded] = useState(false)
@@ -31,11 +30,13 @@ export function AtomCell({
 
   // json formatting
   const highlightable = useMemo(() => {
-    if (formatType || !value) {
+    if (!value) {
       return false
     }
-    return value instanceof Map || typeof value === "object"
-  }, [formatType, value])
+    return (
+      value instanceof Map || value instanceof Set || typeof value === "object"
+    )
+  }, [value])
   const [highlighted, setHighlighted] = useState(false)
   const toggleHighlighted = useCallback(() => {
     setHighlighted((x) => !x)
@@ -59,18 +60,19 @@ export function AtomCell({
   }, [])
 
   const onVariable = useCallback(() => {
-    const varName = label.replace(/\W/g, "_")
+    const varName =
+      categorizedAtom.atom.debugLabel?.replace(/\W/g, "_") || "atom_var"
     window[varName as any] = value
-    alert(`Set window.${varName}`)
-  }, [label, value])
+    alert(`window.${varName} has been set`)
+  }, [categorizedAtom, value])
 
   const remove = useCallback(() => {
-    onRemove(label)
-  }, [label, onRemove])
+    onRemove(getCategorizedAtomKey(categorizedAtom))
+  }, [categorizedAtom, onRemove])
 
   const formattedValue = useMemo(
-    () => formatAtomValue(value, formatType, expanded),
-    [formatType, value, expanded]
+    () => formatAtomValue(value, undefined, expanded),
+    [value, expanded]
   )
 
   return (
@@ -100,7 +102,9 @@ export function AtomCell({
         <button onClick={remove}>
           <BsX size={10} />
         </button>
-        <Box css={{ color: colors.gray[400], display: "inline" }}>{label}</Box>
+        <Box css={{ color: colors.gray[400], display: "inline" }}>
+          {categorizedAtom.atom.debugLabel || "n/a"}
+        </Box>
       </Box>
       <Box
         css={{
