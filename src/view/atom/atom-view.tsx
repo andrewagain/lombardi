@@ -40,11 +40,18 @@ export default function AtomView() {
     <Box
       display="grid"
       gridTemplateAreas={`"t" "d" "b"`}
-      gridTemplateColumns="auto auto 1fr"
+      gridTemplateRows="auto auto 1fr"
       height="100%"
-      overflow="hidden"
+      width="100%"
+      minWidth={1}
     >
-      <Box gridArea="t" css={{ height: 200 }}>
+      <Box
+        gridArea="t"
+        css={{ height: 200 }}
+        padding={2}
+        minWidth={1}
+        overflowY="scroll"
+      >
         <AtomCellList atomSets={getAllImportSets()} />
       </Box>
       <PanelDivider orientation="bottom" gridArea="d" />
