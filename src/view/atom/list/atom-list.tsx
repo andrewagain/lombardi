@@ -35,12 +35,17 @@ export function AtomList({ atomSets }: { atomSets: AtomSet[] }) {
     if (!filterText) {
       return atomSets
     }
-    return atomSets.map((set) => ({
-      ...set,
-      atoms: set.atoms.filter((atom) =>
-        atom.debugLabel?.toLowerCase().includes(filterText.toLowerCase())
-      ),
-    }))
+    const lowerFilterText = filterText.toLowerCase()
+    return atomSets
+      .map((set) => ({
+        ...set,
+        atoms: set.atoms.filter(
+          (atom) =>
+            atom.debugLabel?.toLowerCase().includes(lowerFilterText) ||
+            set.name.toLowerCase().includes(lowerFilterText)
+        ),
+      }))
+      .filter((set) => set.atoms.length > 0)
   }, [atomSets, filterText])
 
   const removeCell = useCallback(
