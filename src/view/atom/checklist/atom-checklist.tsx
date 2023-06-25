@@ -1,6 +1,8 @@
 import { Box, Heading, Input } from "@chakra-ui/react"
 import { useMemo, useState } from "react"
 
+import colors from "@/app/theme/colors"
+
 import {
   AtomSet,
   getCategorizedAtomKey,
@@ -29,11 +31,11 @@ export default function AtomChecklist({ atomSets }: { atomSets: AtomSet[] }) {
   }, [atomSets, filterText])
 
   return (
-    <Box padding={2}>
+    <Box display="flex" flexDirection="column">
       <Box
-        css={{
-          flex: "0 0 auto",
-        }}
+        flex="0 1 auto"
+        padding={2}
+        borderBottom={`1px solid ${colors.gray[600]}`}
       >
         <Input
           onChange={(e) => {
@@ -45,7 +47,7 @@ export default function AtomChecklist({ atomSets }: { atomSets: AtomSet[] }) {
         />
       </Box>
 
-      <Box padding={2}>
+      <Box flex="1 1 auto" padding={2} overflowY="scroll">
         {filteredSets.map((set) => (
           <Box key={set.name}>
             <Heading size="sm" paddingTop={2}>
