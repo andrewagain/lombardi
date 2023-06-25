@@ -73,13 +73,6 @@ export function useDeleteNodes() {
 
   return useCallback(
     (ids: string[]) => {
-      setNodeMap((nodeMap) => {
-        const newNodeMap = new Map(nodeMap)
-        for (const id of ids) {
-          newNodeMap.delete(id)
-        }
-        return newNodeMap
-      })
       setEdgeMap((edgeMap) => {
         const newEdgeMap = new Map(edgeMap)
         for (const edge of edgeMap.values()) {
@@ -88,6 +81,13 @@ export function useDeleteNodes() {
           }
         }
         return newEdgeMap
+      })
+      setNodeMap((nodeMap) => {
+        const newNodeMap = new Map(nodeMap)
+        for (const id of ids) {
+          newNodeMap.delete(id)
+        }
+        return newNodeMap
       })
     },
     [setNodeMap, setEdgeMap]
