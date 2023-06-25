@@ -1,4 +1,5 @@
-import { atom, useSetAtom } from "jotai"
+import { useSetAtom } from "jotai"
+import { atomWithStorage } from "jotai/utils"
 import { useCallback } from "react"
 
 import { toggleArrayInclusion } from "@/util/datastructure/array"
@@ -9,7 +10,9 @@ export enum SidePanel {
   Right,
 }
 
-export const interfaceSidePanelsAtom = atom([SidePanel.Left])
+export const interfaceSidePanelsAtom = atomWithStorage("nuons.sidepanels", [
+  SidePanel.Left,
+])
 
 export function useToggleSidePanel(sidePanel: SidePanel) {
   const setSidePanels = useSetAtom(interfaceSidePanelsAtom)

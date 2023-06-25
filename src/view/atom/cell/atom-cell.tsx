@@ -10,8 +10,6 @@ import colors from "@/app/theme/colors"
 import { CategorizedAtom, getCategorizedAtomKey } from "../atom-util"
 import { formatAtomValue } from "./format-atom-value"
 
-//             label={ca.atom.debugLabel || ""}
-
 export function AtomCell({
   categorizedAtom,
   onRemove,

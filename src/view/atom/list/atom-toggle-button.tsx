@@ -1,5 +1,8 @@
+import { Box, Checkbox } from "@chakra-ui/react"
 import { useAtom } from "jotai"
 import { useCallback } from "react"
+
+import { toggleArrayInclusion } from "@/util/datastructure/array"
 
 import { selectedAtomKeysAtom } from "../atom-atoms"
 import { CategorizedAtom, getCategorizedAtomKey } from "../atom-util"
@@ -15,16 +18,14 @@ export default function AtomToggleButton({
   const isSelected = selectedKeys.includes(key)
 
   const toggle = useCallback(() => {
-    if (selectedKeys.includes(key)) {
-      setSelectedKeys(selectedKeys.filter((x) => x !== key))
-    } else {
-      setSelectedKeys([...selectedKeys, key])
-    }
-  }, [selectedKeys, setSelectedKeys, key])
+    setSelectedKeys((prev) => toggleArrayInclusion(prev, key))
+  }, [setSelectedKeys, key])
 
   return (
-    <button data-selected={isSelected ? true : undefined} onClick={toggle}>
-      {title}
-    </button>
+    <Box>
+      <Checkbox isChecked={isSelected} onChange={toggle}>
+        {title}
+      </Checkbox>
+    </Box>
   )
 }
