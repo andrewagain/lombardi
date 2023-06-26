@@ -3,7 +3,7 @@
 import "reactflow/dist/style.css"
 
 import { useAtom, useAtomValue } from "jotai"
-import React, { useCallback, useRef } from "react"
+import { useCallback, useRef } from "react"
 import {
   applyNodeChanges,
   Background,

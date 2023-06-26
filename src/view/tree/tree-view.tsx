@@ -1,5 +1,6 @@
 import { Box } from "@chakra-ui/react"
 import { useAtom, useAtomValue } from "jotai"
+import { useAtomCallback } from "jotai/utils"
 import { useCallback, useEffect, useRef, useState } from "react"
 import {
   CreateHandler,
@@ -32,7 +33,7 @@ export default function TreeView() {
   const treeRef = useRef<TreeApi<GraphNode>>()
 
   const treeData = useAtomValue(graphTreeRootNodesAtom)
-  const [selectedIds, setSelectedIds] = useAtom(graphNodeSelectedIdsAtom)
+  const [selectedIds] = useAtom(graphNodeSelectedIdsAtom)
 
   const [boundsElement, setBoundsElement] = useState<HTMLDivElement | null>()
   const [bounds, setBounds] = useState<DOMRect | undefined>()
@@ -81,24 +82,23 @@ export default function TreeView() {
     [deleteNodes]
   )
 
-  const onSelect: (nodes: NodeApi<GraphNode>[]) => void = useCallback(
-    (nodes) => {
-      // console.log("onSelect", nodes)
+  const onSelect: (nodes: NodeApi<GraphNode>[]) => void = useAtomCallback(
+    useCallback((get, set, nodes) => {
       const next = nodes.map((node) => node.data.id)
-      // TODO: fix this part
-      setSelectedIds((prev) => {
-        console.log("prev", prev)
-        console.log("next", next)
-        console.log("equal", arrayUnsortedIsEqual(prev, next))
-        return arrayUnsortedIsEqual(prev, next) ? prev : next
-      })
-    },
-    [setSelectedIds]
+      const prev = get(graphNodeSelectedIdsAtom)
+      if (!arrayUnsortedIsEqual(prev, next)) {
+        console.log("set selected ids", next)
+        set(graphNodeSelectedIdsAtom, next)
+      }
+    }, [])
   )
 
   useEffect(() => {
     const tree = treeRef.current
     if (!tree) return
+    if (arrayUnsortedIsEqual([...tree.selectedIds.values()], selectedIds)) {
+      return
+    }
     console.log("reset selection to:", selectedIds)
     tree.deselectAll()
     selectedIds.forEach((id) => {
