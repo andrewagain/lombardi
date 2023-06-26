@@ -2,6 +2,7 @@ import { Box, Checkbox } from "@chakra-ui/react"
 import { useAtom, useAtomValue } from "jotai"
 import { useCallback } from "react"
 
+import colors from "@/app/theme/colors"
 import { toggleArrayInclusion } from "@/util/datastructure/array"
 
 import { atomFilterTextAtom, selectedAtomKeysAtom } from "../atom-atoms"
@@ -55,6 +56,11 @@ export default function AtomKeyRow({
         onChange={toggle}
         textOverflow="ellipsis"
         overflow="hidden"
+        css={{
+          "&:hover": {
+            color: colors.blue[100],
+          },
+        }}
       >
         {getHighlightedText(title, filterText)}
       </Checkbox>
