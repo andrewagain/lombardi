@@ -10,6 +10,13 @@ function defaultFormat(value: any) {
   }
 }
 
+export function isSyntaxHighlightable(value?: any) {
+  return (
+    value &&
+    (value instanceof Map || value instanceof Set || typeof value === "object")
+  )
+}
+
 export function formatAtomValue(
   value: any,
   formatType: FormatType | undefined,
