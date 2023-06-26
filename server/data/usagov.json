@@ -104,6 +104,21 @@
       "id": "node-1687421014154",
       "name": "Boeing",
       "label": "Boeing"
+    },
+    {
+      "id": "node-1687744157476",
+      "name": "FTC",
+      "label": "FTC"
+    },
+    {
+      "id": "node-1687744161418",
+      "name": "SEC",
+      "label": "SEC"
+    },
+    {
+      "id": "node-1687744165202",
+      "name": "CFTC",
+      "label": "CFTC"
     }
   ],
   "edges": [
@@ -206,11 +221,30 @@
       "id": "edge-1687421014154",
       "source": "node-1687420995502",
       "target": "node-1687421014154"
+    },
+    {
+      "id": "edge-1687744157477",
+      "source": "node-1687372239122",
+      "target": "node-1687744157476"
+    },
+    {
+      "id": "edge-1687744161418",
+      "source": "node-1687372239122",
+      "target": "node-1687744161418"
+    },
+    {
+      "id": "edge-1687744165202",
+      "source": "node-1687372239122",
+      "target": "node-1687744165202"
     }
   ],
   "edgePriorities": [
     [
       "edge-1687421014154",
+      1
+    ],
+    [
+      "edge-1687372850926",
       1
     ]
   ]
