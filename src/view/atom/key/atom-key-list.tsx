@@ -10,9 +10,9 @@ import {
   getCategorizedAtomKey,
   getSetCategorizedAtoms,
 } from "../atom-util"
-import AtomCheckbox from "./atom-checkbox"
+import AtomKeyRow from "./atom-key-row"
 
-export default function AtomChecklist({ atomSets }: { atomSets: AtomSet[] }) {
+export default function AtomKeyList({ atomSets }: { atomSets: AtomSet[] }) {
   const [filterText, setFilterText] = useAtom(atomFilterTextAtom)
 
   const filteredSets: AtomSet[] = useMemo(() => {
@@ -69,7 +69,7 @@ export default function AtomChecklist({ atomSets }: { atomSets: AtomSet[] }) {
               </Heading>
               <Box>
                 {getSetCategorizedAtoms(set).map((ca) => (
-                  <AtomCheckbox
+                  <AtomKeyRow
                     categorizedAtom={ca}
                     key={getCategorizedAtomKey(ca)}
                   />

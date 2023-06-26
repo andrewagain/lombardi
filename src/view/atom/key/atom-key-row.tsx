@@ -32,7 +32,7 @@ function getHighlightedText(text: string, highlight: string) {
   )
 }
 
-export default function AtomCheckbox({
+export default function AtomKeyRow({
   categorizedAtom,
 }: {
   categorizedAtom: CategorizedAtom

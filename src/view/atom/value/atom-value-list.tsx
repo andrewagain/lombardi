@@ -13,9 +13,9 @@ import {
   getCategorizedAtomKey,
   getCategorizedAtomMap,
 } from "../atom-util"
-import { AtomCell } from "./atom-cell"
+import { AtomCell } from "./atom-value-row"
 
-export function AtomCellList({ atomSets }: { atomSets: AtomSet[] }) {
+export function AtomValueList({ atomSets }: { atomSets: AtomSet[] }) {
   const [selectedKeys, setSelectedKeys] = useAtom(selectedAtomKeysAtom)
   const categorizedAtomMap = useMemo(
     () => getCategorizedAtomMap(atomSets),

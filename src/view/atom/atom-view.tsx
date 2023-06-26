@@ -9,8 +9,8 @@ import * as graphCoreAtoms from "@/graph/state/graph-core-atoms"
 import { PanelDivider } from "@/interface/controls/panel-divider"
 
 import { AtomSet } from "./atom-util"
-import { AtomCellList } from "./cell/atom-cell-list"
-import AtomChecklist from "./checklist/atom-checklist"
+import AtomKeyList from "./key/atom-key-list"
+import { AtomValueList } from "./value/atom-value-list"
 
 function getImportAtomSet(importName: string, importObject: object): AtomSet {
   return {
@@ -52,11 +52,11 @@ export default function AtomView() {
         minWidth={1}
         overflowY="scroll"
       >
-        <AtomCellList atomSets={getAllImportSets()} />
+        <AtomValueList atomSets={getAllImportSets()} />
       </Box>
       <PanelDivider orientation="bottom" gridArea="d" />
       <Box gridArea="b" display="flex" flexDirection="column" overflow="hidden">
-        <AtomChecklist atomSets={getAllImportSets()} />
+        <AtomKeyList atomSets={getAllImportSets()} />
       </Box>
     </Box>
   )
