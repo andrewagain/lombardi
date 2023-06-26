@@ -17,6 +17,7 @@ import {
   PiHighlighterCircleDuotone,
 } from "react-icons/pi"
 
+import colors from "@/app/theme/colors"
 import ToggleIconButton from "@/util/component/toggle-icon-button"
 
 import { CategorizedAtom, getCategorizedAtomKey } from "../atom-util"
@@ -83,7 +84,15 @@ export function AtomValueToolbar({
 
   return (
     <HStack position="relative">
-      <Heading size="md">{categorizedAtom.atom.debugLabel || "n/a"}</Heading>
+      <Heading
+        size="sm"
+        minWidth={1}
+        whiteSpace="nowrap"
+        overflow="hidden"
+        textOverflow="ellipsis"
+      >
+        {categorizedAtom.atom.debugLabel || "n/a"}
+      </Heading>
       <Spacer />
       <IconButton size="sm" onClick={onCopy} aria-label="Copy to Clipboard">
         <PiClipboardTextDuotone />
@@ -113,10 +122,22 @@ export function AtomValueToolbar({
         onClick={toggleExpanded}
       />
 
-      <Box position="absolute" left={0} top={0}>
-        <Button onClick={remove} aria-label="Remove">
-          <BsX size={10} />
-        </Button>
+      <Box position="absolute" left={0} top={0} zIndex={1}>
+        <IconButton
+          onClick={remove}
+          aria-label="Remove"
+          size="sm"
+          opacity={0}
+          backgroundColor={colors.gray[500]}
+          css={{
+            "&:hover": {
+              opacity: 1,
+              backgroundColor: colors.gray[600],
+            },
+          }}
+        >
+          <BsX />
+        </IconButton>
       </Box>
     </HStack>
   )
