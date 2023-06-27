@@ -32,7 +32,7 @@ export function TreeRow({
           opacity: 1,
         },
       }}
-      cursor={isLeaf ? "default" : "pointer"}
+      cursor="pointer"
       height={treeRowHeightPx}
     >
       <HStack
