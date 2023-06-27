@@ -169,8 +169,8 @@ export function PanelDivider({
       width={horizontal ? "100%" : `${VISIBLE_THICKNESS}px`}
       height={horizontal ? `${VISIBLE_THICKNESS}px` : "100%"}
       cursor={horizontal ? "row-resize" : "col-resize"}
+      backgroundColor="interface.border"
       css={{
-        backgroundColor: theme.colors.gray[600],
         transition: "background-color 200ms, border-color 200ms",
         ":hover": {
           backgroundColor: hoverColor,
