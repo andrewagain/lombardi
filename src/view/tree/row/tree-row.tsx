@@ -8,7 +8,7 @@ import { GraphNode } from "@/graph/graph-types.ts"
 import { useToggleNodeVisibility } from "@/graph/state/derived/modify-hooks"
 import { graphNodeHiddenIndirectlySetAtom } from "@/graph/state/derived/visibility-atoms"
 
-import { treeRowHeightPx } from "../tree-util"
+import { treeRowHeight, treeRowHeightPx } from "../tree-util"
 import TreeInput from "./tree-input.tsx"
 
 export function TreeRow({
@@ -25,7 +25,7 @@ export function TreeRow({
     <Box
       position="relative"
       backgroundColor={isSelected ? "state.select" : undefined}
-      _hover={{ bg: isSelected ? "state.focusSelect" : "state.focus" }}
+      _hover={{ color: "state.focus" }}
       fontWeight={isSelected ? "bold" : undefined}
       css={{
         "& [data-eye]": {
@@ -37,6 +37,7 @@ export function TreeRow({
       }}
       cursor="pointer"
       height={treeRowHeightPx}
+      borderEndRadius={`${treeRowHeight / 2}px`}
     >
       <HStack
         style={style}
