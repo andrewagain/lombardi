@@ -2,7 +2,7 @@
 
 import "reactflow/dist/style.css"
 
-import { useAtom, useAtomValue } from "jotai"
+import { useAtom, useAtomValue, useSetAtom } from "jotai"
 import { useCallback, useRef } from "react"
 import {
   applyNodeChanges,
@@ -25,7 +25,7 @@ import RepositionPanel from "./reposition-panel"
 export default function FlowView() {
   const [nodes, setNodes] = useAtom(flowNodesAtom)
   const edges = useAtomValue(flowEdgesAtom)
-  const [selectedIds, setSelectedIds] = useAtom(graphNodeSelectedIdsAtom)
+  const setSelectedIds = useSetAtom(graphNodeSelectedIdsAtom)
   const flowRef = useRef<ReactFlowInstance>()
 
   const onNodesChange = useCallback(
@@ -37,7 +37,6 @@ export default function FlowView() {
 
   const onSelectionChange: OnSelectionChangeFunc = useCallback(
     (selection) => {
-      console.log("FLOW selection change", selection)
       setSelectedIds(selection.nodes.map((node) => node.data.id))
     },
     [setSelectedIds]
