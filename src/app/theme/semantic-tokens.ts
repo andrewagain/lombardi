@@ -23,7 +23,7 @@ export default {
     state: {
       focus: {
         default: `${colors.cyan[300]}66`,
-        _dark: `${colors.cyan[600]}66`,
+        _dark: `${colors.cyan[200]}66`,
       },
       select: {
         default: `${colors.blue[800]}22`,
@@ -31,7 +31,7 @@ export default {
       },
       focusSelect: {
         default: `${colors.cyan[300]}99`,
-        _dark: `${colors.cyan[600]}99`,
+        _dark: `${colors.cyan[200]}cc`,
       },
     },
     button: {
