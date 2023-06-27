@@ -1,11 +1,14 @@
 // All colors should be declared here for simply supporting dark mode
 
+import colors from "./colors"
+
 // https://chakra-ui.com/docs/styled-system/semantic-tokens
 export default {
   colors: {
     background: {
       body: { default: "gray.0", _dark: "gray.1000" },
       paper: { default: "gray.100", _dark: "blue.900" },
+      border: { default: "gray.600", _dark: "gray.400" },
     },
     highlight: {
       main: { default: "blue.300", _dark: "blue.600" },
@@ -17,14 +20,19 @@ export default {
       warning: { default: "yellow.400", _dark: "yellow.600" },
       success: { default: "green.400", _dark: "green.600" },
     },
-    border: {
-      default: { default: "gray.600", _dark: "gray.400" },
-    },
-    focus: {
-      default: { default: "blue.300", _dark: "blue.600" },
-    },
-    select: {
-      default: { default: "cyan.200", _dark: "cyan.400" },
+    state: {
+      focus: {
+        default: `${colors.cyan[300]}66`,
+        _dark: `${colors.cyan[600]}66`,
+      },
+      select: {
+        default: `${colors.blue[300]}66`,
+        _dark: `${colors.blue[600]}66`,
+      },
+      focusSelect: {
+        default: `${colors.cyan[300]}99`,
+        _dark: `${colors.cyan[600]}99`,
+      },
     },
   },
 }

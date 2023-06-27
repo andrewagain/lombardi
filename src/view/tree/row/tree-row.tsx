@@ -25,11 +25,9 @@ export function TreeRow({
   return (
     <Box
       position="relative"
-      backgroundColor={isSelected ? "select.default" : undefined}
+      backgroundColor={isSelected ? "state.select" : undefined}
+      _hover={{ bg: isSelected ? "state.focusSelect" : "state.focus" }}
       css={{
-        "&:hover": {
-          backgroundColor: isSelected ? "select.default" : "focus.default",
-        },
         "& [data-eye]": {
           opacity: visible ? 0 : 1,
         },
