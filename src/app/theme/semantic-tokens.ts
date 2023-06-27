@@ -34,5 +34,13 @@ export default {
         _dark: `${colors.cyan[600]}99`,
       },
     },
+    button: {
+      opaque: {
+        background: {
+          main: { default: "gray.200", _dark: "gray.500" },
+          hover: { default: "blue.300", _dark: "blue.600" },
+        },
+      },
+    },
   },
 }

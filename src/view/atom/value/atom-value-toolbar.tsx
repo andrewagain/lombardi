@@ -10,7 +10,6 @@ import {
   PiHighlighterCircleDuotone,
 } from "react-icons/pi"
 
-import colors from "@/app/theme/colors"
 import ToggleIconButton from "@/util/component/toggle-icon-button"
 
 import { CategorizedAtom, getCategorizedAtomKey } from "../atom-util"
@@ -121,12 +120,10 @@ export function AtomValueToolbar({
           aria-label="Remove"
           size="sm"
           opacity={0}
-          backgroundColor={colors.gray[500]}
-          css={{
-            "&:hover": {
-              opacity: 1,
-              backgroundColor: colors.gray[600],
-            },
+          backgroundColor="button.opaque.background.main"
+          _hover={{
+            opacity: 1,
+            backgroundColor: "button.opaque.background.hover",
           }}
         >
           <BsX />
