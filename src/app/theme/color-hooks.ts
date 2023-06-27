@@ -4,7 +4,7 @@ import { mode } from "@chakra-ui/theme-tools"
 export const highlightColor = mode("blue.400", "blue.500")
 
 export function useHighlightColor(): string {
-  return useColorModeValue("blue.400", "blue.500")
+  return useColorModeValue("blue.400", "blue.300")
 }
 
 export function useTextColor(): string {

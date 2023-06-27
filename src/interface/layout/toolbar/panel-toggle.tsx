@@ -5,7 +5,12 @@ import {
   VscLayoutSidebarRight,
 } from "react-icons/vsc"
 
-import { SidePanel, useToggleSidePanel } from "@/interface/interface-state"
+import { useButtonColor } from "@/app/theme/color-hooks"
+import {
+  SidePanel,
+  useSidePanelEnabled,
+  useToggleSidePanel,
+} from "@/interface/interface-state"
 
 function getIcon(p: SidePanel): JSX.Element | null {
   switch (p) {
@@ -21,12 +26,14 @@ function getIcon(p: SidePanel): JSX.Element | null {
 
 export function PanelToggle({ side }: { side: SidePanel }) {
   const toggle = useToggleSidePanel(side)
-
+  const enabled = useSidePanelEnabled(side)
+  const color = useButtonColor(enabled)
   return (
     <IconButton
       aria-label="Toggle State Pane"
       onClick={toggle}
       title="Toggle State Pane"
+      color={color}
     >
       {getIcon(side)}
     </IconButton>
