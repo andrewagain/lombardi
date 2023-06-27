@@ -1,7 +1,7 @@
 import { extendTheme, ThemeConfig } from "@chakra-ui/react"
-import { mode } from "@chakra-ui/theme-tools"
 
 import colors from "./colors"
+import semanticTokens from "./semantic-tokens"
 
 const config: ThemeConfig = {
   initialColorMode: "dark",
@@ -11,18 +11,11 @@ const config: ThemeConfig = {
 const theme = extendTheme({
   config,
   colors,
-  semanticTokens: {
-    colors: {
-      background: {
-        primary: { default: "gray.0", _dark: "gray.1000" },
-        balls: { default: "blue.400", _dark: "blue.400" },
-      },
-    },
-  },
+  semanticTokens,
   styles: {
-    global: (props: any) => ({
+    global: () => ({
       body: {
-        bg: mode("#fff", "#121212")(props),
+        bg: "background.body",
 
         // workaround for an issue: pressing tab causes the window to get both horizontal and vertical
         // scrollbars, until the mouse is moved, at which point the scrollbars disappear. I found it very jarring.
@@ -31,7 +24,5 @@ const theme = extendTheme({
     }),
   },
 })
-
-export const mediaDarkMode = "@media (prefers-color-scheme: dark)"
 
 export default theme
