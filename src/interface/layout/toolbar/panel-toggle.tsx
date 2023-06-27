@@ -1,7 +1,23 @@
 import { IconButton } from "@chakra-ui/react"
-import { VscLayoutSidebarLeft, VscLayoutSidebarRight } from "react-icons/vsc"
+import {
+  VscDebugBreakpointData,
+  VscLayoutSidebarLeft,
+  VscLayoutSidebarRight,
+} from "react-icons/vsc"
 
 import { SidePanel, useToggleSidePanel } from "@/interface/interface-state"
+
+function getIcon(p: SidePanel): JSX.Element | null {
+  switch (p) {
+    case SidePanel.Left:
+      return <VscLayoutSidebarLeft />
+    case SidePanel.Right:
+      return <VscLayoutSidebarRight />
+    case SidePanel.Debug:
+      return <VscDebugBreakpointData />
+  }
+  return null
+}
 
 export function PanelToggle({ side }: { side: SidePanel }) {
   const toggle = useToggleSidePanel(side)
@@ -12,11 +28,7 @@ export function PanelToggle({ side }: { side: SidePanel }) {
       onClick={toggle}
       title="Toggle State Pane"
     >
-      {side === SidePanel.Left ? (
-        <VscLayoutSidebarLeft />
-      ) : (
-        <VscLayoutSidebarRight />
-      )}
+      {getIcon(side)}
     </IconButton>
   )
 }

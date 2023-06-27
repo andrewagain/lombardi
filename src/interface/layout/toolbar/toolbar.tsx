@@ -26,6 +26,7 @@ export default function Toolbar() {
       <GraphSelect />
       <DarkModeSwitch />
       <PanelToggle side={SidePanel.Right} />
+      <PanelToggle side={SidePanel.Debug} />
     </Box>
   )
 }

@@ -1,15 +1,17 @@
 import { Box } from "@chakra-ui/react"
 
-export default function RightPanel() {
+import AtomView from "@/view/atom/atom-view"
+
+export default function DebugPanel() {
   return (
     <Box
-      gridArea="r-panel"
+      gridArea="d-panel"
       minHeight={1}
       css={{
         width: "200px",
       }}
     >
-      WIP
+      <AtomView />
     </Box>
   )
 }

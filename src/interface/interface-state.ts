@@ -8,6 +8,7 @@ export enum SidePanel {
   None,
   Left,
   Right,
+  Debug,
 }
 
 export const interfaceSidePanelsAtom = atomWithStorage("nuons.sidepanels", [
