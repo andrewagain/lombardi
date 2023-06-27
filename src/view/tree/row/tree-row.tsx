@@ -21,6 +21,7 @@ export function TreeRow({
   const indirectlyHidden = indirectlyHiddenSet.has(node.data.id)
 
   const { isSelected, isEditing, isLeaf, isDragging } = node
+  console.log("isDragging", isDragging)
   return (
     <Box
       position="relative"
