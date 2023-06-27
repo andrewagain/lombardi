@@ -27,6 +27,7 @@ import { arrayUnsortedIsEqual } from "@/util/datastructure/array.ts"
 
 import { TreeRow } from "./row/tree-row.tsx"
 import TreeCursor from "./tree-cursor.tsx"
+import { treeRowHeight } from "./tree-util.ts"
 
 // https://github.com/brimdata/react-arborist
 export default function TreeView() {
@@ -125,6 +126,7 @@ export default function TreeView() {
         width={bounds?.width}
         height={bounds?.height}
         ref={treeRef}
+        rowHeight={treeRowHeight}
       >
         {TreeRow}
       </Tree>

@@ -1,13 +1,13 @@
-import { Box } from "@chakra-ui/react"
+import { Box, HStack, IconButton } from "@chakra-ui/react"
 import { useAtomValue } from "jotai"
 import { NodeRendererProps } from "react-arborist"
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai"
 
-import { mediaDarkMode } from "@/app/theme/theme"
 import { GraphNode } from "@/graph/graph-types.ts"
 import { useToggleNodeVisibility } from "@/graph/state/derived/modify-hooks"
 import { graphNodeHiddenIndirectlySetAtom } from "@/graph/state/derived/visibility-atoms"
 
+import { treeRowHeightPx } from "../tree-util"
 import FolderArrow from "./folder-arrow"
 import TreeInput from "./tree-input"
 
@@ -20,57 +20,28 @@ export function TreeRow({
   const indirectlyHiddenSet = useAtomValue(graphNodeHiddenIndirectlySetAtom)
   const indirectlyHidden = indirectlyHiddenSet.has(node.data.id)
 
+  const { isSelected, isEditing, isLeaf, isDragging } = node
   return (
     <Box
-      data-selected={node.isSelected}
+      position="relative"
       css={{
-        display: "flex",
-        alignItems: "center",
-        margin: 0,
-        height: "100%",
-        lineHeight: "20px",
-        whiteSpace: "nowrap",
-        cursor: "pointer",
-        borderTopRightRadius: 10,
-        borderBottomRightRadius: 10,
-        overflow: "hidden",
-        "[data-actions]": {
-          display: "none",
+        "& [data-eye]": {
+          opacity: visible ? 0 : 1,
         },
-
-        "&:hover": {
-          backgroundColor: "#eee",
-          [mediaDarkMode]: {
-            backgroundColor: "#333",
-          },
-          "[data-actions]": {
-            display: "flex",
-          },
-        },
-        '&[data-focused="true"]': {
-          backgroundColor: "#ddd",
-          [mediaDarkMode]: {
-            backgroundColor: "#444",
-          },
-        },
-        "&[data-selected=true]": {
-          backgroundColor: "#ccc",
-          [mediaDarkMode]: {
-            backgroundColor: "#555",
-          },
+        "&:hover [data-eye]": {
+          opacity: 1,
         },
       }}
+      cursor={isLeaf ? "default" : "pointer"}
+      height={treeRowHeightPx}
     >
-      <Box
+      <HStack
         style={style}
         ref={dragHandle}
-        css={{
-          flex: "1 1 auto",
-          display: "flex",
-          overflow: "hidden",
-          opacity: indirectlyHidden ? 0.5 : 1,
-        }}
-        onClick={() => node.isInternal && node.toggle()}
+        opacity={indirectlyHidden ? 0.5 : 1}
+        onClick={() => !isLeaf && node.toggle()}
+        whiteSpace="nowrap"
+        height={treeRowHeightPx}
       >
         <FolderArrow node={node} />
         <Box
@@ -80,22 +51,20 @@ export function TreeRow({
             overflow: "hidden",
           }}
         >
-          {node.isEditing ? <TreeInput node={node} /> : node.data.name}
+          {isEditing ? <TreeInput node={node} /> : node.data.name}
         </Box>
-      </Box>
-      <Box
-        css={{
-          display: "flex",
-          flex: "1 1 auto",
-          flexDirection: "row-reverse",
-          paddingRight: 10,
-        }}
-        data-actions
-      >
-        <button onClick={toggleVisibility}>
+      </HStack>
+
+      <HStack position="absolute" data-eye right={0} top={0} zIndex={1}>
+        <IconButton
+          onClick={toggleVisibility}
+          aria-label="Visibility"
+          size="sm"
+          variant="ghost"
+        >
           {visible ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
-        </button>
-      </Box>
+        </IconButton>
+      </HStack>
     </Box>
   )
 }
