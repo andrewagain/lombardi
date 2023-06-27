@@ -3,7 +3,6 @@ import {
   IconButtonProps,
   useColorModeValue,
 } from "@chakra-ui/react"
-import { highlight } from "prismjs"
 import { IconType } from "react-icons"
 
 import colors from "@/app/theme/colors"
