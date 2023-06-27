@@ -11,6 +11,14 @@ const config: ThemeConfig = {
 const theme = extendTheme({
   config,
   colors,
+  semanticTokens: {
+    colors: {
+      background: {
+        primary: { default: "gray.0", _dark: "gray.1000" },
+        balls: { default: "blue.400", _dark: "blue.400" },
+      },
+    },
+  },
   styles: {
     global: (props: any) => ({
       body: {

@@ -6,6 +6,7 @@
 
 // https://github.com/chakra-ui/chakra-ui/blob/main/packages/components/theme/src/foundations/colors.ts
 const gray = {
+  0: "#ffffff",
   50: "#F7FAFC",
   100: "#EDF2F7",
   200: "#E2E8F0",
@@ -16,6 +17,8 @@ const gray = {
   700: "#2D3748",
   800: "#1A202C",
   900: "#171923",
+  1000: "#121212",
+  1100: "#000000",
 }
 
 // main is blue.300
