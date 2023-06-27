@@ -5,7 +5,6 @@ import {
   VscLayoutSidebarRight,
 } from "react-icons/vsc"
 
-import { useButtonColor } from "@/app/theme/color-hooks"
 import {
   SidePanel,
   useSidePanelEnabled,
@@ -27,13 +26,12 @@ function getIcon(p: SidePanel): JSX.Element | null {
 export function PanelToggle({ side }: { side: SidePanel }) {
   const toggle = useToggleSidePanel(side)
   const enabled = useSidePanelEnabled(side)
-  const color = useButtonColor(enabled)
   return (
     <IconButton
       aria-label="Toggle State Pane"
       onClick={toggle}
       title="Toggle State Pane"
-      color={color}
+      color={enabled ? "highlight.main" : undefined}
     >
       {getIcon(side)}
     </IconButton>

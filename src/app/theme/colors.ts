@@ -21,7 +21,6 @@ const gray = {
   1100: "#000000",
 }
 
-// main is blue.300
 const blue = {
   50: "#e2efff",
   100: "#b3d0ff",
@@ -35,7 +34,6 @@ const blue = {
   900: "#000a1e",
 }
 
-// main is cyan.200
 const cyan = {
   50: "#dffffd",
   100: "#b8f6f4",
@@ -49,7 +47,6 @@ const cyan = {
   900: "#001818",
 }
 
-// main is purple.400
 const purple = {
   50: "#fee9ff",
   100: "#eec3f0",

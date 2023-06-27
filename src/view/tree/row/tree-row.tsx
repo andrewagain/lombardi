@@ -3,7 +3,6 @@ import { useAtomValue } from "jotai"
 import { NodeRendererProps } from "react-arborist"
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai"
 
-import { useFocusColor, useSelectColor } from "@/app/theme/color-hooks"
 import { GraphNode } from "@/graph/graph-types.ts"
 import { useToggleNodeVisibility } from "@/graph/state/derived/modify-hooks"
 import { graphNodeHiddenIndirectlySetAtom } from "@/graph/state/derived/visibility-atoms"
@@ -20,17 +19,15 @@ export function TreeRow({
   const [visible, toggleVisibility] = useToggleNodeVisibility(node.data.id)
   const indirectlyHiddenSet = useAtomValue(graphNodeHiddenIndirectlySetAtom)
   const indirectlyHidden = indirectlyHiddenSet.has(node.data.id)
-  const selectColor = useSelectColor()
-  const focusColor = useFocusColor()
 
   const { isSelected, isEditing, isLeaf, isDragging } = node
   return (
     <Box
       position="relative"
-      backgroundColor={isSelected ? selectColor : undefined}
+      backgroundColor={isSelected ? "select.default" : undefined}
       css={{
         "&:hover": {
-          backgroundColor: isSelected ? selectColor : focusColor,
+          backgroundColor: isSelected ? "select.default" : "focus.default",
         },
         "& [data-eye]": {
           opacity: visible ? 0 : 1,

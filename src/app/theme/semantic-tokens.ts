@@ -17,5 +17,14 @@ export default {
       warning: { default: "yellow.400", _dark: "yellow.600" },
       success: { default: "green.400", _dark: "green.600" },
     },
+    border: {
+      default: { default: "gray.600", _dark: "gray.400" },
+    },
+    focus: {
+      default: { default: "blue.300", _dark: "blue.600" },
+    },
+    select: {
+      default: { default: "cyan.200", _dark: "cyan.400" },
+    },
   },
 }
