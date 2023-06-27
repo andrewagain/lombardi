@@ -10,7 +10,7 @@ import Footer from "./footer/footer"
 import DebugPanel from "./panel/debug-panel"
 import LeftPanel from "./panel/left-panel"
 import RightPanel from "./panel/right-panel"
-import Toolbar from "./toolbar/toolbar"
+import Toolbar from "./toolbar/main-toolbar"
 
 export default function Layout() {
   const panels = useAtomValue(interfaceSidePanelsAtom)

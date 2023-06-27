@@ -2,7 +2,7 @@ import { Box, Heading, Input } from "@chakra-ui/react"
 import { useAtom } from "jotai"
 import { useMemo } from "react"
 
-import colors from "@/app/theme/colors"
+import { interfaceBorder } from "@/app/theme/style-util"
 
 import { atomFilterTextAtom } from "../atom-atoms"
 import {
@@ -40,11 +40,7 @@ export default function AtomKeyList({ atomSets }: { atomSets: AtomSet[] }) {
       alignItems="stretch"
       overflow="hidden"
     >
-      <Box
-        flex="0 1 auto"
-        padding={2}
-        borderBottom={`1px solid ${colors.gray[600]}`}
-      >
+      <Box flex="0 1 auto" padding={2} borderBottom={interfaceBorder}>
         <Input
           onChange={(e) => {
             setFilterText(e.target.value)

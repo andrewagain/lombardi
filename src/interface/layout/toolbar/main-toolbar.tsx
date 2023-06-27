@@ -10,7 +10,7 @@ import { PanelToggle } from "./panel-toggle"
 
 export default function Toolbar() {
   return (
-    <HStack padding={2} as="header" border={interfaceBorder}>
+    <HStack padding={2} as="header" borderBottom={interfaceBorder}>
       <LogoIcon />
       <PanelToggle side={SidePanel.Left} />
       <Spacer />
