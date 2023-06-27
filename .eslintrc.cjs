@@ -14,5 +14,18 @@ module.exports = {
 
     // 3rd-party modules often force us to use 'any'
     "@typescript-eslint/no-explicit-any": "off",
+
+    "no-restricted-imports": [
+      "error",
+      {
+        paths: [
+          {
+            name: "@/app/theme/colors",
+            message:
+              "To support dark mode, use semantic-tokens.ts instead of colors.ts.",
+          },
+        ],
+      },
+    ],
   },
 }
