@@ -9,7 +9,7 @@ import { graphNodeHiddenIndirectlySetAtom } from "@/graph/state/derived/visibili
 
 import { treeRowHeightPx } from "../tree-util"
 import FolderArrow from "./folder-arrow"
-import TreeInput from "./tree-input"
+import TreeInput from "./tree-input.tsx"
 
 export function TreeRow({
   node,
