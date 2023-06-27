@@ -26,8 +26,8 @@ export default {
         _dark: `${colors.cyan[600]}66`,
       },
       select: {
-        default: `${colors.blue[300]}66`,
-        _dark: `${colors.blue[600]}66`,
+        default: `${colors.blue[800]}22`,
+        _dark: `${colors.blue[100]}22`,
       },
       focusSelect: {
         default: `${colors.cyan[300]}99`,

@@ -84,6 +84,11 @@
       "id": "node-1687680905515",
       "name": "Clip",
       "label": "Clip"
+    },
+    {
+      "id": "node-1687908649532",
+      "name": "Question",
+      "label": "Question"
     }
   ],
   "edges": [
@@ -166,6 +171,11 @@
       "id": "edge-1687680905515",
       "source": "node-1687413492705",
       "target": "node-1687680905515"
+    },
+    {
+      "id": "edge-1687908649533",
+      "source": "node-1687413576989",
+      "target": "node-1687908649532"
     }
   ],
   "edgePriorities": [

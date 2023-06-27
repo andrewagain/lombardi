@@ -2,13 +2,13 @@ import { Box, HStack, IconButton } from "@chakra-ui/react"
 import { useAtomValue } from "jotai"
 import { NodeRendererProps } from "react-arborist"
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai"
+import { MdArrowDropDown, MdArrowRight } from "react-icons/md"
 
 import { GraphNode } from "@/graph/graph-types.ts"
 import { useToggleNodeVisibility } from "@/graph/state/derived/modify-hooks"
 import { graphNodeHiddenIndirectlySetAtom } from "@/graph/state/derived/visibility-atoms"
 
 import { treeRowHeightPx } from "../tree-util"
-import FolderArrow from "./folder-arrow"
 import TreeInput from "./tree-input.tsx"
 
 export function TreeRow({
@@ -20,13 +20,13 @@ export function TreeRow({
   const indirectlyHiddenSet = useAtomValue(graphNodeHiddenIndirectlySetAtom)
   const indirectlyHidden = indirectlyHiddenSet.has(node.data.id)
 
-  const { isSelected, isEditing, isLeaf, isDragging } = node
-  console.log("isDragging", isDragging)
+  const { isSelected, isEditing, isLeaf } = node
   return (
     <Box
       position="relative"
       backgroundColor={isSelected ? "state.select" : undefined}
       _hover={{ bg: isSelected ? "state.focusSelect" : "state.focus" }}
+      fontWeight={isSelected ? "bold" : undefined}
       css={{
         "& [data-eye]": {
           opacity: visible ? 0 : 1,
@@ -42,11 +42,18 @@ export function TreeRow({
         style={style}
         ref={dragHandle}
         opacity={indirectlyHidden ? 0.5 : 1}
-        onClick={() => !isLeaf && node.toggle()}
         whiteSpace="nowrap"
         height={treeRowHeightPx}
       >
-        <FolderArrow node={node} />
+        <IconButton
+          size="sm"
+          aria-label="Expand"
+          variant="ghost"
+          onClick={() => !isLeaf && node.toggle()}
+          visibility={isLeaf ? "hidden" : undefined}
+        >
+          {node.isOpen ? <MdArrowDropDown /> : <MdArrowRight />}
+        </IconButton>
         <Box
           minWidth={1}
           css={{
