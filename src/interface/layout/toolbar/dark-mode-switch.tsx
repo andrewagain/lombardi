@@ -1,4 +1,4 @@
-import { Switch, useColorMode } from "@chakra-ui/react"
+import { IconButton, useColorMode } from "@chakra-ui/react"
 import { MdDarkMode, MdLightMode } from "react-icons/md"
 
 export default function DarkModeSwitch() {
@@ -6,8 +6,13 @@ export default function DarkModeSwitch() {
   const checked = colorMode === "dark"
 
   return (
-    <Switch checked={checked} onChange={toggleColorMode}>
-      {checked ? <MdDarkMode /> : <MdLightMode />}
-    </Switch>
+    <IconButton
+      aria-label="Toggle dark mode"
+      icon={checked ? <MdDarkMode /> : <MdLightMode />}
+      onClick={toggleColorMode}
+      variant="ghost"
+      colorScheme="gray"
+      size="sm"
+    />
   )
 }
