@@ -3,8 +3,9 @@ import { Box } from "@chakra-ui/react"
 import colors from "@/app/theme/colors"
 
 import { SidePanel } from "../../interface-state"
+import DarkModeSwitch from "./dark-mode-switch"
 import GraphSelect from "./graph-select"
-import LogoIcon from "./LogoIcon"
+import LogoIcon from "./logo-icon"
 import { PanelToggle } from "./panel-toggle"
 
 export default function Toolbar() {
@@ -23,6 +24,7 @@ export default function Toolbar() {
       <PanelToggle side={SidePanel.Left} />
       <Box />
       <GraphSelect />
+      <DarkModeSwitch />
       <PanelToggle side={SidePanel.Right} />
     </Box>
   )
