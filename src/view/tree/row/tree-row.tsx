@@ -66,7 +66,14 @@ export function TreeRow({
         </Box>
       </HStack>
 
-      <HStack position="absolute" data-eye right={0} top={0} zIndex={1}>
+      <HStack
+        position="absolute"
+        data-eye
+        right={2}
+        top={0}
+        zIndex={1}
+        bottom={0}
+      >
         <IconButton
           onClick={toggleVisibility}
           aria-label="Visibility"
