@@ -6,7 +6,7 @@ import { GraphNode } from "@/graph/graph-types"
 
 export default function FolderArrow({ node }: { node: NodeApi<GraphNode> }) {
   return (
-    <Box opacity={node.isLeaf ? 0 : 1} background="background.balls">
+    <Box opacity={node.isLeaf ? 0 : 1}>
       {node.isOpen ? <MdArrowDropDown /> : <MdArrowRight />}
     </Box>
   )

@@ -15,7 +15,7 @@ const theme = extendTheme({
   styles: {
     global: () => ({
       body: {
-        bg: "background.body",
+        bg: "interface.body",
 
         // workaround for an issue: pressing tab causes the window to get both horizontal and vertical
         // scrollbars, until the mouse is moved, at which point the scrollbars disappear. I found it very jarring.

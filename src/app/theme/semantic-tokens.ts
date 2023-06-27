@@ -5,10 +5,10 @@ import colors from "./colors"
 // https://chakra-ui.com/docs/styled-system/semantic-tokens
 export default {
   colors: {
-    background: {
+    interface: {
       body: { default: "gray.0", _dark: "gray.1000" },
       paper: { default: "gray.100", _dark: "blue.900" },
-      border: { default: "gray.600", _dark: "gray.400" },
+      border: { default: "gray.300", _dark: "gray.600" },
     },
     highlight: {
       main: { default: "blue.300", _dark: "blue.600" },
