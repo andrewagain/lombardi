@@ -1,10 +1,9 @@
 // Chakra's default colors are here:
-// https://github.com/chakra-ui/chakra-ui/blob/main/packages/theme/src/foundations/colors.ts
+// https://github.com/chakra-ui/chakra-ui/blob/main/packages/components/theme/src/foundations/colors.ts
 
 // We override those colors here.
 // Each set of hues is generated with https://smart-swatch.netlify.app/
 
-// https://github.com/chakra-ui/chakra-ui/blob/main/packages/components/theme/src/foundations/colors.ts
 const gray = {
   0: "#ffffff",
   50: "#F7FAFC",
