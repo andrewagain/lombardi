@@ -1,4 +1,9 @@
-import { IconButton, IconButtonProps } from "@chakra-ui/react"
+import {
+  IconButton,
+  IconButtonProps,
+  useColorModeValue,
+} from "@chakra-ui/react"
+import { highlight } from "prismjs"
 import { IconType } from "react-icons"
 
 import colors from "@/app/theme/colors"
@@ -15,9 +20,10 @@ export default function ToggleIconButton({
   OffIcon,
   ...props
 }: ToggleIconButtonProps) {
+  const highlight = useColorModeValue(colors.blue[300], colors.blue[100])
   return (
     <IconButton size="sm" {...props}>
-      {on ? <OnIcon color={colors.blue[100]} /> : <OffIcon />}
+      {on ? <OnIcon color={highlight} /> : <OffIcon />}
     </IconButton>
   )
 }

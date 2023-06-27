@@ -1,10 +1,8 @@
-import { Box, Text } from "@chakra-ui/react"
+import { Box, Text, useColorModeValue } from "@chakra-ui/react"
 import { useAtomValue } from "jotai"
 import React, { useMemo, useRef, useState } from "react"
 import { LightAsync as SyntaxHighlighter } from "react-syntax-highlighter"
 import agate from "react-syntax-highlighter/dist/esm/styles/hljs/agate"
-
-import colors from "@/app/theme/colors"
 
 import { CategorizedAtom } from "../atom-util"
 import { AtomValueToolbar } from "./atom-value-toolbar"
@@ -26,6 +24,8 @@ export function AtomCell({
     () => formatAtomValue(value, undefined, expanded),
     [value, expanded]
   )
+  const valueText = useColorModeValue("gray.800", "gray.300")
+  const valueBackground = useColorModeValue("gray.200", "gray.900")
 
   return (
     <React.Fragment>
@@ -49,11 +49,7 @@ export function AtomCell({
             {formattedValue}
           </SyntaxHighlighter>
         ) : (
-          <Text
-            color={colors.gray[300]}
-            backgroundColor={colors.gray[900]}
-            padding={1}
-          >
+          <Text color={valueText} backgroundColor={valueBackground} padding={1}>
             {formattedValue}
           </Text>
         )}
