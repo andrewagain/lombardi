@@ -1,4 +1,4 @@
-import { useSetAtom } from "jotai"
+import { useAtomValue, useSetAtom } from "jotai"
 import { atomWithStorage } from "jotai/utils"
 import { useCallback } from "react"
 
@@ -21,4 +21,11 @@ export function useToggleSidePanel(sidePanel: SidePanel) {
   return useCallback(() => {
     setSidePanels((a) => toggleArrayInclusion(a, sidePanel))
   }, [setSidePanels, sidePanel])
+}
+
+export function useSidePanelEnabled(sidePanel: SidePanel) {
+  {
+    const sidePanels = useAtomValue(interfaceSidePanelsAtom)
+    return sidePanels.includes(sidePanel)
+  }
 }
