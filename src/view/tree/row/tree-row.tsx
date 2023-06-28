@@ -38,6 +38,7 @@ export function TreeRow({
       cursor="pointer"
       height={treeRowHeightPx}
       borderEndRadius={`${treeRowHeight / 2}px`}
+      marginRight={2}
     >
       <HStack
         style={style}
