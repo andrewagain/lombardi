@@ -2,6 +2,7 @@ import { useAtom, useSetAtom } from "jotai"
 import { useAtomCallback } from "jotai/utils"
 import { useCallback } from "react"
 
+import { listToMap, mergeMaps } from "@/util/datastructure/map.ts"
 import { setCopyWithToggledItem } from "@/util/datastructure/set.ts"
 
 import { GraphEdge, GraphNode, GraphNodeId } from "../../graph-types.ts"
@@ -118,8 +119,10 @@ export function useMoveNodes() {
           return
         }
 
+        //
+        // Step 1: Update the edges
+        //
         const edgeMap = get(graphEdgeMapAtom)
-        const edgePriorityMap = get(graphEdgePriorityMapAtom)
 
         // Put all nodes that are moving into a map for easy lookup
         const movingNodeIdMap = new Map(nodeIds.map((id) => [id, true]))
@@ -134,12 +137,18 @@ export function useMoveNodes() {
           ...edge,
           source: parentId,
         }))
+        const newEdgeMap = mergeMaps(
+          edgeMap,
+          listToMap(updatedIncomingEdges, (x) => x.id)
+        )
+        console.log("old edgeMap", edgeMap)
+        console.log("newEdgeMap", newEdgeMap)
+        set(graphEdgeMapAtom, newEdgeMap)
 
-        // Create a new edge map with the updated edges
-        const newEdgeMap = new Map(edgeMap)
-        updatedIncomingEdges.forEach((edge) => {
-          newEdgeMap.set(edge.id, edge)
-        })
+        //
+        // Step 2: Prioritize the edges
+        //
+        const edgePriorityMap = get(graphEdgePriorityMapAtom)
 
         // Update the edge priority such that the moved edges are in the correct position
         const newEdgePriorityMap = new Map(edgePriorityMap)
@@ -149,29 +158,18 @@ export function useMoveNodes() {
           (edge) => edge.source === parentId
         )
         // Sort the outgoing edges of the parent
-        const parentOutgoingEdgeSorted = graphSortEdges(
+        const sortedSiblingEdges = graphSortEdges(
           parentOutgoingEdges,
           edgePriorityMap
         )
+        sortedSiblingEdges.splice(insertIndex, 0, ...updatedIncomingEdges)
 
-        // Find the index of the first outgoing edge that is not moving
-        const beforeNode = parentOutgoingEdgeSorted[insertIndex - 1]
-        const afterNode = parentOutgoingEdgeSorted[insertIndex]
-        const beforePriority =
-          edgePriorityMap.get(beforeNode?.id ?? null) || null
-        const afterPriority = edgePriorityMap.get(afterNode?.id ?? null) || null
-
-        const priorities = calculateInsertNodePriorities(
-          incomingEdges.length,
-          beforePriority,
-          afterPriority
-        )
-
-        incomingEdges.forEach((edge, i) => {
-          newEdgePriorityMap.set(edge.id, priorities[i])
+        console.log("sortedSiblingEdges", sortedSiblingEdges)
+        sortedSiblingEdges.forEach((edge, i) => {
+          console.log(`Setting priority of ${edge.id} to ${i + 1}`)
+          newEdgePriorityMap.set(edge.id, i + 1)
         })
 
-        set(graphEdgeMapAtom, newEdgeMap)
         set(graphEdgePriorityMapAtom, newEdgePriorityMap)
       },
       []
