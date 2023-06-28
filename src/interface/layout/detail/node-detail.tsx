@@ -1,18 +1,15 @@
-import { Box } from "@chakra-ui/react"
 import { useAtomValue } from "jotai"
 
-import { GraphNodeId } from "@/graph/graph-types"
-import { graphNodeFamily } from "@/graph/state/derived/node-atoms"
+import { graphNodeSelectedIdsAtom } from "@/graph/state/graph-core-atoms"
 
-export default function NodeDetail({ id }: { id: GraphNodeId }) {
-  const node = useAtomValue(graphNodeFamily(id))
-  if (!node) {
-    return <Box>🤪 Node Undefined 🤷‍♀️</Box>
+import MultiDetail from "./multi-detail"
+import SingleDetail from "./single-detail"
+
+export default function NodeDetail() {
+  const selectedNodeIds = useAtomValue(graphNodeSelectedIdsAtom)
+
+  if (selectedNodeIds.length === 1) {
+    return <SingleDetail />
   }
-
-  return (
-    <Box>
-      <Box>id: {node.id}</Box>
-    </Box>
-  )
+  return <MultiDetail />
 }

@@ -6,7 +6,7 @@ import * as serialAtoms from "@/graph/state/derived/serializable-atoms"
 import * as treeAtoms from "@/graph/state/derived/tree-atoms"
 import * as visibilityAtoms from "@/graph/state/derived/visibility-atoms"
 import * as graphCoreAtoms from "@/graph/state/graph-core-atoms"
-import { PanelDivider } from "@/interface/controls/panel-divider"
+import { PanelDivider } from "@/interface/layout/panel/panel-divider"
 
 import { AtomSet } from "./atom-util"
 import AtomKeyList from "./key/atom-key-list"

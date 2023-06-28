@@ -23,3 +23,8 @@ export const graphNodeCountAtom = atom((get) => get(graphNodeMapAtom).size)
 export const graphNodeFamily = atomFamily((nodeId: GraphNodeId) => {
   return atom((get) => get(graphNodeMapAtom).get(nodeId))
 })
+
+export const graphNodeFirstAtom = atom((get) => {
+  const nodes = get(graphNodesAtom)
+  return nodes.length > 0 ? nodes[0] : undefined
+})

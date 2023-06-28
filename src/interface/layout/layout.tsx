@@ -2,14 +2,14 @@ import { Box } from "@chakra-ui/react"
 import { useAtomValue } from "jotai"
 
 import { PersistGraphEffect } from "@/graph/state/effect/graph-persist"
+import AtomView from "@/view/atom/atom-view"
 import FlowView from "@/view/flow/flow-view.tsx"
+import TreeView from "@/view/tree/tree-view"
 
-import { PanelDivider } from "../controls/panel-divider"
 import { interfaceSidePanelsAtom, SidePanel } from "../interface-state"
+import NodeDetail from "./detail/node-detail"
 import Footer from "./footer/footer"
-import DebugPanel from "./panel/debug-panel"
-import LeftPanel from "./panel/left-panel"
-import RightPanel from "./panel/right-panel"
+import Panel from "./panel/panel.tsx"
 import Toolbar from "./toolbar/main-toolbar"
 
 export default function Layout() {
@@ -39,25 +39,30 @@ export default function Layout() {
     >
       <Toolbar />
       {panels.includes(SidePanel.Left) && (
-        <>
-          <LeftPanel />
-          <PanelDivider gridArea="l-div" orientation="right" />
-        </>
+        <Panel
+          orientation="left"
+          panelGridArea="l-panel"
+          dividerGridArea="l-div"
+        >
+          <TreeView />
+        </Panel>
       )}
       <div style={{ gridArea: "main" }}>
         <FlowView />
       </div>
       {panels.includes(SidePanel.Right) && (
-        <>
-          <PanelDivider gridArea="r-div" orientation="left" />
-          <RightPanel />
-        </>
+        <Panel orientation="right" panelGridArea="r-panel">
+          <NodeDetail />
+        </Panel>
       )}
       {panels.includes(SidePanel.Debug) && (
-        <>
-          <PanelDivider gridArea="d-div" orientation="left" />
-          <DebugPanel />
-        </>
+        <Panel
+          orientation="right"
+          panelGridArea="r-panel"
+          dividerGridArea="r-div"
+        >
+          <AtomView />
+        </Panel>
       )}
 
       <Footer />
