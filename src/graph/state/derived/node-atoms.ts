@@ -1,6 +1,7 @@
 import { atom } from "jotai"
+import { atomFamily } from "jotai/utils"
 
-import { GraphNode } from "@/graph/graph-types"
+import { GraphNode, GraphNodeId } from "@/graph/graph-types"
 import { listToMap } from "@/util/datastructure/map"
 
 import { graphNodeMapAtom } from "../graph-core-atoms"
@@ -18,3 +19,7 @@ export const graphNodesAtom = atom(
 )
 
 export const graphNodeCountAtom = atom((get) => get(graphNodeMapAtom).size)
+
+export const graphNodeFamily = atomFamily((nodeId: GraphNodeId) => {
+  return atom((get) => get(graphNodeMapAtom).get(nodeId))
+})

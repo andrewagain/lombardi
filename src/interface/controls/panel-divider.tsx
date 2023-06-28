@@ -6,6 +6,8 @@ import { useCallback, useEffect, useRef } from "react"
 import { Point } from "@/util/geometry/point"
 import { Size } from "@/util/geometry/rect"
 
+const DEFAULT_WIDTH = 200
+
 const panelDividerWidthsAtom = atomWithStorage(
   "nuons.panels",
   [] as [string, number][]
@@ -21,11 +23,11 @@ const panelDividerWidthMapAtom = atom(
 function usePanelDividerWidth(key: string) {
   const [w, setW] = useAtom(panelDividerWidthMapAtom)
   return [
-    w.get(key),
+    w.get(key) || DEFAULT_WIDTH,
     (width: number) => {
       setW(new Map(w.set(key, width)))
     },
-  ] as [number | undefined, (width: number) => void]
+  ] as [number, (width: number) => void]
 }
 
 type PanelDividerOrientation = "top" | "bottom" | "left" | "right"
