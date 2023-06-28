@@ -6,7 +6,7 @@ import * as serialAtoms from "@/graph/state/derived/serializable-atoms"
 import * as treeAtoms from "@/graph/state/derived/tree-atoms"
 import * as visibilityAtoms from "@/graph/state/derived/visibility-atoms"
 import * as graphCoreAtoms from "@/graph/state/graph-core-atoms"
-import { PanelDivider } from "@/interface/layout/panel/panel-divider"
+import Panel from "@/interface/layout/panel/panel"
 
 import { AtomSet } from "./atom-util"
 import AtomKeyList from "./key/atom-key-list"
@@ -39,23 +39,24 @@ export default function AtomView() {
   return (
     <Box
       display="grid"
-      gridTemplateAreas={`"t" "d" "b"`}
+      gridTemplateAreas={`"panel-values" "panel-div" "keys"`}
       gridTemplateRows="auto auto 1fr"
       height="100%"
       width="100%"
       minWidth={1}
     >
+      <Panel orientation="top" panelKey="debug-values">
+        <Box padding={2} minWidth={1} overflowY="scroll">
+          <AtomValueList atomSets={getAllImportSets()} />
+        </Box>
+      </Panel>
+
       <Box
-        gridArea="t"
-        css={{ height: 200 }}
-        padding={2}
-        minWidth={1}
-        overflowY="scroll"
+        gridArea="keys"
+        display="flex"
+        flexDirection="column"
+        overflow="hidden"
       >
-        <AtomValueList atomSets={getAllImportSets()} />
-      </Box>
-      <PanelDivider orientation="bottom" gridArea="d" />
-      <Box gridArea="b" display="flex" flexDirection="column" overflow="hidden">
         <AtomKeyList atomSets={getAllImportSets()} />
       </Box>
     </Box>

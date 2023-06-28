@@ -23,7 +23,7 @@ export default function Layout() {
         gridTemplateRows: "auto 1fr auto",
         gridTemplateAreas: `
         "h       h     h    h     h       h     h"
-        "l-panel l-div main r-div r-panel d-div d-panel"
+        "panel-l div-l main div-r panel-r div-d panel-d"
         "f       f     f    f     f       f     f"`,
         height: "100vh",
         width: "100%",
@@ -39,11 +39,7 @@ export default function Layout() {
     >
       <Toolbar />
       {panels.includes(SidePanel.Left) && (
-        <Panel
-          orientation="left"
-          panelGridArea="l-panel"
-          dividerGridArea="l-div"
-        >
+        <Panel orientation="left" panelKey="l">
           <TreeView />
         </Panel>
       )}
@@ -51,16 +47,12 @@ export default function Layout() {
         <FlowView />
       </div>
       {panels.includes(SidePanel.Right) && (
-        <Panel orientation="right" panelGridArea="r-panel">
+        <Panel orientation="right" panelKey="r">
           <NodeDetail />
         </Panel>
       )}
       {panels.includes(SidePanel.Debug) && (
-        <Panel
-          orientation="right"
-          panelGridArea="r-panel"
-          dividerGridArea="r-div"
-        >
+        <Panel orientation="right" panelKey="d">
           <AtomView />
         </Panel>
       )}
