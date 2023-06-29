@@ -11,7 +11,7 @@ export default {
       border: { default: "gray.300", _dark: "gray.600" },
     },
     highlight: {
-      main: { default: "blue.300", _dark: "blue.600" },
+      main: { default: "blue.300", _dark: "blue.300" },
       secondary: { default: "cyan.200", _dark: "cyan.400" },
       trinary: { default: "purple.400", _dark: "purple.600" },
     },
