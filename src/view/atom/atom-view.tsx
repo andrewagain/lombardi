@@ -38,26 +38,17 @@ function getAllImportSets(): AtomSet[] {
 export default function AtomView() {
   return (
     <Box
-      display="grid"
-      gridTemplateAreas={`"panel-values" "div-values" "keys"`}
-      gridTemplateRows="auto auto 1fr"
       height="100%"
       width="100%"
-      minWidth={1}
+      minWidth={0}
+      minHeight={0}
+      overflow="hidden"
     >
       <Panel orientation="top" panelKey="values" overflowY="scroll" padding={2}>
         <AtomValueList atomSets={getAllImportSets()} />
       </Panel>
 
-      <Box
-        gridArea="keys"
-        display="flex"
-        flexDirection="column"
-        overflow="hidden"
-        minHeight={0}
-      >
-        <AtomKeyList atomSets={getAllImportSets()} />
-      </Box>
+      <AtomKeyList atomSets={getAllImportSets()} />
     </Box>
   )
 }

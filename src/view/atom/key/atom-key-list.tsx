@@ -33,14 +33,8 @@ export default function AtomKeyList({ atomSets }: { atomSets: AtomSet[] }) {
   }, [atomSets, filterText])
 
   return (
-    <Box
-      display="flex"
-      flexDirection="column"
-      flex="1 1 auto"
-      alignItems="stretch"
-      overflow="hidden"
-    >
-      <Box flex="0 1 auto" padding={2} borderBottom={interfaceBorder}>
+    <Box minHeight={0} overflow="hidden">
+      <Box padding={2} borderBottom={interfaceBorder}>
         <Input
           onChange={(e) => {
             setFilterText(e.target.value)
@@ -51,29 +45,22 @@ export default function AtomKeyList({ atomSets }: { atomSets: AtomSet[] }) {
         />
       </Box>
 
-      <Box
-        flex="0 1 auto"
-        position="relative"
-        overflowY="scroll"
-        overflowX="hidden"
-      >
-        <Box minHeight={1}>
-          {filteredSets.map((set) => (
-            <Box key={set.name} padding={2}>
-              <Heading size="sm" paddingTop={2}>
-                {set.name}
-              </Heading>
-              <Box>
-                {getSetCategorizedAtoms(set).map((ca) => (
-                  <AtomKeyRow
-                    categorizedAtom={ca}
-                    key={getCategorizedAtomKey(ca)}
-                  />
-                ))}
-              </Box>
+      <Box minHeight={0} overflowY="scroll">
+        {filteredSets.map((set) => (
+          <Box key={set.name} padding={2}>
+            <Heading size="sm" paddingTop={2}>
+              {set.name}
+            </Heading>
+            <Box>
+              {getSetCategorizedAtoms(set).map((ca) => (
+                <AtomKeyRow
+                  categorizedAtom={ca}
+                  key={getCategorizedAtomKey(ca)}
+                />
+              ))}
             </Box>
-          ))}
-        </Box>
+          </Box>
+        ))}
       </Box>
     </Box>
   )

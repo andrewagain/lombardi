@@ -84,6 +84,8 @@ export default function Panel({
         style={panelSizeStyle}
         ref={panelRef}
         gridArea={getPanelGridArea(panelKey)}
+        minHeight={0}
+        minWidth={0}
         {...boxProps}
       >
         {children}
