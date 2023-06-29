@@ -42,5 +42,8 @@ export default {
         },
       },
     },
+    text: {
+      subtle: { default: "gray.500", _dark: "gray.500" },
+    },
   },
 }

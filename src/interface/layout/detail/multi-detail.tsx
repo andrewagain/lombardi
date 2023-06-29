@@ -8,7 +8,9 @@ export default function MultiDetail() {
 
   return (
     <Box>
-      <Box>{selectedNodeIds.length} nodes selected</Box>
+      <Box textAlign="center" paddingTop={4} color="text.subtle">
+        {selectedNodeIds.length} nodes selected
+      </Box>
     </Box>
   )
 }
