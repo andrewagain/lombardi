@@ -6,10 +6,7 @@ import { listToMap, mergeMaps } from "@/util/datastructure/map.ts"
 import { setCopyWithToggledItem } from "@/util/datastructure/set.ts"
 
 import { GraphEdge, GraphNode, GraphNodeId } from "../../graph-types.ts"
-import {
-  calculateInsertNodePriorities,
-  graphSortEdges,
-} from "../../graph-util.ts"
+import { graphSortEdges } from "../../graph-util.ts"
 import {
   graphEdgeMapAtom,
   graphEdgePriorityMapAtom,
