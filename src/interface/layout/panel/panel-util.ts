@@ -63,13 +63,13 @@ export function getNextPanelSize(
   }
 
   switch (orientation) {
-    case "left":
-      return initialSize.width - drag.x
-    case "top":
-      return initialSize.height - drag.y
     case "right":
-      return initialSize.width + drag.x
+      return initialSize.width - drag.x
     case "bottom":
+      return initialSize.height - drag.y
+    case "left":
+      return initialSize.width + drag.x
+    case "top":
       return initialSize.height + drag.y
   }
 }
