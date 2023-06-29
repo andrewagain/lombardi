@@ -51,20 +51,31 @@ export function useAddEdge() {
   )
 }
 
-export function useRenameNode() {
+export function useModifyNode() {
   const setNodeMap = useSetAtom(graphNodeMapAtom)
 
   return useCallback(
-    (id: string, name: string) => {
+    (id: string, updates: Partial<GraphNode>) => {
       setNodeMap((nodeMap) => {
         const node = nodeMap.get(id)
         if (!node) {
           return nodeMap
         }
-        return new Map(nodeMap).set(id, { ...node, name })
+        return new Map(nodeMap).set(id, { ...node, ...updates })
       })
     },
     [setNodeMap]
+  )
+}
+
+export function useRenameNode() {
+  const modifyNode = useModifyNode()
+
+  return useCallback(
+    (id: string, name: string) => {
+      modifyNode(id, { name })
+    },
+    [modifyNode]
   )
 }
 

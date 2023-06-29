@@ -1,16 +1,18 @@
-import { Box } from "@chakra-ui/react"
+import { Box, VStack } from "@chakra-ui/react"
 import { useAtomValue } from "jotai"
 
 import { GraphNode } from "@/graph/graph-types"
 import { graphNodeFirstSelectedAtom } from "@/graph/state/derived/selection-atoms"
 
-import { NameInput } from "./name-input"
+import { DescriptionInput } from "./input/description-input"
+import { NameInput } from "./input/name-input"
 
 function SingleDetailInternal({ node }: { node: GraphNode }) {
   return (
-    <Box padding={2}>
+    <VStack padding={2}>
       <NameInput node={node} />
-    </Box>
+      <DescriptionInput node={node} />
+    </VStack>
   )
 }
 
