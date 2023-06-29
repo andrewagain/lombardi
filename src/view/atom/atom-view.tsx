@@ -39,16 +39,14 @@ export default function AtomView() {
   return (
     <Box
       display="grid"
-      gridTemplateAreas={`"panel-values" "panel-div" "keys"`}
+      gridTemplateAreas={`"panel-values" "div-values" "keys"`}
       gridTemplateRows="auto auto 1fr"
       height="100%"
       width="100%"
       minWidth={1}
     >
-      <Panel orientation="top" panelKey="debug-values">
-        <Box padding={2} minWidth={1} overflowY="scroll">
-          <AtomValueList atomSets={getAllImportSets()} />
-        </Box>
+      <Panel orientation="top" panelKey="values" overflowY="scroll" padding={2}>
+        <AtomValueList atomSets={getAllImportSets()} />
       </Panel>
 
       <Box
@@ -56,6 +54,7 @@ export default function AtomView() {
         display="flex"
         flexDirection="column"
         overflow="hidden"
+        minHeight={0}
       >
         <AtomKeyList atomSets={getAllImportSets()} />
       </Box>

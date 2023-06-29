@@ -84,6 +84,7 @@ export default function Panel({
         style={panelSizeStyle}
         ref={panelRef}
         gridArea={getPanelGridArea(panelKey)}
+        {...boxProps}
       >
         {children}
       </Box>
@@ -102,7 +103,6 @@ export default function Panel({
         gridArea={getPanelDividerGridArea(panelKey)}
         position="relative"
         data-orientation={orientation}
-        {...boxProps}
       >
         <Box
           onMouseDown={onMouseDown}
