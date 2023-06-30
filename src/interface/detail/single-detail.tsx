@@ -3,7 +3,7 @@ import { useAtomValue } from "jotai"
 
 import { graphNodeFirstSelectedAtom } from "@/graph/state/derived/selection-atoms"
 
-import CategoryForm from "./input/category-form"
+import CategoryForm from "./category/category-form"
 import { DescriptionInput } from "./input/description-input"
 import { NameInput } from "./input/name-input"
 
