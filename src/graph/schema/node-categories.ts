@@ -1,5 +1,10 @@
-import { NodeCategory } from "../graph-types"
-type ShorthandNodeCategory = [string | undefined, string, string[]]
+import { NodeCategory, NodePropertyType } from "../graph-types"
+type ShorthandNodePropertyType = [string, NodePropertyType]
+type ShorthandNodeCategory = [
+  string | undefined,
+  string,
+  ShorthandNodePropertyType[]
+]
 
 export function toNodeCategories(
   shorthand: ShorthandNodeCategory[]
@@ -7,16 +12,23 @@ export function toNodeCategories(
   return shorthand.map(([parent, name, properties]) => ({
     parent,
     name,
-    properties,
+    properties: properties.map(([name, type]) => ({ name, type })),
   }))
 }
 
 export const nodeCategories: ShorthandNodeCategory[] = [
-  ["", "Organism", ["birthday", "species"]],
-  ["Organism", "Human", ["job"]],
+  [
+    "",
+    "Organism",
+    [
+      ["birthday", "datetime"],
+      ["species", "string"],
+    ],
+  ],
+  ["Organism", "Human", [["title", "string"]]],
   ["Organism", "Animal", []],
   ["Organism", "Plant", []],
-  ["", "Institution", ["location"]],
+  ["", "Institution", [["location", "string"]]],
   ["Institution", "Corporation", []],
   ["Institution", "Government", []],
   ["Institution", "Nonprofit", []],
@@ -31,7 +43,7 @@ export const nodeCategories: ShorthandNodeCategory[] = [
   ["Logic", "Answer", []],
   ["Logic", "Premise", []],
   ["Logic", "Conclusion", []],
-  ["", "Source", ["url"]],
+  ["", "Source", [["url", "string"]]],
   ["Source", "Video", []],
   ["Source", "Study", []],
   ["Source", "Website", []],
