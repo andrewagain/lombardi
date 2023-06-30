@@ -6,11 +6,11 @@ import AtomView from "@/view/atom/atom-view"
 import FlowView from "@/view/flow/flow-view.tsx"
 import TreeView from "@/view/tree/tree-view"
 
+import NodeDetail from "../detail/node-detail.tsx"
 import { interfaceSidePanelsAtom, SidePanel } from "../interface-state"
-import NodeDetail from "./detail/node-detail"
+import Toolbar from "../toolbar/main-toolbar.tsx"
 import Footer from "./footer/footer"
 import Panel from "./panel/panel.tsx"
-import Toolbar from "./toolbar/main-toolbar"
 
 export default function Layout() {
   const panels = useAtomValue(interfaceSidePanelsAtom)
