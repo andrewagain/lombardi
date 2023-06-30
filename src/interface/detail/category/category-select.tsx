@@ -1,7 +1,8 @@
-import { Select } from "chakra-react-select"
+import { GroupBase, Select } from "chakra-react-select"
 import { useAtomValue } from "jotai"
+import { OptionsOrGroups } from "react-select"
 
-import { GraphNode, GraphNodeId, NodeCategory } from "@/graph/graph-types"
+import { GraphNodeId, NodeCategory } from "@/graph/graph-types"
 import { nodeCategories } from "@/graph/schema/node-categories"
 import { graphNodeFamily } from "@/graph/state/derived/node-atoms"
 
@@ -14,11 +15,11 @@ function getOptionValue(n: NodeCategory) {
 }
 
 // https://react-select.com/props#groupheading
-interface GroupType extends Omit<NodeCategory, "subcategories"> {
-  options: (GroupType | NodeCategory)[]
-}
 
-function optionsToGroups(n: NodeCategory[]): GroupType[] {
+type GroupType = GroupBase<NodeCategory>
+function optionsToGroups(
+  n: NodeCategory[]
+): OptionsOrGroups<NodeCategory, GroupType> {
   return n.map((x) => ({ ...x, options: optionsToGroups(x.subcategories) }))
 }
 
