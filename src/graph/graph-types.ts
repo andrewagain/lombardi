@@ -39,3 +39,9 @@ export interface NodePosition {
   x: number
   y: number
 }
+
+export interface NodeCategory {
+  parent: string | undefined
+  name: string
+  properties: string[]
+}
