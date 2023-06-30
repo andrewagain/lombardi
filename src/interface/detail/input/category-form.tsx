@@ -1,14 +1,23 @@
-import { NodeCategory } from "@/graph/graph-types"
+import { GraphNodeId, NodeCategory } from "@/graph/graph-types"
 
-export default function CategoryForm(category: NodeCategory) {
+import CategoryInput from "./category-input"
+
+export default function CategoryForm({
+  nodeId,
+  category,
+}: {
+  nodeId: GraphNodeId
+  category: NodeCategory
+}) {
   return (
     <div>
       <h2>{category.name}</h2>
       {category.properties.map((property) => (
-        <div>
-          <label>{property.name}</label>
-          <input type="text" />
-        </div>
+        <CategoryInput
+          nodeId={nodeId}
+          category={category}
+          property={property}
+        />
       ))}
     </div>
   )

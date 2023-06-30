@@ -1,10 +1,14 @@
 import { GraphNodeId, NodeCategory, NodeProperty } from "@/graph/graph-types"
 
-export default function CategoryInput(
-  nodeId: GraphNodeId,
-  category: NodeCategory,
+export default function CategoryInput({
+  nodeId,
+  category,
+  property,
+}: {
+  nodeId: GraphNodeId
+  category: NodeCategory
   property: NodeProperty
-) {
+}) {
   switch (property.type) {
     case "string":
       return <input type="text" />
