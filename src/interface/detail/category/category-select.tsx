@@ -1,12 +1,11 @@
-import {
+import { useAtomValue } from "jotai"
+import { useCallback, useMemo } from "react"
+import Select, {
   ActionMeta,
   GroupBase,
   OnChangeValue,
-  Select,
-} from "chakra-react-select"
-import { useAtomValue } from "jotai"
-import { useCallback, useMemo } from "react"
-import { OptionsOrGroups } from "react-select"
+  OptionsOrGroups,
+} from "react-select"
 
 import { GraphNodeId, NodeCategory } from "@/graph/graph-types"
 import { nodeCategories, nodeCategoryMap } from "@/graph/schema/node-categories"
@@ -38,6 +37,7 @@ function optionsToGroups(
 }
 
 const options = optionsToGroups(nodeCategories)
+console.log("options", options)
 
 export default function CategorySelect({ nodeId }: { nodeId: GraphNodeId }) {
   const node = useAtomValue(graphNodeFamily(nodeId))
