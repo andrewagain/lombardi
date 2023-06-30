@@ -50,9 +50,9 @@ export interface NodeProperty {
 }
 
 export interface NodeCategory {
-  parent: string | undefined
   name: string
   properties: NodeProperty[]
+  subcategories: NodeCategory[]
 }
 
 export type NodePropertyValue = string | number | boolean | Date | undefined
