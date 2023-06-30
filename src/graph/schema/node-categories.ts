@@ -51,6 +51,17 @@ const shorthandNodeCategories: ShorthandNodeCategory[] = [
       },
       {
         id: "Government",
+        subcategories: [
+          {
+            id: "Federal",
+          },
+          {
+            id: "State",
+          },
+          {
+            id: "Local",
+          },
+        ],
       },
       {
         id: "Nonprofit",
