@@ -5,6 +5,7 @@ import {
   GraphEdgeId,
   GraphEdgePriority,
   GraphNode,
+  GraphNodeIdAndPropertyName,
   NodePropertyValue,
 } from "../../graph-types"
 import {
@@ -16,7 +17,7 @@ import { graphNodesAtom } from "./node-atoms"
 
 export interface SerializableData {
   nodes: GraphNode[]
-  nodeProperties: [number, string | Map<string, NodePropertyValue>][][]
+  nodeProperties: [GraphNodeIdAndPropertyName, NodePropertyValue][]
   edges: GraphEdge[]
   edgePriorities: [GraphEdgeId, GraphEdgePriority][]
 }
@@ -27,9 +28,7 @@ export const serializableDataAtom = atom(
       nodes: get(graphNodesAtom),
       edges: get(graphEdgesAtom),
       edgePriorities: [...get(graphEdgePriorityMapAtom).entries()],
-      nodeProperties: [...get(graphNodePropertyMapAtom).entries()].map((x) => [
-        ...x.entries(),
-      ]),
+      nodeProperties: [...get(graphNodePropertyMapAtom).entries()],
     }
     return data
   },
