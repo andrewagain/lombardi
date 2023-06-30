@@ -1,10 +1,12 @@
 export type GraphNodeId = string
 export type GraphEdgeId = string
 export type GraphEdgePriority = number // may be a fraction
+export type NodeCategoryId = string
+
 export interface GraphNode {
   id: GraphNodeId
   name: string
-  categories: NodeCategory[]
+  categories: NodeCategoryId[]
   description?: string
   icon?: string
 }
@@ -50,7 +52,7 @@ export interface NodeProperty {
 }
 
 export interface NodeCategory {
-  name: string
+  id: NodeCategoryId
   properties: NodeProperty[]
   subcategories: NodeCategory[]
 }

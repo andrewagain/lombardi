@@ -1,17 +1,24 @@
-import { GraphNodeId, NodeCategory } from "@/graph/graph-types"
+import { GraphNodeId, NodeCategoryId } from "@/graph/graph-types"
+import { nodeCategoryMap } from "@/graph/schema/node-categories"
 
 import CategoryInput from "./category-input"
 
 export default function CategoryForm({
   nodeId,
-  category,
+  categoryId,
 }: {
   nodeId: GraphNodeId
-  category: NodeCategory
+  categoryId: NodeCategoryId
 }) {
+  const category = nodeCategoryMap.get(categoryId)
+
+  if (!category) {
+    return null
+  }
+
   return (
     <div>
-      <h2>{category.name}</h2>
+      <h2>{category.id}</h2>
       {category.properties.map((property) => (
         <CategoryInput
           nodeId={nodeId}

@@ -6,7 +6,7 @@ import {
 type ShorthandNodeProperty = [NodePropertyName, NodePropertyType]
 
 interface ShorthandNodeCategory {
-  name: string
+  id: string
   properties?: ShorthandNodeProperty[]
   subcategories?: ShorthandNodeCategory[]
 }
@@ -14,9 +14,9 @@ interface ShorthandNodeCategory {
 function expandShorthand(
   shorthandNodeCategory: ShorthandNodeCategory
 ): NodeCategory {
-  const { name, properties = [], subcategories = [] } = shorthandNodeCategory
+  const { id, properties = [], subcategories = [] } = shorthandNodeCategory
   return {
-    name,
+    id,
     properties: properties.map(([name, type]) => ({ name, type })),
     subcategories: subcategories.map(expandShorthand),
   }
@@ -24,96 +24,100 @@ function expandShorthand(
 
 const shorthandNodeCategories: ShorthandNodeCategory[] = [
   {
-    name: "Organism",
+    id: "Organism",
     properties: [
       ["birthday", "datetime"],
       ["species", "string"],
     ],
     subcategories: [
       {
-        name: "Human",
+        id: "Human",
         properties: [["title", "string"]],
       },
       {
-        name: "Animal",
+        id: "Animal",
       },
       {
-        name: "Plant",
+        id: "Plant",
       },
     ],
   },
   {
-    name: "Institution",
+    id: "Institution",
     properties: [["location", "string"]],
     subcategories: [
       {
-        name: "Corporation",
+        id: "Corporation",
       },
       {
-        name: "Government",
+        id: "Government",
       },
       {
-        name: "Nonprofit",
+        id: "Nonprofit",
       },
       {
-        name: "University",
+        id: "University",
       },
       {
-        name: "School",
+        id: "School",
       },
       {
-        name: "Hospital",
+        id: "Hospital",
       },
       {
-        name: "Religious",
+        id: "Religious",
       },
       {
-        name: "Sports",
+        id: "Sports",
       },
     ],
   },
   {
-    name: "Logic",
+    id: "Logic",
     properties: [],
     subcategories: [
       {
-        name: "Claim",
+        id: "Claim",
       },
       {
-        name: "Question",
+        id: "Question",
       },
       {
-        name: "Answer",
+        id: "Answer",
       },
       {
-        name: "Assumption",
+        id: "Assumption",
       },
       {
-        name: "Conclusion",
+        id: "Conclusion",
       },
     ],
   },
   {
-    name: "Source",
+    id: "Source",
     properties: [["url", "string"]],
     subcategories: [
       {
-        name: "Video",
+        id: "Video",
       },
       {
-        name: "Study",
+        id: "Study",
       },
       {
-        name: "Website",
+        id: "Website",
       },
       {
-        name: "Book",
+        id: "Book",
       },
       {
-        name: "Podcast",
+        id: "Podcast",
       },
     ],
   },
 ]
 
 export const nodeCategories = shorthandNodeCategories.map(expandShorthand)
+
+export const nodeCategoryMap = new Map(
+  nodeCategories.map((category) => [category.id, category])
+)
