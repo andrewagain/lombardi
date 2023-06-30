@@ -40,8 +40,15 @@ export interface NodePosition {
   y: number
 }
 
+export type NodePropertyType = "datetime" | "string" | "number" | "boolean"
+
+export interface NodeProperty {
+  name: string
+  type: NodePropertyType
+}
+
 export interface NodeCategory {
   parent: string | undefined
   name: string
-  properties: string[]
+  properties: NodeProperty[]
 }
