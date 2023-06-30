@@ -1,6 +1,8 @@
 import { Select } from "chakra-react-select"
 
-export default function CategorySelect() {
+import { GraphNodeId } from "@/graph/graph-types"
+
+export default function CategorySelect({ nodeId }: { nodeId: GraphNodeId }) {
   return (
     <Select
       options={[
