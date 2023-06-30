@@ -13,17 +13,32 @@ function getOptionValue(n: NodeCategory) {
   return n.name
 }
 
+const options = [
+  {
+    label: "Group 1",
+    options: [
+      { label: "Group 1, option 1", value: "value_1" },
+      { label: "Group 1, option 2", value: "value_2" },
+    ],
+  },
+  { label: "A root option", value: "value_3" },
+  { label: "Another root option", value: "value_4" },
+]
 export default function CategorySelect({ nodeId }: { nodeId: GraphNodeId }) {
   const node = useAtomValue(graphNodeFamily(nodeId))
 
   return (
-    <Select
-      closeMenuOnSelect={false}
-      isMulti
-      value={node?.categories || []}
-      options={nodeCategories}
-      getOptionLabel={getOptionLabel}
-      getOptionValue={getOptionValue}
-    />
+    <div>
+      <Select options={options} />
+
+      <Select
+        closeMenuOnSelect={false}
+        isMulti
+        value={node?.categories || []}
+        options={nodeCategories}
+        getOptionLabel={getOptionLabel}
+        getOptionValue={getOptionValue}
+      />
+    </div>
   )
 }
