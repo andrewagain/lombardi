@@ -2,20 +2,23 @@ import { atom } from "jotai"
 
 import {
   GraphEdge,
+  GraphEdgeId,
   GraphEdgePriority,
   GraphNode,
   GraphNodeId,
   NodePosition,
+  NodePropertyName,
+  NodePropertyValue,
 } from "../graph-types.ts"
 
 export const graphIdAtom = atom("opioid")
 
-export const graphNodeMapAtom = atom(new Map<string, GraphNode>())
+export const graphNodeMapAtom = atom(new Map<GraphNodeId, GraphNode>())
 
-export const graphEdgeMapAtom = atom(new Map<string, GraphEdge>())
+export const graphEdgeMapAtom = atom(new Map<GraphEdgeId, GraphEdge>())
 
 export const graphEdgePriorityMapAtom = atom(
-  new Map<string, GraphEdgePriority>()
+  new Map<GraphEdgeId, GraphEdgePriority>()
 )
 
 export const graphNodePositionMapAtom = atom(
@@ -25,3 +28,7 @@ export const graphNodePositionMapAtom = atom(
 export const graphNodeHiddenSetAtom = atom(new Set<GraphNodeId>())
 
 export const graphNodeSelectedIdsAtom = atom([] as GraphNodeId[])
+
+export const graphNodePropertyMapAtom = atom(
+  new Map<GraphNodeId, Map<NodePropertyName, NodePropertyValue>>()
+)

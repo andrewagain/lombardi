@@ -4,6 +4,7 @@ export type GraphEdgePriority = number // may be a fraction
 export interface GraphNode {
   id: GraphNodeId
   name: string
+  categories: NodeCategory[]
   description?: string
   icon?: string
 }
@@ -40,6 +41,7 @@ export interface NodePosition {
   y: number
 }
 
+export type NodePropertyName = string
 export type NodePropertyType = "datetime" | "string" | "number" | "boolean"
 
 export interface NodeProperty {
@@ -52,3 +54,5 @@ export interface NodeCategory {
   name: string
   properties: NodeProperty[]
 }
+
+export type NodePropertyValue = string | number | boolean | Date | undefined
