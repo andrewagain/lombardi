@@ -66,3 +66,16 @@ export function calculateInsertNodePriorities(
 
   return times(insertCount, (i) => i + 1)
 }
+
+export function splitGraphNodeIdAndPropertyName(
+  combo: string
+): [string, string] {
+  return combo.split(",") as [string, string]
+}
+
+export function combineGraphNodeIdAndPropertyName(
+  nodeId: string,
+  propertyName: string
+): string {
+  return [nodeId, propertyName].join(",")
+}

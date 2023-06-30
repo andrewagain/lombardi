@@ -6,8 +6,8 @@ import {
   GraphEdgePriority,
   GraphNode,
   GraphNodeId,
+  GraphNodeIdAndPropertyName,
   NodePosition,
-  NodePropertyName,
   NodePropertyValue,
 } from "../graph-types.ts"
 
@@ -30,5 +30,5 @@ export const graphNodeHiddenSetAtom = atom(new Set<GraphNodeId>())
 export const graphNodeSelectedIdsAtom = atom([] as GraphNodeId[])
 
 export const graphNodePropertyMapAtom = atom(
-  new Map<GraphNodeId, Map<NodePropertyName, NodePropertyValue>>()
+  new Map<GraphNodeIdAndPropertyName, NodePropertyValue>()
 )
