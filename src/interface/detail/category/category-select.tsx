@@ -20,7 +20,11 @@ type GroupType = GroupBase<NodeCategory>
 function optionsToGroups(
   n: NodeCategory[]
 ): OptionsOrGroups<NodeCategory, GroupType> {
-  return n.map((x) => ({ ...x, options: optionsToGroups(x.subcategories) }))
+  return n.map((x) => ({
+    ...x,
+    options: optionsToGroups(x.subcategories),
+    label: x.name,
+  }))
 }
 
 const options = optionsToGroups(nodeCategories)
