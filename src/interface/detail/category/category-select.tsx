@@ -1,7 +1,7 @@
 import { Select } from "chakra-react-select"
 import { useAtomValue } from "jotai"
 
-import { GraphNodeId, NodeCategory } from "@/graph/graph-types"
+import { GraphNode, GraphNodeId, NodeCategory } from "@/graph/graph-types"
 import { nodeCategories } from "@/graph/schema/node-categories"
 import { graphNodeFamily } from "@/graph/state/derived/node-atoms"
 
@@ -13,29 +13,27 @@ function getOptionValue(n: NodeCategory) {
   return n.name
 }
 
-const options = [
-  {
-    label: "Group 1",
-    options: [
-      { label: "Group 1, option 1", value: "value_1" },
-      { label: "Group 1, option 2", value: "value_2" },
-    ],
-  },
-  { label: "A root option", value: "value_3" },
-  { label: "Another root option", value: "value_4" },
-]
+// https://react-select.com/props#groupheading
+interface GroupType extends Omit<NodeCategory, "subcategories"> {
+  options: (GroupType | NodeCategory)[]
+}
+
+function optionsToGroups(n: NodeCategory[]): GroupType[] {
+  return n.map((x) => ({ ...x, options: optionsToGroups(x.subcategories) }))
+}
+
+const options = optionsToGroups(nodeCategories)
+
 export default function CategorySelect({ nodeId }: { nodeId: GraphNodeId }) {
   const node = useAtomValue(graphNodeFamily(nodeId))
 
   return (
     <div>
-      <Select options={options} />
-
       <Select
         closeMenuOnSelect={false}
         isMulti
         value={node?.categories || []}
-        options={nodeCategories}
+        options={options}
         getOptionLabel={getOptionLabel}
         getOptionValue={getOptionValue}
       />
