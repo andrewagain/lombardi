@@ -5,18 +5,7 @@ type ShorthandNodeCategory = [
   string,
   ShorthandNodePropertyType[]
 ]
-
-export function toNodeCategories(
-  shorthand: ShorthandNodeCategory[]
-): NodeCategory[] {
-  return shorthand.map(([parent, name, properties]) => ({
-    parent,
-    name,
-    properties: properties.map(([name, type]) => ({ name, type })),
-  }))
-}
-
-export const nodeCategories: ShorthandNodeCategory[] = [
+const shorthandNodeCategories: ShorthandNodeCategory[] = [
   [
     "",
     "Organism",
@@ -50,3 +39,15 @@ export const nodeCategories: ShorthandNodeCategory[] = [
   ["Source", "Book", []],
   ["Source", "Podcast", []],
 ]
+
+export function toNodeCategories(
+  shorthand: ShorthandNodeCategory[]
+): NodeCategory[] {
+  return shorthand.map(([parent, name, properties]) => ({
+    parent,
+    name,
+    properties: properties.map(([name, type]) => ({ name, type })),
+  }))
+}
+
+export const nodeCategories = toNodeCategories(shorthandNodeCategories)
