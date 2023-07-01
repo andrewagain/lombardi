@@ -21,6 +21,7 @@ export default function CategoryForm({
       <h2>{category.id}</h2>
       {category.properties.map((property) => (
         <CategoryInput
+          key={property.name}
           nodeId={nodeId}
           category={category}
           property={property}

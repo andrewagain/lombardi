@@ -16,7 +16,11 @@
       "label": "Manufacturers",
       "description": "Shitty companies that make shitty shit\n",
       "categories": [
-        "Government"
+        "Government",
+        "Institution",
+        "Federal",
+        "Nonprofit",
+        "Corporation"
       ]
     },
     {

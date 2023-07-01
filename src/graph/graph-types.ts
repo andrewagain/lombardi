@@ -54,7 +54,6 @@ export interface NodeProperty {
 export interface NodeCategory {
   id: NodeCategoryId
   properties: NodeProperty[]
-  subcategories: NodeCategory[]
 }
 
 export type NodePropertyValue = string | number | boolean | Date | undefined

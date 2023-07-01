@@ -1,11 +1,6 @@
+import { ActionMeta, OnChangeValue, Select } from "chakra-react-select"
 import { useAtomValue } from "jotai"
 import { useCallback, useMemo } from "react"
-import Select, {
-  ActionMeta,
-  GroupBase,
-  OnChangeValue,
-  OptionsOrGroups,
-} from "react-select"
 
 import { GraphNodeId, NodeCategory } from "@/graph/graph-types"
 import { nodeCategories, nodeCategoryMap } from "@/graph/schema/node-categories"
@@ -22,22 +17,6 @@ function getOptionValue(n: NodeCategory) {
 }
 
 type Option = NodeCategory
-
-// https://react-select.com/props#groupheading
-
-type GroupType = GroupBase<NodeCategory>
-function optionsToGroups(
-  n: NodeCategory[]
-): OptionsOrGroups<NodeCategory, GroupType> {
-  return n.map((x) => ({
-    ...x,
-    options: optionsToGroups(x.subcategories),
-    label: x.id,
-  }))
-}
-
-const options = optionsToGroups(nodeCategories)
-console.log("options", options)
 
 export default function CategorySelect({ nodeId }: { nodeId: GraphNodeId }) {
   const node = useAtomValue(graphNodeFamily(nodeId))
@@ -69,7 +48,7 @@ export default function CategorySelect({ nodeId }: { nodeId: GraphNodeId }) {
         closeMenuOnSelect={false}
         isMulti
         value={value}
-        options={options}
+        options={nodeCategories}
         getOptionLabel={getOptionLabel}
         getOptionValue={getOptionValue}
         onChange={onChange}
