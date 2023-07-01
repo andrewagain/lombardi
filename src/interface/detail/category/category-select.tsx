@@ -10,13 +10,17 @@ import { useAtomValue } from "jotai"
 import { useCallback, useMemo } from "react"
 
 import { GraphNodeId, NodeCategory } from "@/graph/graph-types"
-import { nodeCategories, nodeCategoryMap } from "@/graph/schema/node-categories"
+import {
+  nodeCategories,
+  nodeCategoryMap,
+  parseNodeCategoryId,
+} from "@/graph/schema/node-categories"
 import { useModifyNode } from "@/graph/state/derived/modify-hooks"
 import { graphNodeFamily } from "@/graph/state/derived/node-atoms"
 import { isTruthy } from "@/util/function"
 
 function getOptionLabel(n: NodeCategory) {
-  return n.id
+  return parseNodeCategoryId(n.id).name
 }
 
 function getOptionValue(n: NodeCategory) {
@@ -26,11 +30,12 @@ function getOptionValue(n: NodeCategory) {
 type Option = NodeCategory
 
 const Option = (props: OptionProps<NodeCategory>) => {
+  const { parents, name } = parseNodeCategoryId(props.data.id)
   return (
     <components.Option {...props}>
       <Box>
-        <Text fontSize={10}>--category--</Text>
-        <Box>{props.data.id}</Box>
+        <Text fontSize={10}>{parents.join(" / ")}</Text>
+        <Box>{name}</Box>
       </Box>
     </components.Option>
   )
