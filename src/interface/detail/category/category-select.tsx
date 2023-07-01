@@ -29,6 +29,8 @@ export default function CategorySelect({ nodeId }: { nodeId: GraphNodeId }) {
     ) => {
       if (actionMeta.action === "select-option") {
         modifyNode(nodeId, { categories: categories.map((x) => x.id) })
+      } else if (actionMeta.action === "remove-value") {
+        modifyNode(nodeId, { categories: categories.map((x) => x.id) })
       }
     },
     [modifyNode, nodeId]
@@ -43,16 +45,14 @@ export default function CategorySelect({ nodeId }: { nodeId: GraphNodeId }) {
   )
 
   return (
-    <div>
-      <Select
-        closeMenuOnSelect={false}
-        isMulti
-        value={value}
-        options={nodeCategories}
-        getOptionLabel={getOptionLabel}
-        getOptionValue={getOptionValue}
-        onChange={onChange}
-      />
-    </div>
+    <Select
+      closeMenuOnSelect={false}
+      isMulti
+      value={value}
+      options={nodeCategories}
+      getOptionLabel={getOptionLabel}
+      getOptionValue={getOptionValue}
+      onChange={onChange}
+    />
   )
 }
