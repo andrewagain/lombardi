@@ -69,7 +69,6 @@ export default function CategorySelect({ nodeId }: { nodeId: GraphNodeId }) {
 
   return (
     <Select
-      closeMenuOnSelect={false}
       isMulti
       value={value}
       options={nodeCategories}

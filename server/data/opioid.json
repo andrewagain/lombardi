@@ -15,7 +15,9 @@
       "name": "Manufacturers",
       "label": "Manufacturers",
       "description": "Shitty companies that make shitty shit\n",
-      "categories": []
+      "categories": [
+        "Source/Podcast"
+      ]
     },
     {
       "id": "node-1687369379981",
