@@ -18,25 +18,42 @@ export function parseNodeCategoryId(id: string): NodeCategoryIdParts {
   }
 }
 
+export function serializeNodeCategoryId(
+  parents: string[],
+  name: string
+): string {
+  return [...parents, name].join("/")
+}
+
 interface ShorthandNodeCategory {
   id: string
   properties?: ShorthandNodeProperty[]
   subcategories?: ShorthandNodeCategory[]
 }
 
+type StackItem = [ShorthandNodeCategory, string[]]
+
 function expandShorthand(
   shorthandNodeCategories: ShorthandNodeCategory[]
 ): NodeCategory[] {
-  const shorthandCategories = [...shorthandNodeCategories]
+  const stack: StackItem[] = shorthandNodeCategories.map((x) => [x, []])
+
   const longhandCategories: NodeCategory[] = []
-  while (shorthandCategories.length > 0) {
+  while (stack.length > 0) {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    const s = shorthandCategories.pop()!
+    const [category, parents] = stack.pop()!
     longhandCategories.push({
-      id: s.id,
-      properties: (s.properties || []).map(([name, type]) => ({ name, type })),
+      id: serializeNodeCategoryId(parents, category.id),
+      properties: (category.properties || []).map(([name, type]) => ({
+        name,
+        type,
+      })),
     })
-    shorthandCategories.push(...(s.subcategories || []))
+    stack.push(
+      ...(category.subcategories?.map(
+        (x) => [x, [...parents, category.id]] as StackItem
+      ) || [])
+    )
   }
 
   return longhandCategories

@@ -29,7 +29,7 @@ const Option = (props: OptionProps<NodeCategory>) => {
   return (
     <components.Option {...props}>
       <Box>
-        <Box>--category--</Box>
+        <Text fontSize={10}>--category--</Text>
         <Box>{props.data.id}</Box>
       </Box>
     </components.Option>
