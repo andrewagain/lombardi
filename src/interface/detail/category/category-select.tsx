@@ -1,4 +1,11 @@
-import { ActionMeta, OnChangeValue, Select } from "chakra-react-select"
+import { Box, Text } from "@chakra-ui/react"
+import {
+  ActionMeta,
+  components,
+  OnChangeValue,
+  OptionProps,
+  Select,
+} from "chakra-react-select"
 import { useAtomValue } from "jotai"
 import { useCallback, useMemo } from "react"
 
@@ -17,6 +24,17 @@ function getOptionValue(n: NodeCategory) {
 }
 
 type Option = NodeCategory
+
+const Option = (props: OptionProps<NodeCategory>) => {
+  return (
+    <components.Option {...props}>
+      <Box>
+        <Box>--category--</Box>
+        <Box>{props.data.id}</Box>
+      </Box>
+    </components.Option>
+  )
+}
 
 export default function CategorySelect({ nodeId }: { nodeId: GraphNodeId }) {
   const node = useAtomValue(graphNodeFamily(nodeId))
@@ -53,6 +71,7 @@ export default function CategorySelect({ nodeId }: { nodeId: GraphNodeId }) {
       getOptionLabel={getOptionLabel}
       getOptionValue={getOptionValue}
       onChange={onChange}
+      components={{ Option }}
     />
   )
 }
