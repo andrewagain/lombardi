@@ -1,3 +1,5 @@
+import { HStack, Text } from "@chakra-ui/react"
+
 import { GraphNodeId, NodeCategoryId } from "@/graph/graph-types"
 import { nodeCategoryMap } from "@/graph/schema/node-categories"
 
@@ -20,12 +22,15 @@ export default function CategoryForm({
     <div>
       <h2>{category.id}</h2>
       {category.properties.map((property) => (
-        <CategoryInput
-          key={property.name}
-          nodeId={nodeId}
-          category={category}
-          property={property}
-        />
+        <HStack>
+          <Text>{property.name}</Text>
+          <CategoryInput
+            key={property.name}
+            nodeId={nodeId}
+            category={category}
+            property={property}
+          />
+        </HStack>
       ))}
     </div>
   )

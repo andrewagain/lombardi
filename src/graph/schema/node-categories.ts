@@ -31,27 +31,32 @@ interface ShorthandNodeCategory {
   subcategories?: ShorthandNodeCategory[]
 }
 
-type StackItem = [ShorthandNodeCategory, string[]]
+// category, parentIds, parentProperties
+type StackItem = [ShorthandNodeCategory, string[], ShorthandNodeProperty[]]
 
 function expandShorthand(
   shorthandNodeCategories: ShorthandNodeCategory[]
 ): NodeCategory[] {
-  const stack: StackItem[] = shorthandNodeCategories.map((x) => [x, []])
+  const stack: StackItem[] = shorthandNodeCategories.map((x) => [x, [], []])
 
   const longhandCategories: NodeCategory[] = []
   while (stack.length > 0) {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    const [category, parents] = stack.pop()!
+    const [category, parentIds, parentProperties] = stack.pop()!
+    const combinedProperties = [
+      ...(category.properties || []),
+      ...parentProperties,
+    ]
     longhandCategories.push({
-      id: serializeNodeCategoryId(parents, category.id),
-      properties: (category.properties || []).map(([name, type]) => ({
+      id: serializeNodeCategoryId(parentIds, category.id),
+      properties: combinedProperties.map(([name, type]) => ({
         name,
         type,
       })),
     })
     stack.push(
       ...(category.subcategories?.map(
-        (x) => [x, [...parents, category.id]] as StackItem
+        (x) => [x, [...parentIds, category.id], combinedProperties] as StackItem
       ) || [])
     )
   }
