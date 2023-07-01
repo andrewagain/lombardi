@@ -43,9 +43,9 @@ export default function Layout() {
           <TreeView />
         </Panel>
       )}
-      <div style={{ gridArea: "main" }}>
+      <Box gridArea="main" minWidth={1} minHeight={1}>
         <FlowView />
-      </div>
+      </Box>
       {panels.includes(SidePanel.Right) && (
         <Panel orientation="right" panelKey="r">
           <NodeDetail />
