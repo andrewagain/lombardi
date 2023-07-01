@@ -44,6 +44,25 @@ function expandShorthand(
 
 const shorthandNodeCategories: ShorthandNodeCategory[] = [
   {
+    id: "Organism",
+    properties: [
+      ["birthday", "datetime"],
+      ["species", "string"],
+    ],
+    subcategories: [
+      {
+        id: "Human",
+        properties: [["title", "string"]],
+      },
+      {
+        id: "Animal",
+      },
+      {
+        id: "Plant",
+      },
+    ],
+  },
+  {
     id: "Institution",
     properties: [["location", "string"]],
     subcategories: [
@@ -67,6 +86,21 @@ const shorthandNodeCategories: ShorthandNodeCategory[] = [
       {
         id: "Nonprofit",
       },
+      {
+        id: "University",
+      },
+      {
+        id: "School",
+      },
+      {
+        id: "Hospital",
+      },
+      {
+        id: "Religious",
+      },
+      {
+        id: "Sports",
+      },
     ],
   },
   {
@@ -75,6 +109,39 @@ const shorthandNodeCategories: ShorthandNodeCategory[] = [
     subcategories: [
       {
         id: "Claim",
+      },
+      {
+        id: "Question",
+      },
+      {
+        id: "Answer",
+      },
+      {
+        id: "Assumption",
+      },
+      {
+        id: "Conclusion",
+      },
+    ],
+  },
+  {
+    id: "Source",
+    properties: [["url", "string"]],
+    subcategories: [
+      {
+        id: "Video",
+      },
+      {
+        id: "Study",
+      },
+      {
+        id: "Website",
+      },
+      {
+        id: "Book",
+      },
+      {
+        id: "Podcast",
       },
     ],
   },
