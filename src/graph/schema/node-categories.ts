@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { NodeCategory } from "../graph-types"
 
 export const nodeCategories: NodeCategory[] = [
@@ -140,3 +141,26 @@ export const nodeCategories: NodeCategory[] = [
 export const nodeCategoryMap = new Map(
   nodeCategories.map((category) => [category.id, category])
 )
+
+export function getNodeCategoryChain(categoryId: string): NodeCategory[] {
+  const category = nodeCategoryMap.get(categoryId)
+  if (!category) {
+    throw new Error(`Unknown category: ${categoryId}`)
+  }
+  const remaining = [category]
+  const visited = [category]
+  while (remaining.length > 0) {
+    const current = remaining.pop()!
+    for (const composeId of current.composeIds) {
+      const compose = nodeCategoryMap.get(composeId)
+      if (!compose) {
+        throw new Error(`Unknown category: ${composeId} in ${categoryId}`)
+      }
+      if (!visited.includes(compose)) {
+        remaining.push(compose)
+        visited.push(compose)
+      }
+    }
+  }
+  return visited
+}
