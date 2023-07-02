@@ -58,7 +58,10 @@ export interface NodeProperty {
 
 export interface NodeCategory {
   id: NodeCategoryId
+  name: string
+  composeIds: NodeCategoryId[]
   properties: NodeProperty[]
+  isAbstract?: boolean
 }
 
 export type NodePropertyValue = string | number | boolean | Date | undefined

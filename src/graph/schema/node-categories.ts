@@ -1,179 +1,141 @@
-import {
-  NodeCategory,
-  NodePropertyName,
-  NodePropertyType,
-} from "../graph-types"
-type ShorthandNodeProperty = [NodePropertyName, NodePropertyType]
+import { NodeCategory } from "../graph-types"
 
-export interface NodeCategoryIdParts {
-  parents: string[]
-  name: string
-}
-
-export function parseNodeCategoryId(id: string): NodeCategoryIdParts {
-  const parts = id.split("/")
-  return {
-    parents: parts.slice(0, -1),
-    name: parts[parts.length - 1],
-  }
-}
-
-export function serializeNodeCategoryId(
-  parents: string[],
-  name: string
-): string {
-  return [...parents, name].join("/")
-}
-
-interface ShorthandNodeCategory {
-  id: string
-  properties?: ShorthandNodeProperty[]
-  subcategories?: ShorthandNodeCategory[]
-}
-
-// category, parentIds, parentProperties
-type StackItem = [ShorthandNodeCategory, string[], ShorthandNodeProperty[]]
-
-function expandShorthand(
-  shorthandNodeCategories: ShorthandNodeCategory[]
-): NodeCategory[] {
-  const stack: StackItem[] = shorthandNodeCategories.map((x) => [x, [], []])
-
-  const longhandCategories: NodeCategory[] = []
-  while (stack.length > 0) {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    const [category, parentIds, parentProperties] = stack.pop()!
-    const combinedProperties = [
-      ...(category.properties || []),
-      ...parentProperties,
-    ]
-    longhandCategories.push({
-      id: serializeNodeCategoryId(parentIds, category.id),
-      properties: combinedProperties.map(([name, type]) => ({
-        name,
-        type,
-      })),
-    })
-    stack.push(
-      ...(category.subcategories?.map(
-        (x) => [x, [...parentIds, category.id], combinedProperties] as StackItem
-      ) || [])
-    )
-  }
-
-  return longhandCategories
-}
-
-const shorthandNodeCategories: ShorthandNodeCategory[] = [
+export const nodeCategories: NodeCategory[] = [
   {
-    id: "Organism",
+    id: "organism",
+    name: "Organism",
     properties: [
-      ["birthday", "datetime"],
-      ["species", "string"],
+      { name: "birthday", type: "datetime" },
+      { name: "species", type: "string" },
     ],
-    subcategories: [
-      {
-        id: "Human",
-        properties: [["title", "string"]],
-      },
-      {
-        id: "Animal",
-      },
-      {
-        id: "Plant",
-      },
-    ],
+    composeIds: [],
+    isAbstract: true,
   },
   {
-    id: "Institution",
-    properties: [["location", "string"]],
-    subcategories: [
-      {
-        id: "Corporation",
-      },
-      {
-        id: "Government",
-        subcategories: [
-          {
-            id: "Federal",
-          },
-          {
-            id: "State",
-          },
-          {
-            id: "Local",
-          },
-        ],
-      },
-      {
-        id: "Nonprofit",
-      },
-      {
-        id: "University",
-      },
-      {
-        id: "School",
-      },
-      {
-        id: "Hospital",
-      },
-      {
-        id: "Religious",
-      },
-      {
-        id: "Sports",
-      },
-    ],
-  },
-  {
-    id: "Logic",
+    id: "animal",
+    name: "Animal",
     properties: [],
-    subcategories: [
-      {
-        id: "Claim",
-      },
-      {
-        id: "Question",
-      },
-      {
-        id: "Answer",
-      },
-      {
-        id: "Assumption",
-      },
-      {
-        id: "Conclusion",
-      },
-    ],
+    composeIds: ["organism"],
   },
   {
-    id: "Source",
-    properties: [
-      ["url", "string"],
-      ["author", "string"],
-    ],
-    subcategories: [
-      {
-        id: "Video",
-      },
-      {
-        id: "Study",
-      },
-      {
-        id: "Website",
-      },
-      {
-        id: "Book",
-        properties: [["ISBN", "string"]],
-      },
-      {
-        id: "Podcast",
-      },
-    ],
+    id: "human",
+    name: "Human",
+    properties: [{ name: "title", type: "string" }],
+    composeIds: ["animal"],
+  },
+  {
+    id: "plant",
+    name: "Plant",
+    properties: [],
+    composeIds: ["organism"],
+  },
+  {
+    id: "institution",
+    name: "Institution",
+    properties: [{ name: "location", type: "string" }],
+    composeIds: [],
+    isAbstract: true,
+  },
+  {
+    id: "corporation",
+    name: "Corporation",
+    properties: [],
+    composeIds: ["institution"],
+  },
+  {
+    id: "government",
+    name: "Government",
+    properties: [],
+    composeIds: ["institution"],
+    isAbstract: true,
+  },
+  {
+    id: "federal",
+    name: "Federal",
+    properties: [],
+    composeIds: ["government"],
+  },
+  {
+    id: "state",
+    name: "State",
+    properties: [],
+    composeIds: ["government"],
+  },
+  {
+    id: "local",
+    name: "Local",
+    properties: [],
+    composeIds: ["government"],
+  },
+  {
+    id: "nonprofit",
+    name: "Nonprofit",
+    properties: [],
+    composeIds: ["institution"],
+  },
+  {
+    id: "university",
+    name: "University",
+    properties: [],
+    composeIds: ["institution"],
+  },
+  {
+    id: "school",
+    name: "School",
+    properties: [],
+    composeIds: ["institution"],
+  },
+  {
+    id: "hospital",
+    name: "Hospital",
+    properties: [],
+    composeIds: ["institution"],
+  },
+  {
+    id: "religious-institution",
+    name: "Religious",
+    properties: [],
+    composeIds: ["institution"],
+    isAbstract: true,
+  },
+  {
+    id: "church",
+    name: "Church",
+    properties: [],
+    composeIds: ["religious-institution"],
+  },
+  {
+    id: "logic",
+    name: "Logic",
+    properties: [],
+    composeIds: [],
+    isAbstract: true,
+  },
+  {
+    id: "claim",
+    name: "Claim",
+    properties: [],
+    composeIds: ["logic"],
+  },
+  {
+    id: "question",
+    name: "Question",
+    properties: [],
+    composeIds: ["logic"],
+  },
+  {
+    id: "answer",
+    name: "Answer",
+    properties: [],
+    composeIds: ["logic"],
+  },
+  {
+    id: "assumption",
+    name: "Assumption",
+    properties: [],
+    composeIds: ["logic"],
   },
 ]
-
-export const nodeCategories = expandShorthand(shorthandNodeCategories)
 
 export const nodeCategoryMap = new Map(
   nodeCategories.map((category) => [category.id, category])
