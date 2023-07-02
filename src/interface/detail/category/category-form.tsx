@@ -1,7 +1,8 @@
-import { HStack, Text } from "@chakra-ui/react"
+import { Box, HStack, Text } from "@chakra-ui/react"
+import { useMemo } from "react"
 
 import { GraphNodeId, NodeCategoryId } from "@/graph/graph-types"
-import { nodeCategoryMap } from "@/graph/schema/node-categories"
+import { getNodeCategoryChain } from "@/graph/schema/node-categories"
 
 import CategoryInput from "./category-input"
 
@@ -12,24 +13,24 @@ export default function CategoryForm({
   nodeId: GraphNodeId
   categoryId: NodeCategoryId
 }) {
-  const category = nodeCategoryMap.get(categoryId)
-
-  if (!category) {
-    return null
-  }
+  const chain = useMemo(() => getNodeCategoryChain(categoryId), [categoryId])
 
   return (
     <div>
-      <h2>{category.id}</h2>
-      {category.properties.map((property) => (
-        <HStack key={property.name}>
-          <Text>{property.name}</Text>
-          <CategoryInput
-            nodeId={nodeId}
-            category={category}
-            property={property}
-          />
-        </HStack>
+      {chain.map((category) => (
+        <Box key={category.id}>
+          <h2>{category.name}</h2>
+          {category.properties.map((property) => (
+            <HStack key={property.name}>
+              <Text>{property.name}</Text>
+              <CategoryInput
+                nodeId={nodeId}
+                category={category}
+                property={property}
+              />
+            </HStack>
+          ))}
+        </Box>
       ))}
     </div>
   )

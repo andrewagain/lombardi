@@ -11,16 +11,16 @@ import { useCallback, useMemo } from "react"
 
 import { GraphNodeId, NodeCategory } from "@/graph/graph-types"
 import {
+  getNodeCategoryChain,
   nodeCategories,
   nodeCategoryMap,
-  parseNodeCategoryId,
 } from "@/graph/schema/node-categories"
 import { useModifyNode } from "@/graph/state/derived/modify-hooks"
 import { graphNodeFamily } from "@/graph/state/derived/node-atoms"
 import { isTruthy } from "@/util/function"
 
 function getOptionLabel(n: NodeCategory) {
-  return parseNodeCategoryId(n.id).name
+  return n.name
 }
 
 function getOptionValue(n: NodeCategory) {
@@ -30,12 +30,19 @@ function getOptionValue(n: NodeCategory) {
 type Option = NodeCategory
 
 const Option = (props: OptionProps<NodeCategory>) => {
-  const { parents, name } = parseNodeCategoryId(props.data.id)
+  const categoryChain = useMemo(
+    () => getNodeCategoryChain(props.data.id),
+    [props.data]
+  )
+  const parentText = categoryChain
+    .slice(0, -1)
+    .map((x) => x.name)
+    .join(" / ")
   return (
     <components.Option {...props}>
       <Box>
-        <Text fontSize={10}>{parents.join(" / ")}</Text>
-        <Box>{name}</Box>
+        <Text fontSize={10}>{parentText}</Text>
+        <Box>{props.data.name}</Box>
       </Box>
     </components.Option>
   )
