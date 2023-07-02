@@ -22,10 +22,9 @@ export default function CategoryForm({
     <div>
       <h2>{category.id}</h2>
       {category.properties.map((property) => (
-        <HStack>
+        <HStack key={property.name}>
           <Text>{property.name}</Text>
           <CategoryInput
-            key={property.name}
             nodeId={nodeId}
             category={category}
             property={property}
