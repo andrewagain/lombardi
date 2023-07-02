@@ -19,13 +19,7 @@ export default function SingleDetail() {
       <NameInput node={node} />
       <DescriptionInput node={node} />
       <CategorySelect nodeId={node.id} />
-      {(node.categories || []).map((categoryId) => (
-        <CategoryForm
-          nodeId={node.id}
-          key={categoryId}
-          categoryId={categoryId}
-        />
-      ))}
+      <CategoryForm nodeId={node.id} />
     </VStack>
   )
 }

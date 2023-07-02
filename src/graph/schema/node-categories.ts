@@ -1,4 +1,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
+import { isTruthy } from "@/util/function"
+
 import { NodeCategory } from "../graph-types"
 
 export const nodeCategories: NodeCategory[] = [
@@ -168,6 +170,12 @@ export const nodeCategories: NodeCategory[] = [
     composeIds: ["source"],
   },
   {
+    id: "podcast",
+    name: "Podcast",
+    properties: [],
+    composeIds: ["source"],
+  },
+  {
     id: "website",
     name: "Website",
     properties: [],
@@ -241,19 +249,26 @@ export const nodeCategoryMap = new Map(
   nodeCategories.map((category) => [category.id, category])
 )
 
-export function getNodeCategoryChain(categoryId: string): NodeCategory[] {
-  const category = nodeCategoryMap.get(categoryId)
-  if (!category) {
-    throw new Error(`Unknown category: ${categoryId}`)
+export function getNodeCategoryChain(categoryIds: string[]): NodeCategory[] {
+  const rootCategories = categoryIds
+    .map((id) => nodeCategoryMap.get(id))
+    .filter(isTruthy)
+  if (rootCategories.length < categoryIds.length) {
+    throw new Error(
+      `Unknown category(s): ${categoryIds.filter(
+        (id) => !nodeCategoryMap.has(id)
+      )}`
+    )
   }
-  const remaining = [category]
-  const visited = [category]
+
+  const remaining = [...rootCategories]
+  const visited = [...rootCategories]
   while (remaining.length > 0) {
     const current = remaining.pop()!
     for (const composeId of current.composeIds) {
       const compose = nodeCategoryMap.get(composeId)
       if (!compose) {
-        throw new Error(`Unknown category: ${composeId} in ${categoryId}`)
+        throw new Error(`Unknown category: ${composeId} from ${categoryIds}`)
       }
       if (!visited.includes(compose)) {
         remaining.push(compose)

@@ -31,7 +31,7 @@ type Option = NodeCategory
 
 const Option = (props: OptionProps<NodeCategory>) => {
   const categoryChain = useMemo(
-    () => getNodeCategoryChain(props.data.id),
+    () => getNodeCategoryChain([props.data.id]),
     [props.data]
   )
   const parentText = categoryChain
