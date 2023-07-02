@@ -44,7 +44,12 @@ export interface NodePosition {
 }
 
 export type NodePropertyName = string
-export type NodePropertyType = "datetime" | "string" | "number" | "boolean"
+export type NodePropertyType =
+  | "datetime"
+  | "string"
+  | "number"
+  | "boolean"
+  | "url"
 
 export interface NodeProperty {
   name: string

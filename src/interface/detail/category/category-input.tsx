@@ -18,5 +18,8 @@ export default function CategoryInput({
       return <input type="checkbox" />
     case "datetime":
       return <input type="datetime-local" />
+    case "url":
+      // TODO: add validation, and support multiple URLs. anytime we have 1 URL we may have multiple for mirrors or backup sources
+      return <input type="url" />
   }
 }
