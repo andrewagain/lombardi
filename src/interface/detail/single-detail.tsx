@@ -15,7 +15,7 @@ export default function SingleDetail() {
   }
 
   return (
-    <VStack padding={2}>
+    <VStack padding={2} alignItems="stretch">
       <NameInput node={node} />
       <DescriptionInput node={node} />
       <CategorySelect nodeId={node.id} />
