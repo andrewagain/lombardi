@@ -148,7 +148,10 @@ const shorthandNodeCategories: ShorthandNodeCategory[] = [
   },
   {
     id: "Source",
-    properties: [["url", "string"]],
+    properties: [
+      ["url", "string"],
+      ["author", "string"],
+    ],
     subcategories: [
       {
         id: "Video",
@@ -161,6 +164,7 @@ const shorthandNodeCategories: ShorthandNodeCategory[] = [
       },
       {
         id: "Book",
+        properties: [["ISBN", "string"]],
       },
       {
         id: "Podcast",
