@@ -1,4 +1,4 @@
-import { Box, HStack, Text } from "@chakra-ui/react"
+import { Box, HStack, Text, VStack } from "@chakra-ui/react"
 import { useAtomValue } from "jotai"
 import { useMemo } from "react"
 
@@ -16,9 +16,9 @@ export default function CategoryForm({ nodeId }: { nodeId: GraphNodeId }) {
   )
 
   return (
-    <div>
+    <VStack alignItems="stretch">
       {chain.map((category) => (
-        <Box key={category.id}>
+        <Box key={category.id} borderColor="interface.border" borderWidth="1px">
           <h2>{category.name}</h2>
           {category.properties.map((property) => (
             <HStack key={property.name}>
@@ -32,6 +32,6 @@ export default function CategoryForm({ nodeId }: { nodeId: GraphNodeId }) {
           ))}
         </Box>
       ))}
-    </div>
+    </VStack>
   )
 }
