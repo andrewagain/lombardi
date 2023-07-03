@@ -21,6 +21,9 @@ export default function CategoryForm({
   const category = nodeCategoryMap.get(categoryId)
   const chain = useMemo(() => getNodeCategoryChain([categoryId]), [categoryId])
   const properties = useMemo(() => getCategoryChainProperties(chain), [chain])
+  console.log("chain", chain)
+  console.log("properties", properties)
+
   const composedNames = useMemo(
     () => getCategoryChainComposedNames(chain),
     [chain]

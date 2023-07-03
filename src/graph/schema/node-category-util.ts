@@ -21,7 +21,7 @@ export function getNodeCategoryChain(categoryIds: string[]): NodeCategory[] {
   }
 
   const remaining = [...rootCategories]
-  const visited: NodeCategory[] = []
+  const visited: NodeCategory[] = [...rootCategories]
   while (remaining.length > 0) {
     const current = remaining.pop()!
     for (const composeId of current.composeIds) {
@@ -55,8 +55,9 @@ export function getCategoryChainComposedNames(
   categories: NodeCategory[]
 ): string[] {
   const names: string[] = []
+  const skipFirst = categories.slice(1)
 
-  for (const category of categories) {
+  for (const category of skipFirst) {
     names.push(category.name)
   }
   return names

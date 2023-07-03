@@ -9,8 +9,6 @@ import { useModifyNode } from "@/graph/state/derived/modify-hooks"
 import { graphNodeFamily } from "@/graph/state/derived/node-atoms"
 import { isTruthy } from "@/util/function"
 
-import CategorySelectOption from "./category-select-option"
-
 function getOptionLabel(n: NodeCategory) {
   return n.name
 }
@@ -54,7 +52,6 @@ export default function CategorySelect({ nodeId }: { nodeId: GraphNodeId }) {
       getOptionLabel={getOptionLabel}
       getOptionValue={getOptionValue}
       onChange={onChange}
-      components={{ Option: CategorySelectOption }}
     />
   )
 }
