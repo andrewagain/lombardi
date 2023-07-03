@@ -1,10 +1,13 @@
-import { Box, Text } from "@chakra-ui/react"
-import { useAtomValue } from "jotai"
-import React from "react"
+import { Box, Heading, HStack, Text } from "@chakra-ui/react"
+import React, { useMemo } from "react"
 
 import { GraphNodeId, NodeCategoryId } from "@/graph/graph-types"
-import { nodeCategoryMap } from "@/graph/schema/node-category-util"
-import { graphNodeFamily } from "@/graph/state/derived/node-atoms"
+import {
+  getCategoryChainComposedNames,
+  getCategoryChainProperties,
+  getNodeCategoryChain,
+  nodeCategoryMap,
+} from "@/graph/schema/node-category-util"
 
 import CategoryInput from "../category-input"
 
@@ -15,8 +18,13 @@ export default function CategoryForm({
   nodeId: GraphNodeId
   categoryId: NodeCategoryId
 }) {
-  const node = useAtomValue(graphNodeFamily(nodeId))
   const category = nodeCategoryMap.get(categoryId)
+  const chain = useMemo(() => getNodeCategoryChain([categoryId]), [categoryId])
+  const properties = useMemo(() => getCategoryChainProperties(chain), [chain])
+  const composedNames = useMemo(
+    () => getCategoryChainComposedNames(chain),
+    [chain]
+  )
   if (!category) {
     return null
   }
@@ -28,14 +36,17 @@ export default function CategoryForm({
       width="100%"
       overflow="hidden"
     >
-      <h2>{category.name}</h2>
+      <HStack alignItems="baseline">
+        <Heading size="md">{category.name}</Heading>
+        <Text fontSize={10}>({composedNames.join(",")})</Text>
+      </HStack>
       <Box
         display="grid"
         gridTemplateColumns={"auto 1fr"}
         gridRowGap={2}
         gridColumnGap={2}
       >
-        {category.properties.map((property) => (
+        {properties.map((property) => (
           <React.Fragment key={property.name}>
             <Text>{property.name}</Text>
             <CategoryInput

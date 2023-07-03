@@ -21,7 +21,7 @@ export function getNodeCategoryChain(categoryIds: string[]): NodeCategory[] {
   }
 
   const remaining = [...rootCategories]
-  const visited = [...rootCategories]
+  const visited: NodeCategory[] = []
   while (remaining.length > 0) {
     const current = remaining.pop()!
     for (const composeId of current.composeIds) {

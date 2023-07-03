@@ -29,9 +29,9 @@ export default function CategorySelect({ nodeId }: { nodeId: GraphNodeId }) {
       actionMeta: ActionMeta<NodeCategory>
     ) => {
       if (actionMeta.action === "select-option") {
-        modifyNode(nodeId, { categories: categories.map((x) => x.id) })
+        modifyNode(nodeId, { categoryIds: categories.map((x) => x.id) })
       } else if (actionMeta.action === "remove-value") {
-        modifyNode(nodeId, { categories: categories.map((x) => x.id) })
+        modifyNode(nodeId, { categoryIds: categories.map((x) => x.id) })
       }
     },
     [modifyNode, nodeId]
@@ -39,14 +39,15 @@ export default function CategorySelect({ nodeId }: { nodeId: GraphNodeId }) {
 
   const value = useMemo(
     () =>
-      (node?.categories || [])
+      (node?.categoryIds || [])
         .map((id) => nodeCategoryMap.get(id))
         .filter(isTruthy),
-    [node?.categories]
+    [node?.categoryIds]
   )
 
   return (
     <Select
+      placeholder="Select categories..."
       isMulti
       value={value}
       options={nodeCategories}
