@@ -1,5 +1,5 @@
 import { Box, Heading, HStack, Text } from "@chakra-ui/react"
-import React, { useMemo } from "react"
+import { useMemo } from "react"
 
 import { GraphNodeId, NodeCategoryId } from "@/graph/graph-types"
 import {
@@ -38,29 +38,26 @@ export default function CategoryForm({
       borderWidth="1px"
       width="100%"
       overflow="hidden"
-      padding={2}
+      padding={3}
     >
       <HStack alignItems="baseline">
-        <Heading size="md">{category.name}</Heading>
+        <Heading size="md" marginBottom={1}>
+          {category.name}
+        </Heading>
         <Text fontSize={10} color="text.subtle">
           {composedNames.join(",")}
         </Text>
       </HStack>
-      <Box
-        display="grid"
-        gridTemplateColumns={"auto 1fr"}
-        gridRowGap={2}
-        gridColumnGap={2}
-      >
+      <Box>
         {properties.map((property) => (
-          <React.Fragment key={property.name}>
-            <Text>{property.name}</Text>
+          <Box key={property.name}>
+            <Text color="text.secondary">{property.name}</Text>
             <CategoryInput
               nodeId={nodeId}
               category={category}
               property={property}
             />
-          </React.Fragment>
+          </Box>
         ))}
       </Box>
     </Box>

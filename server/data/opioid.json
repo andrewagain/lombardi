@@ -16,7 +16,7 @@
       "label": "Manufacturers",
       "description": "Shitty companies that make shitty shit\n",
       "categoryIds": [
-        "human"
+        "scientific-study"
       ]
     },
     {
@@ -27,7 +27,10 @@
     {
       "id": "node-1687369383820",
       "name": "Hydrocodone",
-      "label": "Hydrocodone"
+      "label": "Hydrocodone",
+      "categoryIds": [
+        "animal"
+      ]
     },
     {
       "id": "node-1687369842483",
