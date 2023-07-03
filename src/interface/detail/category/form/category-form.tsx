@@ -9,7 +9,7 @@ import {
   nodeCategoryMap,
 } from "@/graph/schema/node-category-util"
 
-import CategoryInput from "../category-input"
+import CategoryInput from "../input/category-input"
 
 export default function CategoryForm({
   nodeId,

@@ -1,4 +1,4 @@
-import { Box } from "@chakra-ui/react"
+import { Box, Checkbox, Input } from "@chakra-ui/react"
 
 import { GraphNodeId, NodeCategory, NodeProperty } from "@/graph/graph-types"
 
@@ -13,11 +13,11 @@ export default function CategoryInput({
 }) {
   switch (property.type) {
     case "string":
-      return <input type="text" />
+      return <Input type="text" />
     case "number":
-      return <input type="number" />
+      return <Input type="number" />
     case "boolean":
-      return <input type="checkbox" />
+      return <Checkbox />
     case "datetime":
       return <input type="datetime-local" />
     case "url":
