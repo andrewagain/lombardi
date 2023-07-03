@@ -11,7 +11,7 @@ export default function CategoryFormList({ nodeId }: { nodeId: GraphNodeId }) {
 
   return (
     <VStack alignItems="stretch">
-      {node?.categoryIds.map((categoryId) => (
+      {node?.categoryIds?.map((categoryId) => (
         <CategoryForm
           key={categoryId}
           nodeId={nodeId}
