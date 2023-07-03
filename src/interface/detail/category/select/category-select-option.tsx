@@ -16,10 +16,8 @@ export default function CategorySelectOption(props: OptionProps<NodeCategory>) {
     .join(" / ")
   return (
     <components.Option {...props}>
-      <Box>
-        <Text fontSize={10}>{parentText}</Text>
-        <Box>{props.data.name}</Box>
-      </Box>
+      <Text fontSize={10}>{parentText}</Text>
+      <Box>{props.data.name}</Box>
     </components.Option>
   )
 }
