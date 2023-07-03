@@ -42,7 +42,9 @@ export default function CategoryForm({
     >
       <HStack alignItems="baseline">
         <Heading size="md">{category.name}</Heading>
-        <Text fontSize={10}>({composedNames.join(",")})</Text>
+        <Text fontSize={10} color="text.subtle">
+          {composedNames.join(",")}
+        </Text>
       </HStack>
       <Box
         display="grid"
