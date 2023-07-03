@@ -38,6 +38,7 @@ export default function CategoryForm({
       borderWidth="1px"
       width="100%"
       overflow="hidden"
+      padding={2}
     >
       <HStack alignItems="baseline">
         <Heading size="md">{category.name}</Heading>
