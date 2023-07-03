@@ -35,6 +35,7 @@ export const nodeCategories: NodeCategory[] = [
   {
     id: "institution",
     name: "Institution",
+    aliases: ["Organization"],
     properties: [{ name: "location", type: "string" }],
     composeIds: [],
     isAbstract: true,
@@ -42,12 +43,13 @@ export const nodeCategories: NodeCategory[] = [
   {
     id: "corporation",
     name: "Corporation",
+    aliases: ["Company"],
     properties: [],
     composeIds: ["institution"],
   },
   {
     id: "government",
-    name: "Government",
+    name: "Government Institution",
     properties: [],
     composeIds: ["institution"],
     isAbstract: true,
@@ -72,7 +74,7 @@ export const nodeCategories: NodeCategory[] = [
   },
   {
     id: "nonprofit",
-    name: "Nonprofit",
+    name: "Nonprofit Organization",
     properties: [],
     composeIds: ["institution"],
   },
@@ -139,6 +141,12 @@ export const nodeCategories: NodeCategory[] = [
     composeIds: ["logic"],
   },
   {
+    id: "conclusion",
+    name: "Conclusion",
+    properties: [],
+    composeIds: ["logic"],
+  },
+  {
     id: "source",
     name: "Source",
     properties: [{ name: "url", type: "string" }],
@@ -146,8 +154,9 @@ export const nodeCategories: NodeCategory[] = [
     isAbstract: true,
   },
   {
-    id: "scientific-paper",
-    name: "Scientific Paper",
+    id: "study",
+    name: "Scientific Study",
+    aliases: ["Paper"],
     properties: [
       { name: "author", type: "string" },
       { name: "doi", type: "string" },

@@ -59,6 +59,7 @@ export interface NodeProperty {
 export interface NodeCategory {
   id: NodeCategoryId
   name: string
+  aliases?: string[]
   composeIds: NodeCategoryId[]
   properties: NodeProperty[]
   isAbstract?: boolean
