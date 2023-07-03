@@ -4,7 +4,7 @@ import { useMemo } from "react"
 import React from "react"
 
 import { GraphNodeId } from "@/graph/graph-types"
-import { getNodeCategoryChain } from "@/graph/schema/node-categories"
+import { getNodeCategoryChain } from "@/graph/schema/node-category-util"
 import { graphNodeFamily } from "@/graph/state/derived/node-atoms"
 
 import CategoryInput from "./category-input"

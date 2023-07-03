@@ -3,7 +3,7 @@ import { components, OptionProps } from "chakra-react-select"
 import { useMemo } from "react"
 
 import { NodeCategory } from "@/graph/graph-types"
-import { getNodeCategoryChain } from "@/graph/schema/node-categories"
+import { getNodeCategoryChain } from "@/graph/schema/node-category-util"
 
 export default function CategorySelectOption(props: OptionProps<NodeCategory>) {
   const categoryChain = useMemo(
