@@ -6,7 +6,7 @@ export type NodeCategoryId = string
 export interface GraphNode {
   id: GraphNodeId
   name: string
-  categories: NodeCategoryId[]
+  categoryIds: NodeCategoryId[]
   description?: string
   icon?: string
 }

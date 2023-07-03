@@ -15,9 +15,7 @@
       "name": "Manufacturers",
       "label": "Manufacturers",
       "description": "Shitty companies that make shitty shit\n",
-      "categories": [
-        "church"
-      ]
+      "categoryIds": ["church"]
     },
     {
       "id": "node-1687369379981",
@@ -203,22 +201,10 @@
     }
   ],
   "edgePriorities": [
-    [
-      "edge-1687370219458",
-      5
-    ],
-    [
-      "edge-1687369383821",
-      2
-    ],
-    [
-      "edge-1687370207229",
-      3
-    ],
-    [
-      "edge-1687370216694",
-      4
-    ]
+    ["edge-1687370219458", 5],
+    ["edge-1687369383821", 2],
+    ["edge-1687370207229", 3],
+    ["edge-1687370216694", 4]
   ],
   "nodeProperties": []
 }

@@ -3,7 +3,7 @@ import { useAtomValue } from "jotai"
 
 import { graphNodeFirstSelectedAtom } from "@/graph/state/derived/selection-atoms"
 
-import CategoryForm from "./category/category-form"
+import CategoryFormList from "./category/form/category-form-list"
 import CategorySelect from "./category/select/category-select"
 import { DescriptionInput } from "./input/description-input"
 import { NameInput } from "./input/name-input"
@@ -19,7 +19,7 @@ export default function SingleDetail() {
       <NameInput node={node} />
       <DescriptionInput node={node} />
       <CategorySelect nodeId={node.id} />
-      <CategoryForm nodeId={node.id} />
+      <CategoryFormList nodeId={node.id} />
     </VStack>
   )
 }
