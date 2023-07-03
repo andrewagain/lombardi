@@ -1,23 +1,14 @@
-import { Box, Text } from "@chakra-ui/react"
-import {
-  ActionMeta,
-  components,
-  OnChangeValue,
-  OptionProps,
-  Select,
-} from "chakra-react-select"
+import { ActionMeta, OnChangeValue, Select } from "chakra-react-select"
 import { useAtomValue } from "jotai"
 import { useCallback, useMemo } from "react"
 
 import { GraphNodeId, NodeCategory } from "@/graph/graph-types"
-import {
-  getNodeCategoryChain,
-  nodeCategories,
-  nodeCategoryMap,
-} from "@/graph/schema/node-categories"
+import { nodeCategories, nodeCategoryMap } from "@/graph/schema/node-categories"
 import { useModifyNode } from "@/graph/state/derived/modify-hooks"
 import { graphNodeFamily } from "@/graph/state/derived/node-atoms"
 import { isTruthy } from "@/util/function"
+
+import CategorySelectOption from "./category-select-option"
 
 function getOptionLabel(n: NodeCategory) {
   return n.name
@@ -27,35 +18,14 @@ function getOptionValue(n: NodeCategory) {
   return n.id
 }
 
-type Option = NodeCategory
-
-const Option = (props: OptionProps<NodeCategory>) => {
-  const categoryChain = useMemo(
-    () => getNodeCategoryChain([props.data.id]),
-    [props.data]
-  )
-  const parentText = categoryChain
-    .slice(0, -1)
-    .map((x) => x.name)
-    .join(" / ")
-  return (
-    <components.Option {...props}>
-      <Box>
-        <Text fontSize={10}>{parentText}</Text>
-        <Box>{props.data.name}</Box>
-      </Box>
-    </components.Option>
-  )
-}
-
 export default function CategorySelect({ nodeId }: { nodeId: GraphNodeId }) {
   const node = useAtomValue(graphNodeFamily(nodeId))
   const modifyNode = useModifyNode()
 
   const onChange = useCallback(
     (
-      categories: OnChangeValue<Option, true>,
-      actionMeta: ActionMeta<Option>
+      categories: OnChangeValue<NodeCategory, true>,
+      actionMeta: ActionMeta<NodeCategory>
     ) => {
       if (actionMeta.action === "select-option") {
         modifyNode(nodeId, { categories: categories.map((x) => x.id) })
@@ -82,7 +52,7 @@ export default function CategorySelect({ nodeId }: { nodeId: GraphNodeId }) {
       getOptionLabel={getOptionLabel}
       getOptionValue={getOptionValue}
       onChange={onChange}
-      components={{ Option }}
+      components={{ Option: CategorySelectOption }}
     />
   )
 }
