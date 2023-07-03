@@ -154,7 +154,7 @@ export const nodeCategories: NodeCategory[] = [
     isAbstract: true,
   },
   {
-    id: "study",
+    id: "scientific-study",
     name: "Scientific Study",
     aliases: ["Paper"],
     properties: [
