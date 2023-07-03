@@ -19,7 +19,7 @@ export function DescriptionInput({ node }: { node: GraphNode }) {
       value={node.description || ""}
       onChange={onChange}
       placeholder="Description"
-      height={200}
+      height={120}
     />
   )
 }

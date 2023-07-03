@@ -4,17 +4,14 @@ export const nodeCategories: NodeCategory[] = [
   {
     id: "organism",
     name: "Organism",
-    properties: [
-      { name: "birthday", type: "datetime" },
-      { name: "species", type: "string" },
-    ],
+    properties: [],
     composeIds: [],
     isAbstract: true,
   },
   {
     id: "animal",
     name: "Animal",
-    properties: [],
+    properties: [{ name: "birthday", type: "datetime" }],
     composeIds: ["organism"],
   },
   {
