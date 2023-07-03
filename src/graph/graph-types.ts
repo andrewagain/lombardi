@@ -68,5 +68,3 @@ export interface NodeCategory {
 }
 
 export type NodePropertyValue = string | number | boolean | Date | undefined
-
-export type GraphNodeIdAndPropertyName = string

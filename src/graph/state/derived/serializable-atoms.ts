@@ -5,7 +5,7 @@ import {
   GraphEdgeId,
   GraphEdgePriority,
   GraphNode,
-  GraphNodeIdAndPropertyName,
+  GraphNodeId,
   NodePropertyValue,
 } from "../../graph-types"
 import {
@@ -17,7 +17,7 @@ import { graphNodesAtom } from "./node-atoms"
 
 export interface SerializableData {
   nodes: GraphNode[]
-  nodeProperties: [GraphNodeIdAndPropertyName, NodePropertyValue][]
+  nodeProperties: [GraphNodeId, NodePropertyValue][]
   edges: GraphEdge[]
   edgePriorities: [GraphEdgeId, GraphEdgePriority][]
 }
