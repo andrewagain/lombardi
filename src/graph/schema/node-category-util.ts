@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { isTruthy } from "@/util/function"
 
-import { NodeCategory } from "../graph-types"
+import { NodeCategory, NodeProperty, NodePropertyName } from "../graph-types"
 import { nodeCategories } from "./node-categories"
 
 export const nodeCategoryMap = new Map(
@@ -36,4 +36,28 @@ export function getNodeCategoryChain(categoryIds: string[]): NodeCategory[] {
     }
   }
   return visited
+}
+
+export function getCategoryChainProperties(
+  categories: NodeCategory[]
+): NodeProperty[] {
+  const propertyMap = new Map<NodePropertyName, NodeProperty>()
+
+  for (const category of categories) {
+    for (const property of category.properties) {
+      propertyMap.set(property.name, property)
+    }
+  }
+  return [...propertyMap.values()]
+}
+
+export function getCategoryChainComposedNames(
+  categories: NodeCategory[]
+): string[] {
+  const names: string[] = []
+
+  for (const category of categories) {
+    names.push(category.name)
+  }
+  return names
 }
