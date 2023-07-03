@@ -50,6 +50,8 @@ export type NodePropertyType =
   | "number"
   | "boolean"
   | "url"
+  | "string[]"
+  | "url[]"
 
 export interface NodeProperty {
   name: string

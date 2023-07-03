@@ -149,7 +149,7 @@ export const nodeCategories: NodeCategory[] = [
   {
     id: "source",
     name: "Source",
-    properties: [{ name: "url", type: "string" }],
+    properties: [{ name: "url", type: "url[]" }],
     composeIds: [],
     isAbstract: true,
   },
@@ -158,7 +158,7 @@ export const nodeCategories: NodeCategory[] = [
     name: "Scientific Study",
     aliases: ["Paper"],
     properties: [
-      { name: "author", type: "string" },
+      { name: "authors", type: "string[]" },
       { name: "doi", type: "string" },
     ],
     composeIds: ["source"],
