@@ -8,6 +8,7 @@ import { getNodeCategoryChain } from "@/graph/schema/node-category-util"
 import { graphNodeFamily } from "@/graph/state/derived/node-atoms"
 
 import CategoryInput from "./category-input"
+
 export default function CategoryForm({ nodeId }: { nodeId: GraphNodeId }) {
   const node = useAtomValue(graphNodeFamily(nodeId))
   const chain = useMemo(
