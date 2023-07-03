@@ -118,3 +118,23 @@ export function mapCopyPlusValuesGetKey<T, U>(
   }
   return nextMap
 }
+
+export function nestedMapToEntries<K1, K2, V>(
+  map: Map<K1, Map<K2, V>>
+): [K1, [K2, V][]][] {
+  return [...map.entries()].map(([key1, innerMap]) => [
+    key1,
+    [...innerMap.entries()],
+  ])
+}
+
+export function nestedMapFromEntries<K1, K2, V>(
+  entries: [K1, [K2, V][]][]
+): Map<K1, Map<K2, V>> {
+  return new Map(
+    entries.map(
+      ([key1, innerEntries]) =>
+        [key1, new Map(innerEntries)] as [K1, Map<K2, V>]
+    )
+  )
+}

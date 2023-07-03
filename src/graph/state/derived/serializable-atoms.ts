@@ -1,11 +1,17 @@
 import { atom } from "jotai"
 
 import {
+  nestedMapFromEntries,
+  nestedMapToEntries,
+} from "@/util/datastructure/map"
+
+import {
   GraphEdge,
   GraphEdgeId,
   GraphEdgePriority,
   GraphNode,
   GraphNodeId,
+  NodePropertyName,
   NodePropertyValue,
 } from "../../graph-types"
 import {
@@ -17,7 +23,7 @@ import { graphNodesAtom } from "./node-atoms"
 
 export interface SerializableData {
   nodes: GraphNode[]
-  nodeProperties: [GraphNodeId, NodePropertyValue][]
+  nodeProperties: [GraphNodeId, [NodePropertyName, NodePropertyValue][]][]
   edges: GraphEdge[]
   edgePriorities: [GraphEdgeId, GraphEdgePriority][]
 }
@@ -28,7 +34,7 @@ export const serializableDataAtom = atom(
       nodes: get(graphNodesAtom),
       edges: get(graphEdgesAtom),
       edgePriorities: [...get(graphEdgePriorityMapAtom).entries()],
-      nodeProperties: [...get(graphNodePropertyMapAtom).entries()],
+      nodeProperties: nestedMapToEntries(get(graphNodePropertyMapAtom)),
     }
     return data
   },
@@ -36,5 +42,6 @@ export const serializableDataAtom = atom(
     set(graphNodesAtom, data.nodes)
     set(graphEdgesAtom, data.edges)
     set(graphEdgePriorityMapAtom, new Map(data.edgePriorities))
+    set(graphNodePropertyMapAtom, nestedMapFromEntries(data.nodeProperties))
   }
 )
