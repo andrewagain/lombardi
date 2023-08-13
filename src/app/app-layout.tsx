@@ -1,10 +1,11 @@
 import { Box } from "@chakra-ui/react"
 import { useAtomValue } from "jotai"
 
+import AtomView from "@/util/atom/atom-view"
 import Panel from "@/util/component/panel/panel"
-import AtomView from "@/view/atom/atom-view"
 
-import { interfaceSidePanelsAtom, SidePanel } from "./interface-state"
+import { interfaceSidePanelsAtom } from "./state/interface-atoms"
+import { SidePanel } from "./state/interface-types"
 import Toolbar from "./toolbar/main-toolbar"
 
 export default function AppLayout() {

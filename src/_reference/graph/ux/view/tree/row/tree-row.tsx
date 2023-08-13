@@ -8,7 +8,7 @@ import { GraphNode } from "@/_reference/graph/graph-types.ts"
 import { useToggleNodeVisibility } from "@/_reference/graph/state/derived/modify-hooks.ts"
 import { graphNodeHiddenIndirectlySetAtom } from "@/_reference/graph/state/derived/visibility-atoms.ts"
 
-import { treeRowHeight, treeRowHeightPx } from "../tree-util"
+import { treeRowHeight, treeRowHeightPx } from "../tree-util.ts"
 import TreeInput from "./tree-input.tsx"
 
 export function TreeRow({

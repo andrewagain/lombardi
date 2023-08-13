@@ -1,11 +1,6 @@
 import { Box } from "@chakra-ui/react"
 
-import * as edgeAtoms from "@/_reference/graph/state/derived/edge-atoms"
-import * as nodeAtoms from "@/_reference/graph/state/derived/node-atoms"
-import * as serialAtoms from "@/_reference/graph/state/derived/serializable-atoms"
-import * as treeAtoms from "@/_reference/graph/state/derived/tree-atoms"
-import * as visibilityAtoms from "@/_reference/graph/state/derived/visibility-atoms"
-import * as graphCoreAtoms from "@/_reference/graph/state/graph-core-atoms"
+import * as interfaceAtoms from "@/_reference/graph/state/derived/edge-atoms"
 import Panel from "@/util/component/panel/panel"
 
 import { AtomSet } from "./atom-util"
@@ -24,14 +19,7 @@ function getAllImportSets(): AtomSet[] {
   if (_cachedImportSets) {
     return _cachedImportSets
   }
-  _cachedImportSets = [
-    getImportAtomSet("core", graphCoreAtoms),
-    getImportAtomSet("node", nodeAtoms),
-    getImportAtomSet("edge", edgeAtoms),
-    getImportAtomSet("serial", serialAtoms),
-    getImportAtomSet("tree", treeAtoms),
-    getImportAtomSet("visibility", visibilityAtoms),
-  ]
+  _cachedImportSets = [getImportAtomSet("node", interfaceAtoms)]
   return _cachedImportSets
 }
 

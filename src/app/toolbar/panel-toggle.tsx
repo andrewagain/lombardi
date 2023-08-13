@@ -5,7 +5,7 @@ import {
   SidePanel,
   useSidePanelEnabled,
   useToggleSidePanel,
-} from "@/app/interface-state"
+} from "@/app/state/interface-state"
 
 // NOTE: Other panels may be created and added here.
 function getIcon(p: SidePanel): JSX.Element | null {
