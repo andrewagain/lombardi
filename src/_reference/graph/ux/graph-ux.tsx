@@ -10,8 +10,8 @@ import {
   interfaceSidePanelsAtom,
   SidePanel,
 } from "../../../app/interface-state.ts"
-import Panel from "../../../util/component/panel/panel.tsx"
 import Toolbar from "../../../app/toolbar/main-toolbar.tsx"
+import Panel from "../../../util/component/panel/panel.tsx"
 import NodeDetail from "./detail/node-detail.tsx"
 import Footer from "./graph-footer.tsx"
 
