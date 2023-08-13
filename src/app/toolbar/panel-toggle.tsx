@@ -2,10 +2,11 @@ import { IconButton } from "@chakra-ui/react"
 import { VscDebugBreakpointData } from "react-icons/vsc"
 
 import {
-  SidePanel,
   useSidePanelEnabled,
   useToggleSidePanel,
 } from "@/app/state/interface-state"
+
+import { SidePanel } from "../state/interface-types"
 
 // NOTE: Other panels may be created and added here.
 function getIcon(p: SidePanel): JSX.Element | null {

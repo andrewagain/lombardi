@@ -2,7 +2,7 @@ import { HStack, Spacer, StackProps } from "@chakra-ui/react"
 
 import { interfaceBorder } from "@/app/theme/style-util"
 
-import { SidePanel } from "../state/interface-state"
+import { SidePanel } from "../state/interface-types"
 import DarkModeSwitch from "./dark-mode-switch"
 import LogoIcon from "./logo-icon"
 import { PanelToggle } from "./panel-toggle"
