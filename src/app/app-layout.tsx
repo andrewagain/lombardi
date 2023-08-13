@@ -22,10 +22,6 @@ export default function AppLayout() {
         height: "100vh",
         width: "100%",
         overflow: "hidden",
-
-        "> header": {
-          gridArea: "h",
-        },
       }}
     >
       <Toolbar gridArea="toolbar" />
