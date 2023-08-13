@@ -18,8 +18,8 @@ export default function AppLayout() {
         gridTemplateColumns: "1fr auto",
         gridTemplateRows: "auto 1fr",
         gridTemplateAreas: `
-        "toolbar dpanel"
-        "main    dpanel"`,
+        "toolbar toolbar"
+        "main    panel-debug"`,
         height: "100vh",
         width: "100%",
         overflow: "hidden",
