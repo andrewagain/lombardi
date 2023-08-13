@@ -1,4 +1,4 @@
-import Layout from "@/interface/layout/layout.tsx"
+import Layout from "@/graph/ux/graph-ux.tsx"
 
 import ProviderStack from "./provider-stack.tsx"
 

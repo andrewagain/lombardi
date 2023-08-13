@@ -6,13 +6,16 @@ import AtomView from "@/view/atom/atom-view"
 import FlowView from "@/view/flow/flow-view.tsx"
 import TreeView from "@/view/tree/tree-view"
 
-import NodeDetail from "../detail/node-detail.tsx"
-import { interfaceSidePanelsAtom, SidePanel } from "../interface-state"
-import Toolbar from "../toolbar/main-toolbar.tsx"
-import Footer from "./footer/footer"
-import Panel from "./panel/panel.tsx"
+import {
+  interfaceSidePanelsAtom,
+  SidePanel,
+} from "../../interface/interface-state.ts"
+import Panel from "../../interface/panel/panel.tsx"
+import Toolbar from "../../interface/toolbar/main-toolbar.tsx"
+import NodeDetail from "./detail/node-detail.tsx"
+import Footer from "./graph-footer.tsx"
 
-export default function Layout() {
+export default function GraphUx() {
   const panels = useAtomValue(interfaceSidePanelsAtom)
 
   return (
