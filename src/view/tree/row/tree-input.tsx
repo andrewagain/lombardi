@@ -1,6 +1,6 @@
 import { NodeApi } from "react-arborist"
 
-import { GraphNode } from "@/graph/graph-types"
+import { GraphNode } from "@/_reference/graph/graph-types"
 
 export default function TreeInput({ node }: { node: NodeApi<GraphNode> }) {
   return (

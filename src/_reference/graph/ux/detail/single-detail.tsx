@@ -1,7 +1,7 @@
 import { Box, VStack } from "@chakra-ui/react"
 import { useAtomValue } from "jotai"
 
-import { graphNodeFirstSelectedAtom } from "@/graph/state/derived/selection-atoms"
+import { graphNodeFirstSelectedAtom } from "@/_reference/graph/state/derived/selection-atoms"
 
 import CategorySelect from "./category/category-select"
 import CategoryFormList from "./category/form/category-form-list"

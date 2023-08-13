@@ -1,6 +1,6 @@
 import { atom } from "jotai"
 
-import { GraphEdge } from "@/graph/graph-types"
+import { GraphEdge } from "@/_reference/graph/graph-types"
 import { listToMap } from "@/util/datastructure/map"
 
 import { graphEdgeMapAtom } from "../graph-core-atoms"

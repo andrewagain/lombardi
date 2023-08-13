@@ -1,7 +1,7 @@
 import { atom } from "jotai"
 
-import { GraphNode } from "@/graph/graph-types.ts"
-import { graphSortEdges } from "@/graph/graph-util.ts"
+import { GraphNode } from "@/_reference/graph/graph-types.ts"
+import { graphSortEdges } from "@/_reference/graph/graph-util.ts"
 import { isTruthy } from "@/util/function.ts"
 
 import {

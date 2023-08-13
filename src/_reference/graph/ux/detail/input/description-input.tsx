@@ -1,8 +1,8 @@
 import { Textarea } from "@chakra-ui/react"
 import { useCallback } from "react"
 
-import { GraphNode } from "@/graph/graph-types"
-import { useModifyNode } from "@/graph/state/derived/modify-hooks"
+import { GraphNode } from "@/_reference/graph/graph-types"
+import { useModifyNode } from "@/_reference/graph/state/derived/modify-hooks"
 
 export function DescriptionInput({ node }: { node: GraphNode }) {
   const modifyNode = useModifyNode()

@@ -4,9 +4,9 @@ import { NodeRendererProps } from "react-arborist"
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai"
 import { MdArrowDropDown, MdArrowRight } from "react-icons/md"
 
-import { GraphNode } from "@/graph/graph-types.ts"
-import { useToggleNodeVisibility } from "@/graph/state/derived/modify-hooks"
-import { graphNodeHiddenIndirectlySetAtom } from "@/graph/state/derived/visibility-atoms"
+import { GraphNode } from "@/_reference/graph/graph-types.ts"
+import { useToggleNodeVisibility } from "@/_reference/graph/state/derived/modify-hooks.ts"
+import { graphNodeHiddenIndirectlySetAtom } from "@/_reference/graph/state/derived/visibility-atoms.ts"
 
 import { treeRowHeight, treeRowHeightPx } from "../tree-util"
 import TreeInput from "./tree-input.tsx"

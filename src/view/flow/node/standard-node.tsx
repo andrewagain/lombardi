@@ -1,7 +1,7 @@
 import { Box, Text } from "@chakra-ui/react"
 import { Handle, NodeProps, Position } from "reactflow"
 
-import { GraphNode } from "@/graph/graph-types"
+import { GraphNode } from "@/_reference/graph/graph-types"
 
 export default function StandardNode({ data, selected }: NodeProps<GraphNode>) {
   return (

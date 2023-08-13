@@ -12,16 +12,16 @@ import {
   TreeApi,
 } from "react-arborist"
 
-import { GraphNode } from "@/graph/graph-types.ts"
+import { GraphNode } from "@/_reference/graph/graph-types.ts"
 import {
   useAddEdge,
   useAddNode,
   useDeleteNodes,
   useMoveNodes,
   useRenameNode,
-} from "@/graph/state/derived/modify-hooks.ts"
-import { graphTreeRootNodesAtom } from "@/graph/state/derived/tree-atoms.ts"
-import { graphNodeSelectedIdsAtom } from "@/graph/state/graph-core-atoms.ts"
+} from "@/_reference/graph/state/derived/modify-hooks.ts"
+import { graphTreeRootNodesAtom } from "@/_reference/graph/state/derived/tree-atoms.ts"
+import { graphNodeSelectedIdsAtom } from "@/_reference/graph/state/graph-core-atoms.ts"
 import ElementBoundsEffect from "@/util/component/bounds-effect.tsx"
 import { arrayUnsortedIsEqual } from "@/util/datastructure/array.ts"
 

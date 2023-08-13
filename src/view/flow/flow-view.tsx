@@ -16,7 +16,7 @@ import {
   ReactFlowInstance,
 } from "reactflow"
 
-import { graphNodeSelectedIdsAtom } from "@/graph/state/graph-core-atoms"
+import { graphNodeSelectedIdsAtom } from "@/_reference/graph/state/graph-core-atoms"
 
 import { flowEdgesAtom, flowNodesAtom } from "./flow-atoms"
 import nodeTypes from "./node/node-types"

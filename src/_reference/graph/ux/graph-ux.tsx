@@ -1,7 +1,7 @@
 import { Box } from "@chakra-ui/react"
 import { useAtomValue } from "jotai"
 
-import { PersistGraphEffect } from "@/graph/state/effect/graph-persist"
+import { PersistGraphEffect } from "@/_reference/graph/state/effect/graph-persist.tsx"
 import AtomView from "@/view/atom/atom-view"
 import FlowView from "@/view/flow/flow-view.tsx"
 import TreeView from "@/view/tree/tree-view"
@@ -9,9 +9,9 @@ import TreeView from "@/view/tree/tree-view"
 import {
   interfaceSidePanelsAtom,
   SidePanel,
-} from "../../interface/interface-state.ts"
-import Panel from "../../interface/panel/panel.tsx"
-import Toolbar from "../../interface/toolbar/main-toolbar.tsx"
+} from "../../../app/interface-state.ts"
+import Panel from "../../../util/component/panel/panel.tsx"
+import Toolbar from "../../../app/toolbar/main-toolbar.tsx"
 import NodeDetail from "./detail/node-detail.tsx"
 import Footer from "./graph-footer.tsx"
 

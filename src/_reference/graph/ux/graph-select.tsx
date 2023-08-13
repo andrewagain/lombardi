@@ -1,7 +1,7 @@
 import { useAtom } from "jotai"
 
-import { graphIdAtom } from "@/graph/state/graph-core-atoms"
-import { useClearGraph } from "@/graph/state/derived/modify-hooks"
+import { useClearGraph } from "@/_reference/graph/state/derived/modify-hooks"
+import { graphIdAtom } from "@/_reference/graph/state/graph-core-atoms"
 
 export default function GraphSelect() {
   const [graphId, setGraphId] = useAtom(graphIdAtom)

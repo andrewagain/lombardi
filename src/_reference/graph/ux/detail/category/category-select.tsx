@@ -2,11 +2,11 @@ import { ActionMeta, OnChangeValue, Select } from "chakra-react-select"
 import { useAtomValue } from "jotai"
 import { useCallback, useMemo } from "react"
 
-import { GraphNodeId, NodeCategory } from "@/graph/graph-types"
-import { nodeCategories } from "@/graph/schema/node-categories"
-import { nodeCategoryMap } from "@/graph/schema/node-category-util"
-import { useModifyNode } from "@/graph/state/derived/modify-hooks"
-import { graphNodeFamily } from "@/graph/state/derived/node-atoms"
+import { GraphNodeId, NodeCategory } from "@/_reference/graph/graph-types"
+import { nodeCategories } from "@/_reference/graph/schema/node-categories"
+import { nodeCategoryMap } from "@/_reference/graph/schema/node-category-util"
+import { useModifyNode } from "@/_reference/graph/state/derived/modify-hooks"
+import { graphNodeFamily } from "@/_reference/graph/state/derived/node-atoms"
 import { isTruthy } from "@/util/function"
 
 function getOptionLabel(n: NodeCategory) {

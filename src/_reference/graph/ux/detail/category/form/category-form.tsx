@@ -1,13 +1,13 @@
 import { Box, Heading, HStack, Text } from "@chakra-ui/react"
 import { useMemo } from "react"
 
-import { GraphNodeId, NodeCategoryId } from "@/graph/graph-types"
+import { GraphNodeId, NodeCategoryId } from "@/_reference/graph/graph-types"
 import {
   getCategoryChainComposedNames,
   getCategoryChainProperties,
   getNodeCategoryChain,
   nodeCategoryMap,
-} from "@/graph/schema/node-category-util"
+} from "@/_reference/graph/schema/node-category-util"
 
 import CategoryInput from "../input/category-input"
 

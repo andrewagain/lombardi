@@ -2,14 +2,14 @@ import dagre from "dagre"
 import { atom } from "jotai"
 import { Edge, Node } from "reactflow"
 
-import { GraphEdge, GraphNode } from "@/graph/graph-types"
-import { graphEdgesAtom } from "@/graph/state/derived/edge-atoms"
-import { graphNodeSelectedIdMapAtom } from "@/graph/state/derived/selection-atoms"
-import { graphVisibleNodesAtom } from "@/graph/state/derived/visibility-atoms"
+import { GraphEdge, GraphNode } from "@/_reference/graph/graph-types"
+import { graphEdgesAtom } from "@/_reference/graph/state/derived/edge-atoms"
+import { graphNodeSelectedIdMapAtom } from "@/_reference/graph/state/derived/selection-atoms"
+import { graphVisibleNodesAtom } from "@/_reference/graph/state/derived/visibility-atoms"
 import {
   graphNodePositionMapAtom,
   graphNodeSelectedIdsAtom,
-} from "@/graph/state/graph-core-atoms"
+} from "@/_reference/graph/state/graph-core-atoms"
 import { isZeroPoint } from "@/util/geometry/point"
 
 export type FlowNode = Node<GraphNode>

@@ -1,6 +1,6 @@
 import { useAtomValue } from "jotai"
 
-import { graphNodeSelectedIdsAtom } from "@/graph/state/graph-core-atoms"
+import { graphNodeSelectedIdsAtom } from "@/_reference/graph/state/graph-core-atoms"
 
 import MultiDetail from "./multi-detail"
 import SingleDetail from "./single-detail"

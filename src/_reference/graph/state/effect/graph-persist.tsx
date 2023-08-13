@@ -2,7 +2,7 @@ import axios from "axios"
 import { useAtom, useAtomValue } from "jotai"
 import { useEffect } from "react"
 
-import { serializableDataAtom } from "@/graph/state/derived/serializable-atoms"
+import { serializableDataAtom } from "@/_reference/graph/state/derived/serializable-atoms"
 
 import { graphIdAtom } from "../graph-core-atoms"
 

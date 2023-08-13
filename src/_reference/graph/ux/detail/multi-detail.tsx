@@ -1,7 +1,7 @@
 import { Box } from "@chakra-ui/react"
 import { useAtomValue } from "jotai"
 
-import { graphNodeSelectedIdsAtom } from "@/graph/state/graph-core-atoms"
+import { graphNodeSelectedIdsAtom } from "@/_reference/graph/state/graph-core-atoms"
 
 export default function MultiDetail() {
   const selectedNodeIds = useAtomValue(graphNodeSelectedIdsAtom)

@@ -1,7 +1,7 @@
 import { atom } from "jotai"
 import { atomFamily } from "jotai/utils"
 
-import { GraphNode, GraphNodeId } from "@/graph/graph-types"
+import { GraphNode, GraphNodeId } from "@/_reference/graph/graph-types"
 import { listToMap } from "@/util/datastructure/map"
 
 import { graphNodeMapAtom } from "../graph-core-atoms"

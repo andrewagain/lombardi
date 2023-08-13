@@ -1,8 +1,8 @@
 import { VStack } from "@chakra-ui/react"
 import { useAtomValue } from "jotai"
 
-import { GraphNodeId } from "@/graph/graph-types"
-import { graphNodeFamily } from "@/graph/state/derived/node-atoms"
+import { GraphNodeId } from "@/_reference/graph/graph-types"
+import { graphNodeFamily } from "@/_reference/graph/state/derived/node-atoms"
 
 import CategoryForm from "./category-form"
 

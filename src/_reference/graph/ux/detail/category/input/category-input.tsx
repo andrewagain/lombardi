@@ -1,6 +1,10 @@
 import { Box, Checkbox, Input } from "@chakra-ui/react"
 
-import { GraphNodeId, NodeCategory, NodeProperty } from "@/graph/graph-types"
+import {
+  GraphNodeId,
+  NodeCategory,
+  NodeProperty,
+} from "@/_reference/graph/graph-types"
 
 export default function CategoryInput({
   nodeId,

@@ -6,12 +6,12 @@ import { useCallback, useEffect, useRef } from "react"
 import { TbLayout2 } from "react-icons/tb"
 import { Panel } from "reactflow"
 
-import { NodePosition } from "@/graph/graph-types"
-import { graphNodeIdsAtom } from "@/graph/state/derived/node-atoms"
+import { NodePosition } from "@/_reference/graph/graph-types"
+import { graphNodeIdsAtom } from "@/_reference/graph/state/derived/node-atoms"
 import {
   graphNodeMapAtom,
   graphNodePositionMapAtom,
-} from "@/graph/state/graph-core-atoms"
+} from "@/_reference/graph/state/graph-core-atoms"
 import { pointCopy } from "@/util/geometry/point"
 
 import { flowDagreAtom } from "./flow-atoms"
