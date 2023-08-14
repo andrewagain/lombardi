@@ -21,12 +21,11 @@ model User {
 }
 
 model Case {
-  id        String    @id @default(uuid())
+  id        String   @id @default(uuid())
   creatorId String
   claim     String
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-  deletedAt DateTime?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
   caseJson  String // serialized "Case" object
 }
 
@@ -36,7 +35,6 @@ model CaseInstance {
   version   Int       @default(0)
   caseJson  String // serialized "Case" object
   createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
   deletedAt DateTime?
 }
 
