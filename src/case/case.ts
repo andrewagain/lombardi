@@ -39,8 +39,7 @@ export interface CaseSupportPoint {
 // An argument or point that a user is making.
 export interface Case {
   id: string
-  title: string
-  text: string
+  claim: string
   clarification: CaseClarification
   supportPoints: CaseSupportPoint[]
   conclusion: string // describes why the supporting points tie the case together

@@ -9,3 +9,27 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model User {
+  id    String @id @default(uuid())
+  email String @unique
+  name  String
+}
+
+model Case {
+  id        String    @id @default(uuid())
+  creatorId String
+  claim     String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+  caseJson  String // serialized "Case" object
+}
+
+model CasePublishLock {
+  caseId   String
+  index    Int    @default(0)
+  caseJson String // serialized "Case" object
+
+  @@id([caseId, index])
+}
