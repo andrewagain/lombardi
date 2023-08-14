@@ -11,9 +11,13 @@ datasource db {
 }
 
 model User {
-  id    String @id @default(uuid())
-  email String @unique
-  name  String
+  id         String    @id @default(uuid())
+  email      String    @unique
+  name       String
+  newsletter Boolean   @default(false)
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  deletedAt  DateTime?
 }
 
 model Case {
@@ -26,10 +30,25 @@ model Case {
   caseJson  String // serialized "Case" object
 }
 
-model CasePublishLock {
-  caseId   String
-  index    Int    @default(0)
-  caseJson String // serialized "Case" object
+model CaseInstance {
+  id        String    @id @default(uuid())
+  caseId    String
+  version   Int       @default(0)
+  caseJson  String // serialized "Case" object
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+}
 
-  @@id([caseId, index])
+model CaseInstanceReview {
+  id             String    @id @default(uuid())
+  caseId         String
+  caseInstanceId String
+  userId         String
+  agreed         Boolean
+  note           String?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+  deletedAt      DateTime?
+  reviewJson     String // serialized "CaseReview" object
 }
