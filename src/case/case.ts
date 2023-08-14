@@ -53,6 +53,7 @@ export enum CaseReviewPointType {
   SupportPointConnection = "SupportPointConnection", // reader might agree with the support point, but believes it is not supportive of the case (supportPointId will be set)
   SourceConnection = "SourceConnection", // reader might agree with the statements of the source, but does not believe it is a good reference for the supporting point (sourceId will be set)
   IncorrectSource = "IncorrectSource", // reader believes this source is providing inaccurate information (sourceId will be set)
+  MissingCounterpoint = "MissingCounterpoint", // reader believes this case is missing a counterpoint which may invalidate the case
 }
 
 export interface CaseReviewPoint {
