@@ -110,8 +110,10 @@ model User {
   updatedAt DateTime @updatedAt
 
   email      String  @unique
+  alias      String  @unique
   name       String
   newsletter Boolean @default(false)
+  bio        String
 
   cases            Case[]
   reviews          CaseReview[]
