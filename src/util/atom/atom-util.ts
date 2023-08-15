@@ -6,7 +6,7 @@ export interface AtomSet {
 }
 
 export function getStateParameter(type: "open" | "rows", title: string) {
-  return `nuons.${title.replace(/\s/g, "")}.${type}`
+  return `lombardi.${title.replace(/\s/g, "")}.${type}`
 }
 
 export function getSetCategorizedAtoms(s: AtomSet): CategorizedAtom[] {

@@ -1,5 +1,5 @@
 
-# NUONS Case-making
+# LOMBARDI Case-making
 
 Next step is to re-envision the app as a 'case maker'.
 The flow I've got so far is:
@@ -56,7 +56,7 @@ Publish the case, which freezes it at a particular version and makes it public f
 4. FEEDBACK
 
 4.1 Share the case on social media
-    All cases will also be in a list on the nuons home page.
+    All cases will also be in a list on the lombardi home page.
 
 4.2 Users Provide Feedback
     Requests for clarification in any part of the case

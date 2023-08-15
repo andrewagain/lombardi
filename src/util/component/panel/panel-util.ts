@@ -18,7 +18,7 @@ const panelSizeMapAtom = atom(
 )
 
 function getLocalStorageKey(panelKey: string): string {
-  return `nuons.panel.${panelKey}`
+  return `lombardi.panel.${panelKey}`
 }
 
 export function loadPanelSize(panelKey: string): number {
