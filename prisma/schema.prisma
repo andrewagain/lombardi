@@ -28,6 +28,7 @@ model Case {
   reviews   CaseReview[]
   instances CaseInstance[]
   conflicts CaseConflict[]
+  // inverseConflicts CaseConflict[] @relation("CaseConflict", fields: [id], references: [conflictingCaseId])
 }
 
 // The presence of this object indicates that the user agrees with the case
@@ -46,15 +47,16 @@ model CaseAgreement {
 // The presence of a CaseConflict indicates that an agreement with one
 // case would be in conflict with an agreement with another case.
 model CaseConflict {
-  caseId            String
+  primaryCaseId     String
   conflictingCaseId String
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  case Case @relation(fields: [caseId], references: [id])
+  primaryCase Case @relation(fields: [primaryCaseId], references: [id])
+  // conflictingCase Case @relation("conflicts", fields: [conflictingCaseId], references: [id])
 
-  @@id([caseId, conflictingCaseId])
+  @@id([primaryCaseId, conflictingCaseId])
 }
 
 model CaseInstance {
