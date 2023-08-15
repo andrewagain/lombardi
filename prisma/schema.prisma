@@ -28,7 +28,6 @@ model CaseInstance {
   version   Int                  @default(0)
   caseJson  String // serialized TypeScript "Case" object
   createdAt DateTime             @default(now())
-  deletedAt DateTime?
   case      Case                 @relation(fields: [caseId], references: [id])
   reviews   CaseInstanceReview[]
 }
@@ -42,7 +41,6 @@ model CaseInstanceReview {
   note           String?
   createdAt      DateTime     @default(now())
   updatedAt      DateTime     @updatedAt
-  deletedAt      DateTime?
   reviewJson     String // serialized TypeScript "CaseReview" object
   case           Case         @relation(fields: [caseId], references: [id])
   caseInstance   CaseInstance @relation(fields: [caseInstanceId], references: [id])
@@ -56,7 +54,6 @@ model User {
   newsletter Boolean              @default(false)
   createdAt  DateTime             @default(now())
   updatedAt  DateTime             @updatedAt
-  deletedAt  DateTime?
   cases      Case[]
   reviews    CaseInstanceReview[]
 }
