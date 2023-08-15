@@ -20,8 +20,8 @@ model Case {
   claim    String
   caseJson String
 
-  author    User                 @relation(fields: [authorId], references: [id])
-  reviews   CaseInstanceReview[]
+  author    User           @relation(fields: [authorId], references: [id])
+  reviews   CaseReview[]
   instances CaseInstance[]
 }
 
@@ -35,6 +35,8 @@ model CaseAgreement {
   @@id([caseId, userId])
 }
 
+// model CaseConflict
+
 model CaseInstance {
   id     String @id @default(uuid())
   caseId String
@@ -44,15 +46,15 @@ model CaseInstance {
   version  Int    @default(0)
   caseJson String
 
-  case    Case                 @relation(fields: [caseId], references: [id])
-  reviews CaseInstanceReview[]
+  case    Case         @relation(fields: [caseId], references: [id])
+  reviews CaseReview[]
 }
 
 // The presence of this review indicates that the user does not
 // agree with the case.
 // The user should not have a review and an agreement for the same case.
 // There can only be one review (or agreement) per user per case instance
-model CaseInstanceReview {
+model CaseReview {
   id             String @id @default(uuid())
   caseId         String
   caseInstanceId String
@@ -80,5 +82,5 @@ model User {
   newsletter Boolean @default(false)
 
   cases   Case[]
-  reviews CaseInstanceReview[]
+  reviews CaseReview[]
 }
