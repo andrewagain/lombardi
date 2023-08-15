@@ -8,7 +8,8 @@
     "build": "tsc && vite build",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "lint:fix": "eslint src --ext ts,tsx --fix",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "prisma-test": "node --experimental-specifier-resolution=node --loader ts-node/esm ./server/index.ts"
   },
   "dependencies": {
     "@chakra-ui/react": "^2.7.1",
