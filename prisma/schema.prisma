@@ -17,8 +17,9 @@ model Case {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  claim    String
-  caseJson String
+  versionCount Int    @default(0)
+  claim        String
+  caseJson     String
 
   author    User           @relation(fields: [authorId], references: [id])
   reviews   CaseReview[]
@@ -26,11 +27,14 @@ model Case {
 }
 
 // The presence of this object indicates that the user agrees with the case
+// A user cannot agree to multiple instances of a case, but they can always
+// upgrade their agreement to the latest version.
 model CaseAgreement {
-  caseId    String
-  userId    String
-  createdAt DateTime @default(now())
-  version   Int      @default(0)
+  caseId      String
+  userId      String
+  createdAt   DateTime @default(now())
+  caseVersion Int      @default(0)
+  User        User     @relation(fields: [userId], references: [id])
 
   @@id([caseId, userId])
 }
@@ -38,16 +42,17 @@ model CaseAgreement {
 // model CaseConflict
 
 model CaseInstance {
-  id     String @id @default(uuid())
-  caseId String
+  caseId      String
+  caseVersion Int    @default(0)
 
   createdAt DateTime @default(now())
 
-  version  Int    @default(0)
   caseJson String
 
   case    Case         @relation(fields: [caseId], references: [id])
   reviews CaseReview[]
+
+  @@id([caseId, caseVersion])
 }
 
 // The presence of this review indicates that the user does not
@@ -55,10 +60,10 @@ model CaseInstance {
 // The user should not have a review and an agreement for the same case.
 // There can only be one review (or agreement) per user per case instance
 model CaseReview {
-  id             String @id @default(uuid())
-  caseId         String
-  caseInstanceId String
-  authorId       String
+  id          String @id @default(uuid())
+  caseId      String
+  caseVersion Int
+  authorId    String
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -67,8 +72,17 @@ model CaseReview {
   reviewJson String
 
   case         Case         @relation(fields: [caseId], references: [id])
-  caseInstance CaseInstance @relation(fields: [caseInstanceId], references: [id])
+  caseInstance CaseInstance @relation(fields: [caseId, caseVersion], references: [caseId, caseVersion])
   author       User         @relation(fields: [authorId], references: [id])
+}
+
+model CaseReviewAgreement {
+  caseReviewId String
+  userId       String
+  createdAt    DateTime @default(now())
+  User         User     @relation(fields: [userId], references: [id])
+
+  @@id([caseReviewId, userId])
 }
 
 model User {
@@ -81,6 +95,8 @@ model User {
   name       String
   newsletter Boolean @default(false)
 
-  cases   Case[]
-  reviews CaseReview[]
+  cases            Case[]
+  reviews          CaseReview[]
+  caseAgreements   CaseAgreement[]
+  reviewAgreements CaseReviewAgreement[]
 }
