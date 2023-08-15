@@ -11,49 +11,63 @@ datasource db {
 }
 
 model Case {
-  id        String               @id @default(uuid())
-  authorId  String
-  claim     String
-  createdAt DateTime             @default(now())
-  updatedAt DateTime             @updatedAt
-  caseJson  String // serialized TypeScript "Case" object
+  id       String @id @default(uuid())
+  authorId String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  claim    String
+  caseJson String
+
   author    User                 @relation(fields: [authorId], references: [id])
   reviews   CaseInstanceReview[]
   instances CaseInstance[]
 }
 
 model CaseInstance {
-  id        String               @id @default(uuid())
-  caseId    String
-  version   Int                  @default(0)
-  caseJson  String // serialized TypeScript "Case" object
-  createdAt DateTime             @default(now())
-  case      Case                 @relation(fields: [caseId], references: [id])
-  reviews   CaseInstanceReview[]
+  id     String @id @default(uuid())
+  caseId String
+
+  createdAt DateTime @default(now())
+
+  version  Int    @default(0)
+  caseJson String
+
+  case    Case                 @relation(fields: [caseId], references: [id])
+  reviews CaseInstanceReview[]
 }
 
+// There can only be one review per user per case instance
+// Open question: can a user edit their review?
 model CaseInstanceReview {
-  id             String       @id @default(uuid())
+  id             String @id @default(uuid())
   caseId         String
   caseInstanceId String
   authorId       String
-  agreed         Boolean
-  note           String?
-  createdAt      DateTime     @default(now())
-  updatedAt      DateTime     @updatedAt
-  reviewJson     String // serialized TypeScript "CaseReview" object
-  case           Case         @relation(fields: [caseId], references: [id])
-  caseInstance   CaseInstance @relation(fields: [caseInstanceId], references: [id])
-  author         User         @relation(fields: [authorId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  agreed     Boolean
+  note       String
+  reviewJson String
+
+  case         Case         @relation(fields: [caseId], references: [id])
+  caseInstance CaseInstance @relation(fields: [caseInstanceId], references: [id])
+  author       User         @relation(fields: [authorId], references: [id])
 }
 
 model User {
-  id         String               @id @default(uuid())
-  email      String               @unique
+  id String @id @default(uuid())
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  email      String  @unique
   name       String
-  newsletter Boolean              @default(false)
-  createdAt  DateTime             @default(now())
-  updatedAt  DateTime             @updatedAt
-  cases      Case[]
-  reviews    CaseInstanceReview[]
+  newsletter Boolean @default(false)
+
+  cases   Case[]
+  reviews CaseInstanceReview[]
 }

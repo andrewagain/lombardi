@@ -45,6 +45,9 @@ export interface Case {
   conclusion: string // describes why the supporting points tie the case together
 }
 
+// Stored in the database as Case.caseJson or CaseInstance.caseJson.
+export type CaseSerial = Case
+
 export enum CaseReviewPointType {
   MinorError = "MinorError", // typo, grammar, etc.
   UnclearCase = "UnclearCase", // reader does not understand what point the author is attempting to make here, and/or clarifying section is not helpful
@@ -62,9 +65,7 @@ export interface CaseReviewPoint {
   sourceId?: string
 }
 
-// A response that user provides to a case they are reviewing.
-export interface CaseReview {
-  agree: boolean
-  // disagreement requires at least one case point be added
+// Stored in the database as CaseInstanceReview.reviewJson.
+export interface CaseReviewSerial {
   points: CaseReviewPoint[]
 }
