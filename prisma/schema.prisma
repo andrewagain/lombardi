@@ -17,13 +17,17 @@ model Case {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+  deprecatedAt    DateTime? // if deprecated, the author no longer believes in their own case
+  deprecationNote String? // if deprecated, the author should explain why or link to a replacement case
+
   versionCount Int    @default(0)
-  claim        String
+  claim        String // the claim being made by the case. this can never be modified
   caseJson     String
 
   author    User           @relation(fields: [authorId], references: [id])
   reviews   CaseReview[]
   instances CaseInstance[]
+  conflicts CaseConflict[]
 }
 
 // The presence of this object indicates that the user agrees with the case
@@ -39,7 +43,19 @@ model CaseAgreement {
   @@id([caseId, userId])
 }
 
-// model CaseConflict
+// The presence of a CaseConflict indicates that an agreement with one
+// case would be in conflict with an agreement with another case.
+model CaseConflict {
+  caseId            String
+  conflictingCaseId String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  case Case @relation(fields: [caseId], references: [id])
+
+  @@id([caseId, conflictingCaseId])
+}
 
 model CaseInstance {
   caseId      String
