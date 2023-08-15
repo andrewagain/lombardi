@@ -24,11 +24,11 @@ model Case {
   claim        String // the claim being made by the case. this can never be modified
   caseJson     String
 
-  author    User           @relation(fields: [authorId], references: [id])
-  reviews   CaseReview[]
-  instances CaseInstance[]
-  conflicts CaseConflict[]
-  // inverseConflicts CaseConflict[] @relation("CaseConflict", fields: [id], references: [conflictingCaseId])
+  author           User           @relation(fields: [authorId], references: [id])
+  reviews          CaseReview[]
+  instances        CaseInstance[]
+  conflicts        CaseConflict[] @relation("CaseConflictPrimary")
+  inverseConflicts CaseConflict[] @relation("CaseConflictInverse")
 }
 
 // The presence of this object indicates that the user agrees with the case
@@ -44,8 +44,8 @@ model CaseAgreement {
   @@id([caseId, userId])
 }
 
-// The presence of a CaseConflict indicates that an agreement with one
-// case would be in conflict with an agreement with another case.
+// The presence of a CaseConflict indicates that the author of the primary case
+// believes that their case is incompatible with the conflicting case.
 model CaseConflict {
   primaryCaseId     String
   conflictingCaseId String
@@ -53,8 +53,8 @@ model CaseConflict {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  primaryCase Case @relation(fields: [primaryCaseId], references: [id])
-  // conflictingCase Case @relation("conflicts", fields: [conflictingCaseId], references: [id])
+  primaryCase     Case @relation("CaseConflictPrimary", fields: [primaryCaseId], references: [id])
+  conflictingCase Case @relation("CaseConflictInverse", fields: [conflictingCaseId], references: [id])
 
   @@id([primaryCaseId, conflictingCaseId])
 }
